@@ -1,0 +1,1164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Spectrum Super Hero Connected App v24 -->
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#6b5cff"><link rel="manifest" href="manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="apple-touch-icon" href="icon-192.png"><title>Spectrum Super Hero • v47</title>
+<style>
+:root{--ink:#172033;--muted:#647084;--bg:#f6f8fc;--card:#fff;--brand:#6b5cff;--brand2:#ff7894;--line:#e5e9f2;--ok:#167a55;--warn:#795400}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer}.top{position:sticky;top:0;z-index:5;background:#fffffff2;border-bottom:1px solid var(--line);padding:12px 16px;display:flex;justify-content:space-between;align-items:center}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}.mark{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:900;background:linear-gradient(135deg,#ff7894,#ffc857,#5ed1b8,#6b5cff)}.nav{display:flex;gap:6px;overflow:auto;background:#fff;border-bottom:1px solid var(--line);padding:8px 12px}.nav button{border:0;background:transparent;padding:9px 11px;border-radius:12px;color:var(--muted);white-space:nowrap}.nav button.active{background:#eeeaff;color:var(--brand);font-weight:700}.banner{padding:10px 14px;text-align:center;background:#fff7df;color:var(--warn);font-size:14px}.banner.ok{background:#eaf8f1;color:var(--ok)}.wrap{max-width:1050px;margin:auto;padding:20px 14px 80px}.hero{background:linear-gradient(135deg,#6b5cff,#8c7cff 48%,#ff7894);color:white;border-radius:24px;padding:28px;margin-bottom:22px}.hero h1{font-size:clamp(34px,8vw,56px);margin:0 0 8px}.hero p{font-size:18px;line-height:1.45;margin:5px 0}.section{display:none}.section.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:0 5px 18px #17203308}.card h3{margin:4px 0 8px}.card p{color:var(--muted);line-height:1.5}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#f0efff;color:var(--brand);font-size:12px;font-weight:700}.cta{border:0;border-radius:12px;padding:11px 14px;background:var(--brand);color:white;font-weight:700}.secondary{background:#eef0f6;color:var(--ink)}.search{display:flex;gap:8px;margin:14px 0}.search input,.search select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff}.footer{text-align:center;color:var(--muted);font-size:13px;margin-top:28px}.profile-row{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}.stat{background:#f8f7ff;border:1px solid #e8e4ff;border-radius:16px;padding:16px}.stat strong{display:block;font-size:28px;margin-top:4px}.progress-track{height:10px;background:#edf0f5;border-radius:999px;overflow:hidden}.progress-bar{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:999px}.history-item{padding:13px 0;border-bottom:1px solid var(--line)}.history-item:last-child{border-bottom:0}.empty{color:var(--muted);padding:10px 0}@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.stats-grid{grid-template-columns:1fr}}.modal{position:fixed;inset:0;background:#17203388;display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal.open{display:flex}.modal-box{background:#fff;border-radius:20px;max-width:760px;width:100%;max-height:85vh;overflow:auto;padding:24px}.modal-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.lesson-intro{font-size:17px;line-height:1.65;color:var(--ink)}.modal-box h2{margin-top:8px}.modal-box h3{margin-bottom:8px}.feature-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.feature-icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:#f0efff;color:var(--brand);font-weight:900;font-size:20px}.checklist{list-style:none;padding:0;margin:10px 0}.checklist li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);color:var(--muted);line-height:1.5}.checklist li:last-child{border-bottom:0}.check{width:22px;height:22px;accent-color:var(--brand);flex:0 0 auto}.tip{background:#f8f7ff;border:1px solid #e8e4ff;border-radius:14px;padding:14px;margin-top:14px}.mini-nav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.mini-nav button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:8px 12px}.fact{border-left:5px solid var(--brand);padding:14px 16px;background:#fff;border-radius:12px}.myth{font-weight:800;color:#9b3852}.fact-title{font-weight:800;color:var(--ok)}@media(max-width:600px){.grid{grid-template-columns:1fr}.search{flex-direction:column}}
+
+/* v16 polish */
+body.high-contrast{--ink:#000;--muted:#222;--bg:#fff;--card:#fff;--line:#111;--brand:#4b00ff;--brand2:#d4005a}body.high-contrast .card,body.high-contrast .stat{box-shadow:none;border-width:2px}body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.compact .card{padding:12px}.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.setting{border:1px solid var(--line);border-radius:14px;padding:13px;background:#fff;display:flex;justify-content:space-between;align-items:center;gap:12px}.setting input{width:20px;height:20px;accent-color:var(--brand)}.welcome{position:fixed;inset:0;background:#17203388;display:none;align-items:center;justify-content:center;padding:20px;z-index:30}.welcome.open{display:flex}.welcome-box{background:#fff;border-radius:24px;max-width:620px;width:100%;padding:28px;box-shadow:0 20px 60px #0003}.welcome-box h2{font-size:30px;margin:8px 0}.quick-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}.quick-link{border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px;text-align:left}.quick-link strong{display:block}.quick-link span{display:block;color:var(--muted);font-size:13px;margin-top:4px}@media(max-width:700px){.settings-grid,.quick-links{grid-template-columns:1fr}}
+
+.brand-logo{width:42px;height:42px;object-fit:cover;border-radius:12px;background:#111}.hero-logo{max-width:340px;margin:0 auto 18px;background:#101018;border-radius:22px;padding:10px;box-shadow:0 12px 35px #17203333}.hero-logo img{display:block;width:100%;height:auto;border-radius:16px}.top .brand span{font-size:17px}@media(max-width:600px){.brand-logo{width:38px;height:38px}.top .brand span{font-size:15px}.hero-logo{max-width:290px}}
+.superhero-visual{display:block;width:100%;max-width:900px;margin:18px auto 0;border-radius:20px;border:3px solid #ffffff66;box-shadow:0 12px 35px #17203344}.brand-logo{object-fit:contain;background:#101018}.hero-logo{background:#101018}
+/* Spectrum Super Hero v23 visual redesign */
+:root{--ink:#18213a;--muted:#66718a;--bg:#eef3fb;--card:#fff;--brand:#6248ff;--brand2:#ff5f91;--cyan:#25c7e8;--yellow:#ffd34e;--green:#35c987;--line:#dce4f2;--navy:#10162d}
+body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radial-gradient(circle at 90% 10%,#ffe1ed 0,transparent 28%),var(--bg);color:var(--ink)}
+.top{background:linear-gradient(135deg,#10162d,#25245a 58%,#5d3dff);color:#fff;border:0;padding:12px 18px;box-shadow:0 8px 28px #10162d25}
+.top .brand{color:#fff}.top .brand-logo{border:2px solid #fff;box-shadow:0 4px 12px #0005}.top .secondary{background:#ffffffee;color:#18213a}
+.nav{background:#12182f;border:0;padding:9px 12px;gap:8px;box-shadow:0 5px 18px #10162d20;position:sticky;top:68px;z-index:40}
+.nav button{color:#d7dcf2;font-weight:700}.nav button:hover{background:#252c4d;color:#fff}.nav button.active{background:linear-gradient(135deg,#8b78ff,#ff6f9c);color:#fff;box-shadow:0 5px 14px #0003}
+.banner{background:#eafaf4;color:#126d4e;border-bottom:1px solid #ccefe0;font-weight:700}
+.wrap{max-width:1120px;padding:26px 18px 90px}
+.hero{position:relative;overflow:hidden;border-radius:30px;padding:30px;background:linear-gradient(135deg,#5141ff 0%,#7864ff 45%,#ff6696 100%);box-shadow:0 18px 50px #5141ff2e;border:1px solid #ffffff66}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;pointer-events:none}.hero:before{width:260px;height:260px;right:-90px;top:-100px;background:#ffffff18}.hero:after{width:180px;height:180px;left:-90px;bottom:-100px;background:#25c7e822}
+.hero-logo{max-width:280px;margin:0 0 20px;border:3px solid #fff;background:#0b0d18;box-shadow:0 15px 35px #0004}.hero h1{letter-spacing:-1px;text-shadow:0 3px 15px #0003}.hero p{max-width:760px}.hero .modal-actions{position:relative;z-index:1}
+.section>h1{font-size:clamp(30px,5vw,46px);letter-spacing:-1px;margin:4px 0 8px;background:linear-gradient(90deg,#4e39f5,#d63d88);-webkit-background-clip:text;background-clip:text;color:transparent}
+.section>p{font-size:17px;max-width:850px;line-height:1.55}.grid{gap:18px}
+.card{border:1px solid #dce4f2;border-radius:22px;padding:19px;box-shadow:0 9px 28px #18213a0d;transition:transform .18s ease,box-shadow .18s ease}.card:hover{transform:translateY(-3px);box-shadow:0 14px 32px #18213a18}
+.card h3{font-size:21px;line-height:1.18}.card p{font-size:15.5px}.pill{background:#eeeaff;color:#563dff}
+.cta{background:linear-gradient(135deg,#6248ff,#8b67ff);box-shadow:0 7px 16px #6248ff25}.cta.secondary{background:#eef1f7;box-shadow:none}
+.feature-icon{background:linear-gradient(135deg,#eeeaff,#ffe8f0);color:#6248ff}.checklist li{padding:11px 0}.check{width:21px;height:21px}
+.tip{background:linear-gradient(135deg,#f5f2ff,#fff0f5);border:1px solid #e6dcff}.search input,.search select{border:2px solid #dce4f2}
+.stats-grid{gap:15px}.stat{background:linear-gradient(135deg,#f7f5ff,#fff);border:1px solid #e5ddff}.progress-bar{background:linear-gradient(90deg,#6248ff,#25c7e8,#ff5f91)}
+.modal-box{border:1px solid #dce4f2;box-shadow:0 24px 70px #0004}.welcome-box{border:1px solid #dce4f2}
+.quick-link{transition:.18s ease}.quick-link:hover{border-color:#8a76ff;transform:translateY(-2px);box-shadow:0 8px 20px #6248ff14}.footer{padding-top:20px}
+#learn .card{border-top:5px solid #6248ff}#acceptance .card{border-top:5px solid #ff5f91}#communication .card{border-top:5px solid #25c7e8}#sensory .card{border-top:5px solid #35c987}#families .card{border-top:5px solid #ffd34e}#educators .card{border-top:5px solid #8b67ff}#resources .card{border-top:5px solid #25a9d1}#myths .card{border-top:5px solid #ff6f91}#quiz .card{border-top:5px solid #6248ff}#profile .card{border-top:5px solid #6248ff}
+@media(max-width:700px){.hero{padding:23px}.hero-logo{max-width:230px}.card{border-radius:18px}.nav{padding-left:8px}}
+
+.top-actions{display:flex;align-items:center;gap:8px}.dashboard-top{background:linear-gradient(135deg,#ffcf4a,#ff6b9d);color:#fff;box-shadow:0 7px 16px #0003;white-space:nowrap}
+@media(max-width:650px){.dashboard-top{font-size:13px;padding:9px 10px}.top-actions{gap:5px}}
+.mission-list{display:grid;gap:10px;margin-top:14px}.mission-step{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid #e2ddff;border-radius:14px;background:#faf9ff}.mission-step.done{border-color:#8b78ff;background:linear-gradient(135deg,#f1edff,#fff5fa)}.mission-check{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#eeeaff;color:#6655ff;font-weight:800;flex:0 0 auto}.mission-step.done .mission-check{background:#6655ff;color:#fff}.mission-step small{display:block;color:#65718b;margin-top:2px}.badge-card.earned{box-shadow:0 8px 22px #7a5cff22}.badge-card.locked{opacity:.78}
+
+.journey-hero{background:linear-gradient(135deg,#151b45,#4d36b8 55%,#ff6b9d);color:#fff;border-radius:22px;padding:22px;margin-bottom:18px}
+.journey-hero h2{margin:5px 0 6px;font-size:32px}
+.journey-hero p{margin:4px 0;color:#eef0ff}
+.level-ring{width:86px;height:86px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#ffd34e 0deg,#ff7894 180deg,#6b5cff 360deg);padding:5px;flex:0 0 auto}
+.level-ring>div{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;background:#151b45;font-weight:900}
+.journey-top{display:flex;justify-content:space-between;gap:18px;align-items:center}
+.journey-name{display:flex;gap:14px;align-items:center}
+.xp-track{height:12px;background:#ffffff25;border-radius:999px;overflow:hidden;margin-top:12px}
+.xp-bar{height:100%;background:linear-gradient(90deg,#ffd34e,#ff7894);border-radius:999px}
+.achievement-card{background:linear-gradient(135deg,#fff8df,#fff);border:1px solid #f3e3a8}
+.hero-name-input{padding:11px 12px;border:1px solid var(--line);border-radius:12px;width:100%;max-width:360px}
+@media(max-width:600px){.journey-top{align-items:flex-start}.journey-name{flex-direction:column;align-items:flex-start}.level-ring{width:72px;height:72px}}
+
+.hero-profile{background:linear-gradient(135deg,#fff,#f7f5ff 55%,#fff0f5);border:1px solid #ddd6ff}.hero-profile-top{display:flex;gap:18px;align-items:center;justify-content:space-between}.hero-avatar{width:108px;height:108px;border-radius:28px;display:grid;place-items:center;font-size:56px;background:linear-gradient(135deg,#161b3c,#6248ff 60%,#ff6b9b);box-shadow:0 12px 28px #6248ff2b;border:4px solid #fff;flex:0 0 auto}.hero-profile-title h2{font-size:32px;margin:3px 0}.hero-profile-title p{margin:4px 0;color:var(--muted)}.avatar-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;margin-top:12px}.avatar-choice{border:1px solid var(--line);background:#fff;border-radius:14px;min-height:48px;font-size:25px}.avatar-choice.selected{border:3px solid var(--brand);background:#f0efff;box-shadow:0 5px 14px #6248ff22}.role-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}.role-choice{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;text-align:left}.role-choice.selected{border:2px solid var(--brand);background:#f3f0ff}.profile-xp{height:10px;background:#edf0f5;border-radius:999px;overflow:hidden;margin-top:7px}.profile-xp>div{height:100%;background:linear-gradient(90deg,#6248ff,#ff7894);border-radius:999px}.profile-badge-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.profile-badge{padding:7px 9px;border-radius:12px;background:#f5f3ff;border:1px solid #e5e0ff;font-size:13px;font-weight:700}.profile-badge.locked{opacity:.45;filter:grayscale(1)}.profile-mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.profile-mini .stat{padding:12px}.profile-mini .stat strong{font-size:24px}@media(max-width:700px){.hero-profile-top{align-items:flex-start;flex-direction:column}.avatar-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.role-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.profile-mini{grid-template-columns:1fr}}
+
+.profile-saved{margin-top:12px;padding:10px 12px;border-radius:12px;background:#eaf8f1;color:#167a55;font-weight:700;display:none}.top-profile-chip{display:none;align-items:center;gap:8px;background:#ffffff18;border:1px solid #ffffff35;border-radius:14px;padding:6px 10px;color:#fff;font-weight:800}.top-profile-chip img,.top-profile-chip .avatar{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:#fff;color:#222;font-size:18px}.dashboard-hero-card{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#fff,#f7f4ff);border:1px solid #ddd6ff}.dashboard-hero-card .avatar{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,#161b3c,#6248ff 60%,#ff6b9b);font-size:32px;border:3px solid #fff}.journey-avatar{width:72px;height:72px;border-radius:20px;display:grid;place-items:center;background:#ffffff18;border:2px solid #ffffff55;font-size:36px;flex:0 0 auto}
+
+<style>
+.reward-top{background:linear-gradient(135deg,#fff1a8,#ffd35e);color:#222;font-weight:800}
+.reward-hero{background:linear-gradient(135deg,#171b4b,#5436c5 55%,#ff6b9d);color:#fff;border-radius:22px;padding:22px;margin-bottom:18px;box-shadow:0 14px 35px #24205a22}
+.reward-head{display:flex;justify-content:space-between;gap:18px;align-items:center}
+.reward-level{display:flex;align-items:center;gap:14px}
+.reward-ring{width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#ffd34e,#ff7894,#6b5cff,#ffd34e);padding:5px;flex:0 0 auto}
+.reward-ring>div{width:100%;height:100%;border-radius:50%;background:#171b4b;display:grid;place-items:center;font-weight:900}
+.reward-xp{min-width:160px;text-align:right}
+.reward-xp strong{font-size:24px}
+.reward-track{height:12px;background:#ffffff30;border-radius:999px;overflow:hidden;margin-top:10px}
+.reward-fill{height:100%;background:linear-gradient(90deg,#ffd34e,#ff7894);border-radius:999px;transition:width .5s ease}
+.reward-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.reward-card{border:1px solid var(--line);border-radius:18px;padding:18px;background:#fff}
+.reward-card.complete{border-color:#8b73ff;background:linear-gradient(145deg,#fff,#f5f1ff)}
+.reward-card.locked{opacity:.76}
+.reward-card h3{margin:8px 0 6px}
+.reward-icon{font-size:28px}
+.reward-progress{height:9px;background:#edf0f6;border-radius:999px;overflow:hidden;margin:12px 0 8px}
+.reward-progress>div{height:100%;background:linear-gradient(90deg,#6757ff,#ff6b9d);border-radius:999px}
+.reward-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.reward-toast{position:fixed;right:22px;bottom:22px;z-index:9999;background:#171b4b;color:#fff;border:2px solid #ffd34e;border-radius:18px;padding:15px 18px;box-shadow:0 15px 35px #0003;max-width:340px;display:none}
+.reward-toast.show{display:block;animation:rewardPop .25s ease-out}
+@keyframes rewardPop{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+@media(max-width:700px){.reward-grid{grid-template-columns:1fr}.reward-head{align-items:flex-start}.reward-xp{min-width:0}}
+</style>
+
+<style>
+.levelup-overlay{position:fixed;inset:0;z-index:10000;background:rgba(10,10,35,.82);display:none;place-items:center;padding:22px;backdrop-filter:blur(7px)}
+.levelup-overlay.show{display:grid}
+.levelup-card{width:min(560px,94vw);text-align:center;background:linear-gradient(145deg,#fff,#f7f1ff);border:3px solid #ffd34e;border-radius:30px;padding:32px 24px;box-shadow:0 25px 80px #0006;animation:levelUpIn .45s ease-out}
+.levelup-stars{font-size:42px;letter-spacing:8px;animation:starPulse 1s ease-in-out infinite alternate}
+.levelup-card h2{font-size:42px;margin:10px 0;background:linear-gradient(90deg,#5b45ff,#ff5e9a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.levelup-number{font-size:74px;font-weight:1000;line-height:1;background:linear-gradient(90deg,#5b45ff,#ff5e9a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.levelup-card p{font-size:18px;color:#596985}
+.levelup-reward{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.levelup-reward span{background:#eee9ff;border-radius:999px;padding:10px 14px;font-weight:800;color:#4936c5}
+.levelup-close{border:0;border-radius:14px;padding:13px 24px;background:linear-gradient(90deg,#5b45ff,#ff5e9a);color:#fff;font-weight:900;font-size:16px;cursor:pointer}
+.journey-timeline{display:grid;gap:12px;margin-top:16px}
+.journey-step{display:flex;align-items:center;gap:14px;padding:15px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.journey-step.done{border-color:#8d78ff;background:linear-gradient(90deg,#f7f4ff,#fff)}
+.journey-dot{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#eeeaff;font-weight:900;flex:0 0 auto}
+.journey-step.done .journey-dot{background:linear-gradient(135deg,#5b45ff,#ff5e9a);color:#fff}
+@keyframes levelUpIn{from{transform:scale(.86) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+@keyframes starPulse{from{transform:scale(.96);opacity:.75}to{transform:scale(1.08);opacity:1}}
+</style>
+<style>
+.badge-cabinet{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.badge-item{position:relative;border:1px solid var(--line);border-radius:20px;padding:20px;background:#fff;min-height:190px}
+.badge-item.earned{border:2px solid #8a72ff;background:linear-gradient(145deg,#fff,#f5f1ff)}
+.badge-item.locked{filter:saturate(.25);opacity:.72}
+.badge-medal{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font-size:36px;background:#eeeaff;margin-bottom:12px}
+.badge-item.earned .badge-medal{background:linear-gradient(145deg,#ffd34e,#ff7fa2)}
+.badge-status{position:absolute;right:14px;top:14px;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:900;background:#eeeaff;color:#5a42e8}
+.badge-item.earned .badge-status{background:#171b4b;color:#fff}
+.badge-date{font-size:13px;color:#64728d;margin-top:9px}
+.badge-count{display:flex;align-items:center;gap:16px;background:#171b4b;color:#fff;border-radius:18px;padding:18px 20px;margin-top:16px}
+.badge-count strong{font-size:30px}
+.badge-progress{height:10px;background:#ffffff25;border-radius:999px;overflow:hidden;flex:1}
+.badge-progress>div{height:100%;background:linear-gradient(90deg,#ffd34e,#ff7fa2)}
+.badge-pop{position:fixed;left:50%;bottom:25px;transform:translateX(-50%) translateY(20px);z-index:10001;background:#171b4b;color:#fff;border:2px solid #ffd34e;border-radius:18px;padding:15px 20px;opacity:0;pointer-events:none;transition:.25s;text-align:center;font-weight:800}
+.badge-pop.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:700px){.badge-cabinet{grid-template-columns:1fr}}
+</style>
+<style>
+.cloud-sync-card{margin:16px 0;padding:16px 18px;border:1px solid #ddd6ff;border-radius:18px;background:linear-gradient(135deg,#f8f6ff,#fff5fb)}
+.cloud-sync-card strong{display:block;margin-bottom:5px}
+.cloud-sync-ok{color:#147a52;font-weight:800}
+.cloud-sync-note{color:#64728d;font-size:14px}
+</style>
+
+<style>
+.guided-lessons{margin-top:22px}.guided-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.guided-card,.guided-panel{background:#fff;border:1px solid #ddd6ff;border-radius:18px;padding:18px}.guided-card p{color:#66738d;line-height:1.5}.guided-chip{display:inline-block;background:#eee9ff;color:#5b45ff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800}.guided-btn{border:0;border-radius:11px;padding:10px 15px;background:#684cff;color:#fff;font-weight:800;cursor:pointer}.guided-choice{display:block;width:100%;margin:9px 0;padding:12px;text-align:left;background:#fff;border:2px solid #e0e3ec;border-radius:12px;font-weight:700;cursor:pointer}.guided-choice.good{border-color:#25a56a;background:#effbf5}.guided-choice.bad{border-color:#d66;background:#fff5f5}.guided-panel{margin-top:18px}.guided-hide{display:none}.guided-bar{height:9px;background:#edf0f5;border-radius:9px;overflow:hidden;margin:14px 0}.guided-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#684cff,#ff6b9d)}
+</style>
+
+<style>
+.resource-finder{margin-top:22px}.resource-filters{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}.resource-filters input,.resource-filters select{padding:12px;border:1px solid #d9dce7;border-radius:12px;background:#fff}.resource-results{display:grid;gap:14px}.resource-card{background:#fff;border:1px solid #ddd6ff;border-radius:18px;padding:18px}.resource-card h3{margin:5px 0}.resource-meta{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.resource-tag{background:#eee9ff;color:#5b45ff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800}.resource-card p{color:#64728d;line-height:1.5}.resource-actions{display:flex;gap:8px;flex-wrap:wrap}.resource-empty{padding:24px;text-align:center;border:1px dashed #cdd2df;border-radius:16px;color:#64728d}
+@media(max-width:800px){.resource-filters{grid-template-columns:1fr 1fr}}@media(max-width:500px){.resource-filters{grid-template-columns:1fr}}
+</style>
+</style></head>
+<body>
+<header class="top"><div class="brand"><img class="brand-logo" src="icon-192.png" alt="Spectrum Super Hero logo"><span>Spectrum Super Hero</span></div><div class="top-actions"><div class="top-profile-chip" id="topProfileChip"><span class="avatar" id="topProfileAvatar">🦸</span><span id="topProfileName">My Super Hero</span></div><button class="cta dashboard-top" onclick="show('dashboard')">⭐ My Dashboard</button><button class="cta secondary" onclick="show('journey')">🦸 My Journey</button><button class="cta secondary reward-top" onclick="show('rewards')">🏆 Rewards</button><button class="cta secondary" onclick="show('badges')">🏅 Badges</button><button class="cta secondary" id="profileTopButton" onclick="show('profile')">Profile</button></div></header>
+<nav class="nav" id="nav"></nav>
+<div class="banner" id="banner">Connecting to Spectrum Super Hero cloud data…</div>
+<main class="wrap">
+<section id="home" class="section active"><div class="hero"><div class="hero-logo"><img src="spectrum-super-hero-kids-logo.png" alt="Spectrum Super Hero logo featuring diverse superhero kids"></div><h1>Spectrum Super Hero</h1><p>Different Abilities. Stronger Together.</p><p>A welcoming place to learn, find practical support, celebrate differences, and build inclusive communities.</p><div class="modal-actions"><button class="cta" onclick="startWelcome(true)">Start here</button><button class="cta secondary" onclick="show('quiz')">Test your knowledge</button></div></div><div class="card" style="margin:-4px 0 22px;background:linear-gradient(135deg,#10162d,#25245a);color:white;border:0"><div class="feature-head"><div><span class="pill" style="background:#ffffff18;color:#fff">SUPER HERO MISSION</span><h3 style="font-size:24px;margin-top:9px;color:#fff">Learn. Connect. Advocate.</h3><p style="color:#dce3ff;margin-bottom:0">Choose a path below and build your own support and learning journey.</p></div><div class="feature-icon" style="background:#ffffff18;color:#fff">★</div></div></div><h2>What do you need today?</h2><div class="grid" id="needs"></div><div class="card" id="nextStepCard" style="margin-top:18px"><div class="feature-head"><div><span class="pill">Your next step</span><h3 id="nextStepTitle">Start with a lesson</h3></div><div class="feature-icon">★</div></div><p id="nextStepText">Choose a topic to begin building your Spectrum Super Hero learning path.</p><div class="modal-actions"><button class="cta" id="nextStepButton" onclick="show('learn')">Explore lessons</button><button class="cta secondary" onclick="show('dashboard')">View progress</button></div></div><div class="tip" style="margin-top:18px"><strong>Accessibility first:</strong> Change text size, contrast, motion, and layout preferences from Profile.</div></section>
+<section id="learn" class="section"><h1>Learn & Understand</h1><p>Explore person-centered information about autism, communication, sensory experiences, support, strengths, and inclusion.</p><div class="grid" id="topics"><div class="card">Loading learning topics…</div></div>
+<div class="guided-lessons">
+<h2>Guided lessons</h2>
+<p>Learn a topic, answer a quick check, and complete the lesson to update your learning progress.</p>
+<div class="guided-grid">
+<div class="guided-card"><span class="guided-chip">Autism Basics</span><h3>What Is Autism?</h3><p>Person-centered basics about autism.</p><button class="guided-btn" onclick="startGuidedLesson('what-is-autism')">Start lesson</button></div>
+<div class="guided-card"><span class="guided-chip">Acceptance</span><h3>Acceptance & Inclusion</h3><p>Practical ways to create belonging.</p><button class="guided-btn" onclick="startGuidedLesson('acceptance-and-inclusion')">Start lesson</button></div>
+<div class="guided-card"><span class="guided-chip">Communication</span><h3>Communication Differences</h3><p>Respectful ways to support communication.</p><button class="guided-btn" onclick="startGuidedLesson('communication-differences')">Start lesson</button></div>
+<div class="guided-card"><span class="guided-chip">Sensory</span><h3>Sensory Experiences</h3><p>Understand sensory access and differences.</p><button class="guided-btn" onclick="startGuidedLesson('sensory-experiences')">Start lesson</button></div>
+<div class="guided-card"><span class="guided-chip">Families</span><h3>Supporting Families</h3><p>Support autonomy, needs, and goals.</p><button class="guided-btn" onclick="startGuidedLesson('supporting-families')">Start lesson</button></div>
+<div class="guided-card"><span class="guided-chip">Educators</span><h3>Inclusive Educators</h3><p>Classroom strategies that increase access.</p><button class="guided-btn" onclick="startGuidedLesson('inclusive-educators')">Start lesson</button></div>
+</div>
+<div id="guidedLessonPanel"></div>
+</div>
+</section>
+<section id="acceptance" class="section"><h1>Acceptance & Inclusion</h1><p>Create spaces where autistic people are respected, included, and able to participate without having to hide who they are.</p><div class="grid"><div class="card"><div class="feature-head"><div><span class="pill">Respect</span><h3>Acceptance starts with the person</h3></div><div class="feature-icon">♥</div></div><p>Listen to autistic people, respect communication differences, and include the person in decisions that affect them.</p><button class="cta" onclick="openTopic('acceptance-and-inclusion')">Open full lesson</button></div><div class="card"><div class="feature-head"><div><span class="pill">Inclusion</span><h3>Remove barriers</h3></div><div class="feature-icon">↔</div></div><p>Look at the environment, expectations, and access needs—not only at what a person does differently.</p><ul class="checklist"><li><input class="check" type="checkbox">Offer accessible choices</li><li><input class="check" type="checkbox">Respect different communication styles</li><li><input class="check" type="checkbox">Provide reasonable accommodations</li><li><input class="check" type="checkbox">Include autistic people in decisions</li></ul></div><div class="card"><span class="pill">Avoid</span><h3>Acceptance is not masking</h3><p>Acceptance does not mean expecting someone to hide harmless autistic traits, force eye contact, or behave in one “normal” way.</p><div class="tip"><strong>Try this:</strong> Ask, “What would make this space easier for you to use?”</div></div><div class="card"><span class="pill">Ally action</span><h3>Use your influence</h3><p>Challenge stereotypes, make information accessible, and speak up when policies or environments exclude people.</p><button class="cta secondary" onclick="show('quiz')">Test your knowledge</button></div></div></section>
+<section id="communication" class="section"><h1>Communication</h1><p>Communication can happen in many forms. The goal is connection and understanding—not making everyone communicate in the same way.</p><div class="grid"><div class="card"><div class="feature-head"><div><span class="pill">Many forms</span><h3>Communication can look different</h3></div><div class="feature-icon">💬</div></div><p>Speech, writing, typing, signs, gestures, pictures, AAC, facial expressions, and other methods can all be meaningful communication.</p><button class="cta" onclick="openTopic('communication-differences')">Open full lesson</button></div><div class="card"><span class="pill">Helpful habits</span><h3>Make communication easier</h3><ul class="checklist"><li><input class="check" type="checkbox">Use clear, direct language when helpful</li><li><input class="check" type="checkbox">Allow processing time</li><li><input class="check" type="checkbox">Offer visual information</li><li><input class="check" type="checkbox">Ask how the person prefers to communicate</li></ul></div><div class="card"><span class="pill">Important</span><h3>Don't measure understanding by appearance</h3><p>Eye contact, facial expression, body language, or spoken language are not reliable measures of intelligence, honesty, or understanding.</p><div class="tip"><strong>Try this:</strong> Give the person enough time to respond before repeating or changing the question.</div></div><div class="card"><span class="pill">Connection</span><h3>Communication is two-way</h3><p>Good communication means adapting on both sides. The person should not have to do all the adapting.</p><button class="cta secondary" onclick="show('learn')">Explore more lessons</button></div></div></section>
+<section id="sensory" class="section"><h1>Sensory Experiences</h1><p>Sensory experiences can be stronger, weaker, or simply different. The same environment can feel comfortable to one person and overwhelming to another.</p><div class="grid"><div class="card"><div class="feature-head"><div><span class="pill">Understand</span><h3>Common sensory areas</h3></div><div class="feature-icon">◌</div></div><p>Sound, light, touch, smell, taste, movement, and body sensations can all affect comfort and participation.</p><button class="cta" onclick="openTopic('sensory-experiences')">Open full lesson</button></div><div class="card"><span class="pill">Plan ahead</span><h3>Make environments more accessible</h3><ul class="checklist"><li><input class="check" type="checkbox">Identify quieter spaces</li><li><input class="check" type="checkbox">Give advance notice about loud sounds or changes</li><li><input class="check" type="checkbox">Allow appropriate movement or sensory breaks</li><li><input class="check" type="checkbox">Reduce unnecessary visual or background stimulation</li></ul></div><div class="card"><span class="pill">Individual needs</span><h3>Ask instead of assuming</h3><p>Some people avoid certain input; others seek input that helps them regulate, focus, or feel comfortable.</p><div class="tip"><strong>Try this:</strong> Ask, “What would make this environment more comfortable?”</div></div><div class="card"><span class="pill">Early support</span><h3>Notice signs of stress</h3><p>A person may become quieter, move away, ask for a break, cover their ears, seek movement, or communicate in another way when an environment becomes difficult.</p></div></div></section>
+<section id="families" class="section"><h1>Families & Caregivers</h1><p>Families and caregivers can help create supportive environments by learning who the person is, what they enjoy, how they communicate, and what support works.</p><div class="grid"><div class="card"><div class="feature-head"><div><span class="pill">Start here</span><h3>Start with the individual</h3></div><div class="feature-icon">★</div></div><p>Learn communication methods, preferences, strengths, routines, support needs, and goals. Include the autistic person in decisions as much as possible.</p><button class="cta" onclick="openTopic('supporting-families')">Open full lesson</button></div><div class="card"><span class="pill">Daily support</span><h3>Build practical routines</h3><ul class="checklist"><li><input class="check" type="checkbox">Use predictable routines when helpful</li><li><input class="check" type="checkbox">Prepare for changes and transitions</li><li><input class="check" type="checkbox">Keep communication supports consistent</li><li><input class="check" type="checkbox">Make time for interests and rest</li></ul></div><div class="card"><span class="pill">Teamwork</span><h3>Build a support team</h3><p>Depending on the person's needs and choices, support may involve family, school staff, healthcare professionals, community programs, advocates, or other trusted people.</p><div class="tip"><strong>Remember:</strong> Caregivers need support too. A sustainable plan considers the whole family while respecting the autistic person's autonomy.</div></div><div class="card"><span class="pill">When needed</span><h3>Find reliable resources</h3><p>Use the Resource Finder to look for verified organizations and services. Check eligibility, location, cost, and accessibility before relying on a service.</p><button class="cta secondary" onclick="show('resources')">Open Resource Finder</button></div></div></section>
+<section id="educators" class="section"><h1>Educators & Schools</h1><p>Inclusive education means designing learning environments where students can access instruction, communicate, participate, and demonstrate learning in ways that work for them.</p><div class="grid"><div class="card"><div class="feature-head"><div><span class="pill">Classroom access</span><h3>Make expectations clear</h3></div><div class="feature-icon">✓</div></div><p>Use concise instructions, predictable routines, advance notice of major changes, visual examples, and manageable steps.</p><button class="cta" onclick="openTopic('inclusive-educators')">Open full lesson</button></div><div class="card"><span class="pill">Participation</span><h3>Offer multiple ways to respond</h3><ul class="checklist"><li><input class="check" type="checkbox">Allow speaking, typing, writing, visuals, or other appropriate methods</li><li><input class="check" type="checkbox">Give processing time</li><li><input class="check" type="checkbox">Consider sensory access</li><li><input class="check" type="checkbox">Support transitions</li></ul></div><div class="card"><span class="pill">Belonging</span><h3>Create genuine inclusion</h3><p>Focus on strengths and interests, avoid public shaming, and do not force eye contact or other harmless behaviors.</p><div class="tip"><strong>Try this:</strong> Ask the student what helps them learn and participate, using an accessible way to gather their input.</div></div><div class="card"><span class="pill">Accommodations</span><h3>Remove barriers</h3><p>Accommodations are tools for access. They are not unfair advantages; they help students participate in learning.</p><button class="cta secondary" onclick="show('resources')">Find resources</button></div></div></section>
+<section id="resources" class="section">
+  <div class="resource-finder">
+    <h1>Resource Finder</h1>
+    <p>Find verified organizations and services published in Spectrum Super Hero. These listings come from the Spectrum Super Hero cloud resource directory.</p>
+    <div class="tip"><strong>Resource safety:</strong> Spectrum Super Hero does not endorse a service simply because it appears here. Check eligibility, location, cost, accessibility, and current availability with the provider.</div>
+    <div id="resourceCloudStatus" class="empty" style="margin-top:12px">Connecting to the verified resource directory…</div><div id="resourceDiagnostics" class="empty" style="margin-top:6px;font-size:12px;display:none"></div>
+    <div class="resource-filters">
+      <input id="resourceSearch" placeholder="Search by organization, service, city, or category…" oninput="filterResources()" aria-label="Search resources">
+      <select id="resourceCategory" onchange="filterResources()" aria-label="Filter by category"><option value="">All categories</option></select>
+      <select id="resourceAudience" onchange="filterResources()" aria-label="Filter by audience"><option value="">All audiences</option></select>
+      <select id="resourceArea" onchange="filterResources()" aria-label="Filter by area"><option value="">All areas</option><option value="National">National / Online</option><option value="Pennsylvania">Pennsylvania</option><option value="Pittsburgh">Pittsburgh</option></select>
+    </div>
+    <div id="resourceCount" class="empty"></div>
+    <div id="resourceResults" class="resource-results"></div>
+  </div>
+</section>
+<section id="myths" class="section"><h1>Myths & Facts</h1><p>Use this quick guide to challenge common misconceptions and build a more accurate understanding of autism.</p><div class="grid"><div class="card fact"><div class="myth">MYTH</div><h3>“Autism looks the same in everyone.”</h3><p class="fact-title">FACT</p><p>Autistic people can have very different communication styles, strengths, preferences, sensory experiences, and support needs.</p></div><div class="card fact"><div class="myth">MYTH</div><h3>“If someone speaks, they don't need communication support.”</h3><p class="fact-title">FACT</p><p>A person can use speech and still benefit from visual information, extra processing time, AAC, or other communication supports.</p></div><div class="card fact"><div class="myth">MYTH</div><h3>“Eye contact shows whether someone is listening.”</h3><p class="fact-title">FACT</p><p>People can listen and understand without making eye contact. Eye contact should not be used as a test of respect, attention, or honesty.</p></div><div class="card fact"><div class="myth">MYTH</div><h3>“Accommodations give someone an unfair advantage.”</h3><p class="fact-title">FACT</p><p>Accommodations remove barriers so people can access information, environments, and opportunities.</p></div><div class="card fact"><div class="myth">MYTH</div><h3>“Acceptance means ignoring support needs.”</h3><p class="fact-title">FACT</p><p>Acceptance and support go together. Respecting someone includes taking their actual access and support needs seriously.</p></div><div class="card fact"><div class="myth">MYTH</div><h3>“There is one best way to communicate.”</h3><p class="fact-title">FACT</p><p>Communication can include speech, writing, signs, gestures, visuals, typing, AAC, and combinations of methods.</p></div></div><div class="tip"><strong>Want to test yourself?</strong> <button class="cta" onclick="show('quiz')">Take the quiz</button></div></section>
+<section id="quiz" class="section"><h1>Test Your Knowledge</h1><p>Check your understanding of autism, communication, sensory experiences, acceptance, and inclusion.</p><div id="quizArea"></div></section>
+
+<section id="dashboard" class="section">
+  <h1>My Super Hero Dashboard</h1>
+  <p>Your personal learning, support, and progress space. Everything here is designed to help you learn at your own pace.</p>
+
+  <div class="card dashboard-hero-card">
+    <div class="avatar" id="dashboardHeroAvatar">🦸</div>
+    <div><span class="pill">MY HERO</span><h3 id="dashboardHeroName" style="margin:5px 0 2px">My Super Hero</h3><p id="dashboardHeroRole" style="margin:0">I’m an autistic person</p></div>
+    <div style="margin-left:auto"><button class="cta secondary" onclick="show('profile')">Edit profile</button></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat"><span class="pill">Lessons</span><strong id="dashLessons">0</strong><span>completed</span></div>
+    <div class="stat"><span class="pill">Saved</span><strong id="dashSaved">0</strong><span>topics & resources</span></div>
+    <div class="stat"><span class="pill">Quizzes</span><strong id="dashQuizzes">0</strong><span>completed</span></div>
+    <div class="stat"><span class="pill">Badges</span><strong id="dashBadges">0</strong><span>earned</span></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="feature-head">
+      <div>
+        <span class="pill">Your mission</span>
+        <h3 id="dashMissionTitle">Choose your first learning mission</h3>
+        <p id="dashMissionText">Complete a lesson, save a helpful resource, or take the quiz to start building your progress.</p>
+      </div>
+      <div class="feature-icon">★</div>
+    </div>
+    <div class="progress-track" style="margin-top:12px"><div id="dashProgressBar" class="progress-bar" style="width:0%"></div></div>
+    <p id="dashProgressText" style="margin:8px 0 0">0% complete</p>
+    <div class="modal-actions">
+      <button class="cta" onclick="show('learn')">Learn something new</button>
+      <button class="cta secondary" onclick="show('resources')">Find resources</button>
+      <button class="cta secondary" onclick="show('quiz')">Take the quiz</button>
+    </div>
+  </div>
+
+  <h2 style="margin-top:24px">Your badges</h2>
+  <div class="grid" id="badgeGrid"></div>
+
+  <div class="card mission-card" style="margin-top:18px">
+    <div class="feature-head"><div><span class="pill">Mission checklist</span><h3>Build your Super Hero progress</h3><p>Each step updates automatically as you use the app.</p></div><div class="feature-icon">⚡</div></div>
+    <div id="missionChecklist" class="mission-list"></div>
+  </div>
+  <div class="stats-grid" style="margin-top:16px">
+    <div class="stat"><span class="pill">Super Hero XP</span><strong id="dashXp">0</strong><span>earned from activity</span></div>
+    <div class="stat"><span class="pill">Next badge</span><strong id="dashNextBadge">—</strong><span id="dashNextBadgeText">Keep exploring</span></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="feature-head"><div><span class="pill">Recent achievement</span><h3 id="dashAchievementTitle">Your journey starts here</h3><p id="dashAchievementText">Complete your first lesson to earn your first badge.</p></div><div class="feature-icon">🏆</div></div>
+  </div>
+
+  <h2 style="margin-top:24px">Quick support tools</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="pill">Communication</span>
+      <h3>Communication helper</h3>
+      <p>Think about the person's preferred communication method, processing time, visual supports, and how you can adapt too.</p>
+      <button class="cta" onclick="openTool('communication')">Open helper</button>
+    </div>
+    <div class="card">
+      <span class="pill">Sensory</span>
+      <h3>Environment check</h3>
+      <p>Look for sound, light, crowding, transitions, movement, and places where a person can take a break.</p>
+      <button class="cta" onclick="openTool('sensory')">Open helper</button>
+    </div>
+    <div class="card">
+      <span class="pill">School</span>
+      <h3>Inclusive classroom check</h3>
+      <p>Review clear expectations, multiple ways to participate, processing time, sensory access, and transition support.</p>
+      <button class="cta" onclick="openTool('school')">Open helper</button>
+    </div>
+    <div class="card">
+      <span class="pill">Ally</span>
+      <h3>Inclusion checklist</h3>
+      <p>Listen, respect preferences, remove barriers, include autistic people in decisions, and avoid stereotypes.</p>
+      <button class="cta" onclick="openTool('ally')">Open helper</button>
+    </div>
+  </div>
+</section>
+
+
+<section id="journey" class="section">
+  <div class="journey-hero">
+    <div class="journey-top">
+      <div class="journey-name">
+        <div class="journey-avatar" id="journeyAvatar">🦸</div>
+        <div class="level-ring"><div>Lv <span id="journeyLevel">1</span></div></div>
+        <div>
+          <span class="pill" style="background:#ffffff22;color:#fff">SUPER HERO JOURNEY</span>
+          <h2 id="journeyHeroName">My Super Hero</h2>
+          <p id="journeyTagline">Learning. Growing. Making a difference.</p>
+        </div>
+      </div>
+      <div style="text-align:right"><strong id="journeyXp">0 XP</strong><div style="font-size:13px;color:#e7e9ff">earned so far</div></div>
+    </div>
+    <div class="xp-track"><div id="journeyXpBar" class="xp-bar" style="width:0%"></div></div>
+    <p id="journeyXpText" style="margin-top:8px">0 / 100 XP to Level 2</p>
+  </div>
+
+  <div class="card">
+    <span class="pill">Make it yours</span>
+    <h2>Choose your hero name</h2>
+    <p>This name is stored on this device and is only used to personalize your Spectrum Super Hero journey.</p>
+    <div class="search">
+      <input class="hero-name-input" id="heroNameInput" maxlength="40" placeholder="Enter your hero name">
+      <button class="cta" onclick="saveHeroName()">Save hero name</button>
+    </div>
+  </div>
+
+  <h2 style="margin-top:22px">Your progress</h2>
+  <div class="stats-grid">
+    <div class="stat"><span class="pill">📚 Lessons</span><strong id="journeyLessons">0</strong><span>completed</span></div>
+    <div class="stat"><span class="pill">🔖 Saved</span><strong id="journeySaved">0</strong><span>helpful items</span></div>
+    <div class="stat"><span class="pill">🧠 Quizzes</span><strong id="journeyQuizzes">0</strong><span>completed</span></div>
+    <div class="stat"><span class="pill">🏆 Badges</span><strong id="journeyBadges">0</strong><span>earned</span></div>
+  </div>
+
+  <div class="grid" style="margin-top:18px">
+    <div class="card achievement-card">
+      <span class="pill">Latest achievement</span>
+      <h3 id="journeyAchievementTitle">Your journey starts here</h3>
+      <p id="journeyAchievementText">Complete your first lesson to earn your first badge.</p>
+    </div>
+    <div class="card">
+      <span class="pill">Next badge</span>
+      <h3><span id="journeyNextBadgeIcon">📚</span> <span id="journeyNextBadge">First Lesson</span></h3>
+      <p id="journeyNextBadgeText">Complete your first learning topic.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <div class="feature-head">
+      <div>
+        <span class="pill">Mission map</span>
+        <h2>Build your Super Hero path</h2>
+      </div>
+      <div class="feature-icon">⚡</div>
+    </div>
+    <p>Every step is connected to something you can do inside the app.</p>
+    <div id="journeyMissionList" class="mission-list"></div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <span class="pill">Your badges</span>
+    <h2>Achievements</h2>
+    <div class="grid" id="journeyBadgeGrid"></div>
+  </div>
+
+  <div class="modal-actions">
+    <button class="cta" onclick="show('learn')">📚 Keep learning</button>
+    <button class="cta secondary" onclick="show('resources')">🔖 Find resources</button>
+    <button class="cta secondary" onclick="show('quiz')">🧠 Take the quiz</button>
+  </div>
+</section>
+
+<section id="rewards" class="section">
+  <div class="reward-hero">
+    <div class="reward-head">
+      <div class="reward-level">
+        <div class="reward-ring"><div>Lv <span id="rewardLevel">1</span></div></div>
+        <div>
+          <span class="pill" style="background:#ffffff22;color:#fff">SUPER HERO REWARDS</span>
+          <h2 id="rewardHeroName">My Super Hero</h2>
+          <p>Complete missions, earn XP, unlock badges, and level up.</p>
+        </div>
+      </div>
+      <div class="reward-xp"><strong id="rewardXp">0 XP</strong><div>earned so far</div></div>
+    </div>
+    <div class="reward-track"><div id="rewardXpBar" class="reward-fill" style="width:0%"></div></div>
+    <p id="rewardXpText" style="margin:8px 0 0">0 / 100 XP to Level 2</p>
+  </div>
+
+  <div class="card">
+    <span class="pill">How it works</span>
+    <h2>Learn → Earn → Level up</h2>
+    <p>Your activity in Spectrum Super Hero can turn into progress. Complete lessons, save helpful information, and take quizzes to earn XP.</p>
+    <div class="reward-grid">
+      <div class="reward-card"><div class="reward-icon">📚</div><h3>Learn</h3><p>10 XP for each completed learning topic.</p></div>
+      <div class="reward-card"><div class="reward-icon">🔖</div><h3>Save</h3><p>15 XP for each saved topic or resource.</p></div>
+      <div class="reward-card"><div class="reward-icon">🧠</div><h3>Quiz</h3><p>25 XP for each completed quiz.</p></div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:22px">Active missions</h2>
+  <div id="rewardMissionGrid" class="reward-grid"></div>
+
+  <h2 style="margin-top:22px">Badge rewards</h2>
+  <div id="rewardBadgeGrid" class="reward-grid"></div>
+
+  <div class="card" style="margin-top:18px">
+    <span class="pill">Next milestone</span>
+    <h2 id="rewardNextTitle">Start your first mission</h2>
+    <p id="rewardNextText">Complete a lesson, save something helpful, or take the quiz to begin.</p>
+    <div class="reward-actions">
+      <button class="cta" onclick="show('learn')">📚 Start a lesson</button>
+      <button class="cta secondary" onclick="show('resources')">🔖 Find resources</button>
+      <button class="cta secondary" onclick="show('quiz')">🧠 Take the quiz</button>
+    </div>
+  </div>
+</section>
+
+<div id="levelJourneyPanel" class="card" style="margin-top:18px">
+  <span class="pill">SUPER HERO JOURNEY</span>
+  <h2>Your growing journey</h2>
+  <p>Every lesson, saved resource, and quiz adds to your journey.</p>
+  <div class="journey-timeline" id="journeyTimeline"></div>
+</div>
+<section id="badges" class="section">
+<div class="card"><span class="pill">SUPER HERO COLLECTION</span><h2>🏆 Badge Cabinet</h2>
+<p>Every badge celebrates something you accomplished. Locked badges show what you can work toward next.</p>
+<div class="badge-count"><div><strong id="badgeEarnedCount">0</strong><div>badges earned</div></div><div class="badge-progress"><div id="badgeCabinetProgress" style="width:0%"></div></div><div id="badgeTotalCount">0 total</div></div></div>
+<div id="badgeCabinetGrid" class="badge-cabinet"></div></section>
+<section id="profile" class="section"><h1>My Hero Profile</h1>
+<div class="card hero-profile">
+  <div class="hero-profile-top">
+    <div style="display:flex;gap:16px;align-items:center">
+      <div class="hero-avatar" id="profileHeroAvatar">🦸🏽</div>
+      <div class="hero-profile-title"><span class="pill">SPECTRUM SUPER HERO</span><h2 id="profileHeroName">My Super Hero</h2><p id="profileHeroRole">Learning. Growing. Making a difference.</p></div>
+    </div>
+    <div style="text-align:right"><span class="pill">Level <strong id="profileHeroLevel">1</strong></span><div style="font-size:22px;font-weight:900;margin-top:5px" id="profileHeroXp">0 XP</div></div>
+  </div>
+  <div class="profile-xp"><div id="profileHeroXpBar" style="width:0%"></div></div>
+  <p id="profileHeroXpText" style="margin:7px 0 0;color:var(--muted)">0 / 100 XP to Level 2</p>
+  <div class="profile-mini" style="margin-top:15px">
+    <div class="stat"><span class="pill">📚 Lessons</span><strong id="profileHeroLessons">0</strong></div>
+    <div class="stat"><span class="pill">🔖 Saved</span><strong id="profileHeroSaved">0</strong></div>
+    <div class="stat"><span class="pill">🏆 Badges</span><strong id="profileHeroBadges">0</strong></div>
+  </div>
+  <div style="margin-top:18px"><strong>Choose your hero avatar</strong><div class="avatar-grid" id="heroAvatarGrid"></div></div>
+  <div style="margin-top:18px"><strong>Hero name</strong><div class="search"><input id="profileHeroNameInput" maxlength="40" placeholder="Enter your hero name"><button class="cta" onclick="saveProfileHero()">Save profile</button></div><div id="profileSavedMessage" class="profile-saved">✓ Profile saved on this device.</div></div>
+  <div style="margin-top:12px"><strong>I'm here as</strong><div class="role-grid" id="heroRoleGrid"></div></div>
+  <div style="margin-top:18px"><strong>Badges</strong><div class="profile-badge-row" id="profileBadgeRow"></div></div>
+  <div class="modal-actions"><button class="cta" onclick="show('journey')">Open My Journey</button><button class="cta secondary" onclick="show('dashboard')">View Dashboard</button></div>
+</div>
+<div class="card" style="margin-top:14px"><h3>Account</h3><div class="card"><h3>Account</h3><p id="authMessage">Checking your Spectrum Super Hero account…</p><div class="search"><input id="email" type="email" placeholder="Email"><input id="password" type="password" placeholder="Password"></div><button class="cta" onclick="signUp()">Create account</button> <button class="cta secondary" onclick="signIn()">Sign in</button> <button class="cta secondary" onclick="signOutUser()">Sign out</button></div><div class="stats-grid"><div class="stat"><span class="pill">Saved</span><strong id="savedCount">0</strong><span>topics & resources</span></div><div class="stat"><span class="pill">Lessons</span><strong id="completedTopicCount">0</strong><span>completed topics</span></div><div class="stat"><span class="pill">Quizzes</span><strong id="quizCount">0</strong><span>completed attempts</span></div><div class="stat"><span class="pill">Best score</span><strong id="bestScore">—</strong><span>highest percentage</span></div></div><div class="card" style="margin-top:14px"><h3>Your progress</h3><div class="profile-row"><span>Account status</span><strong id="accountState">Checking…</strong></div><div class="profile-row"><span>Saved learning topics</span><strong id="savedTopicsCount">0</strong></div><div class="profile-row"><span>Saved resources</span><strong id="savedResourcesCount">0</strong></div><div class="profile-row"><span>Lessons completed</span><strong id="completedTopicCount2">0</strong></div><div class="profile-row"><span>Quiz completion</span><strong id="quizProgressText">0%</strong></div><div class="progress-track"><div id="quizProgressBar" class="progress-bar" style="width:0%"></div></div><div class="profile-row"><span>Text size</span><select id="textSize" onchange="setTextSize(this.value)"><option value="16px">Standard</option><option value="18px">Large</option><option value="20px">Extra large</option></select></div></div><div class="card" style="margin-top:14px"><h3>Accessibility settings</h3><p>These settings stay on this device so Spectrum Super Hero can adapt to your preferences.</p><div class="settings-grid"><label class="setting"><span><strong>Large text</strong><br><small>Increase reading size</small></span><input id="largeTextToggle" type="checkbox" onchange="toggleLargeText(this.checked)"></label><label class="setting"><span><strong>High contrast</strong><br><small>Increase visual contrast</small></span><input id="contrastToggle" type="checkbox" onchange="toggleContrast(this.checked)"></label><label class="setting"><span><strong>Reduce motion</strong><br><small>Limit animations</small></span><input id="motionToggle" type="checkbox" onchange="toggleMotion(this.checked)"></label><label class="setting"><span><strong>Compact layout</strong><br><small>Use tighter spacing</small></span><input id="compactToggle" type="checkbox" onchange="toggleCompact(this.checked)"></label></div><div class="modal-actions"><button class="cta secondary" onclick="resetAccessibility()">Reset accessibility settings</button><button class="cta secondary" onclick="startWelcome(true)">Show Start Here</button></div></div><div class="card" style="margin-top:14px"><h3>Recent quiz history</h3><div id="quizHistory"><div class="empty">Sign in to see your quiz history.</div></div></div><div class="card" style="margin-top:14px"><h3>Saved content</h3><div id="savedContent"><div class="empty">Sign in to see your saved topics and resources.</div></div></div></section>
+<div class="footer">Spectrum Super Hero • Different Abilities. Stronger Together.</div>
+</main>
+<div id="welcome" class="welcome" onclick="if(event.target===this)closeWelcome()"><div class="welcome-box"><span class="pill">WELCOME TO SPECTRUM SUPER HERO</span><h2>Start where you need support.</h2><p class="lesson-intro">Learn, find practical support, and build more inclusive spaces.</p><div class="card" style="margin-top:16px"><strong>Who are you using Spectrum Super Hero for?</strong><div class="quick-links" style="margin-top:10px"><button class="quick-link" onclick="chooseRole('autistic')"><strong>Autistic person</strong><span>Tools, information, and self-advocacy.</span></button><button class="quick-link" onclick="chooseRole('family')"><strong>Family member</strong><span>Support and practical ideas.</span></button><button class="quick-link" onclick="chooseRole('educator')"><strong>Educator or school staff</strong><span>Inclusive learning strategies.</span></button><button class="quick-link" onclick="chooseRole('ally')"><strong>Ally or community member</strong><span>Learn how to support inclusion.</span></button></div></div><div class="quick-links"><button class="quick-link" onclick="welcomeGo('learn')"><strong>Learn</strong><span>Understand autism and neurodiversity.</span></button><button class="quick-link" onclick="welcomeGo('communication')"><strong>Communication</strong><span>Explore different communication methods.</span></button><button class="quick-link" onclick="welcomeGo('sensory')"><strong>Sensory</strong><span>Make environments more accessible.</span></button><button class="quick-link" onclick="welcomeGo('resources')"><strong>Resources</strong><span>Find verified organizations.</span></button><button class="quick-link" onclick="welcomeGo('families')"><strong>Families</strong><span>Find practical caregiver support.</span></button><button class="quick-link" onclick="welcomeGo('quiz')"><strong>Quiz</strong><span>Test what you know.</span></button></div><div class="modal-actions"><button class="cta" onclick="closeWelcome()">Enter Spectrum Super Hero</button><button class="cta secondary" onclick="welcomeGo('profile')">Set accessibility</button></div></div></div><div id="modal" class="modal" onclick="if(event.target===this)closeModal()"><div class="modal-box"><div id="modalContent"></div></div></div>
+<script>
+const URL='https://vikqscjsrwcgpyfznvbc.supabase.co';
+const KEY='sb_publishable_eKwVX8ZjRYadJQIe-24c2A_BpcPLNQ9';
+const H={apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'};
+let topics=[],resources=[],session=null;
+let cloudProgressLoaded=false, cloudProgressSaving=false;
+
+const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+function api(path,opt={}){return fetch(URL+path,{cache:'no-store',...opt,headers:{...H,...(opt.headers||{})}}).then(async r=>{let d=null;try{d=await r.json()}catch{}if(!r.ok)throw new Error(d?.message||d?.error_description||('Request failed '+r.status));return d});}
+
+const rewardMissions=[
+  {icon:'📚',title:'First Lesson',text:'Complete 1 learning topic.',target:1,get:()=>completedTopicIds.size,go:'learn'},
+  {icon:'🌟',title:'Lesson Explorer',text:'Complete 3 learning topics.',target:3,get:()=>completedTopicIds.size,go:'learn'},
+  {icon:'🔖',title:'Helpful Finder',text:'Save 1 topic or resource.',target:1,get:()=>savedTopicIds.size+savedResourceIds.size,go:'resources'},
+  {icon:'💜',title:'Resource Builder',text:'Save 3 topics or resources.',target:3,get:()=>savedTopicIds.size+savedResourceIds.size,go:'resources'},
+  {icon:'🧠',title:'Knowledge Hero',text:'Complete a quiz.',target:1,get:()=>quizHistory.length,go:'quiz'},
+  {icon:'🏆',title:'Perfect Score',text:'Earn 100% on a quiz.',target:1,get:()=>quizHistory.filter(x=>Number(x.question_count)>0&&Number(x.score)===Number(x.question_count)).length,go:'quiz'}
+];
+
+
+function levelProgressState(){
+  const lessons=completedTopicIds.size;
+  const saved=savedTopicIds.size+savedResourceIds.size;
+  const quizzes=quizHistory.length;
+  const badges=badgeDefinitions.filter(b=>b.ok()).length;
+  const xp=lessons*10+saved*15+quizzes*25+badges*10;
+  return {xp,level:Math.floor(xp/100)+1,within:xp%100};
+}
+function closeLevelUp(){
+  const o=document.getElementById('levelupOverlay');
+  if(o)o.classList.remove('show');
+}
+function checkForLevelUp(previousXp, currentXp){
+  const oldLevel=Math.floor(Number(previousXp||0)/100)+1;
+  const newLevel=Math.floor(Number(currentXp||0)/100)+1;
+  if(newLevel>oldLevel){
+    const n=document.getElementById('levelupNumber');
+    const m=document.getElementById('levelupMessage');
+    if(n)n.textContent=String(newLevel);
+    if(m)m.textContent='Amazing work! You reached Level '+newLevel+'. Keep learning, growing, and making a difference!';
+    const o=document.getElementById('levelupOverlay');
+    if(o)o.classList.add('show');
+  }
+}
+function updateJourneyMilestones(){
+  const box=document.getElementById('journeyTimeline');
+  if(!box)return;
+  const s=levelProgressState();
+  const milestones=[
+    {ok:s.xp>=0,icon:'🌟',title:'Started your Super Hero journey',text:'Your journey has begun.'},
+    {ok:s.xp>=10,icon:'📚',title:'Earned your first learning XP',text:'Complete learning topics to grow your knowledge.'},
+    {ok:s.xp>=50,icon:'⚡',title:'Reached 50 XP',text:'You are building momentum.'},
+    {ok:s.level>=2,icon:'🏆',title:'Reached Level 2',text:'You leveled up through learning and progress.'},
+    {ok:s.level>=3,icon:'💫',title:'Reached Level 3',text:'Keep going — your journey is growing.'}
+  ];
+  box.innerHTML=milestones.map(x=>`<div class="journey-step ${x.ok?'done':''}">
+    <div class="journey-dot">${x.ok?'✓':x.icon}</div>
+    <div><strong>${esc(x.title)}</strong><div>${esc(x.text)}</div></div>
+  </div>`).join('');
+}
+
+
+const badgeCatalog=[
+{id:'first-step',icon:'🌟',title:'First Step',requirement:'Earn your first XP.',ok:()=>rewardState().xp>=1},
+{id:'learning-hero',icon:'📚',title:'Learning Hero',requirement:'Complete 1 learning topic.',ok:()=>badgeDefinitions[0].ok()},
+{id:'lesson-explorer',icon:'🗺️',title:'Lesson Explorer',requirement:'Complete 3 learning topics.',ok:()=>badgeDefinitions[1].ok()},
+{id:'helpful-finder',icon:'🔖',title:'Helpful Finder',requirement:'Save your first topic or resource.',ok:()=>badgeDefinitions[2].ok()},
+{id:'resource-builder',icon:'💜',title:'Resource Builder',requirement:'Save 3 topics or resources.',ok:()=>badgeDefinitions[5].ok()},
+{id:'knowledge-hero',icon:'🧠',title:'Knowledge Hero',requirement:'Complete your first quiz.',ok:()=>badgeDefinitions[3].ok()},
+{id:'perfect-score',icon:'💯',title:'Perfect Score',requirement:'Earn 100% on a quiz.',ok:()=>badgeDefinitions[4].ok()},
+{id:'level-two',icon:'🏆',title:'Level 2 Hero',requirement:'Reach Level 2.',ok:()=>rewardState().level>=2},
+{id:'level-three',icon:'💫',title:'Level 3 Hero',requirement:'Reach Level 3.',ok:()=>rewardState().level>=3}
+];
+function badgeMetrics(){const r=rewardState();return{lessons:r.lessons,saved:r.saved,quizzes:r.quizzes,xp:r.xp,level:r.level};}
+function badgeDates(){return JSON.parse(localStorage.getItem('ssh_badge_dates')||'{}');}
+function showBadgePop(m){let e=document.getElementById('badgePop');if(!e){e=document.createElement('div');e.id='badgePop';e.className='badge-pop';document.body.appendChild(e)}e.textContent=m;e.classList.add('show');clearTimeout(window.__bp);window.__bp=setTimeout(()=>e.classList.remove('show'),4000);}
+function markNewBadges(){const d=badgeDates(),now=new Date().toISOString();let fresh=null;badgeCatalog.forEach(b=>{if(b.ok()&&!d[b.id]){d[b.id]=now;if(!fresh)fresh=b}});localStorage.setItem('ssh_badge_dates',JSON.stringify(d));if(fresh)showBadgePop('🏆 Badge unlocked: '+fresh.icon+' '+fresh.title);}
+function syncBadgeState(){try{markNewBadges();renderBadgeCabinet();; syncSuperHeroCloudProgress();renderDashboard();; syncSuperHeroCloudProgress();renderJourney();; syncSuperHeroCloudProgress();renderRewards();; syncSuperHeroCloudProgress();renderHeroProfile();}catch(e){console.warn('Badge sync failed',e.message);}}
+function renderBadgeCabinet(){const g=document.getElementById('badgeCabinetGrid');if(!g)return;markNewBadges();const d=badgeDates(),n=badgeCatalog.filter(b=>b.ok()).length;document.getElementById('badgeEarnedCount').textContent=n;document.getElementById('badgeTotalCount').textContent=badgeCatalog.length+' total';document.getElementById('badgeCabinetProgress').style.width=Math.round(n/badgeCatalog.length*100)+'%';g.innerHTML=badgeCatalog.map(b=>{const ok=b.ok();const date=d[b.id]?new Date(d[b.id]).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'';return `<div class="badge-item ${ok?'earned':'locked'}"><div class="badge-status">${ok?'UNLOCKED':'LOCKED'}</div><div class="badge-medal">${b.icon}</div><h3>${esc(b.title)}</h3><p>${esc(b.requirement)}</p><div class="badge-date">${ok?'Earned '+esc(date):'Keep going to unlock'}</div></div>`}).join('');}
+
+
+async function syncSuperHeroCloudProgress(){
+  try{
+    if(typeof supabaseClient==='undefined' || !supabaseClient) return;
+    const {data:{session}}=await supabaseClient.auth.getSession();
+    if(!session) return;
+    const userId=session.user.id;
+    const completed=Array.from(completedTopicIds||[]);
+    const heroName=localStorage.getItem('ssh_hero_name')||'';
+    const heroAvatar=localStorage.getItem('ssh_hero_avatar')||'';
+    const heroRole=localStorage.getItem('ssh_hero_role')||'';
+    await supabaseClient.from('super_hero_progress').upsert({
+      user_id:userId,completed_topics:completed,hero_name:heroName,
+      hero_avatar:heroAvatar,hero_role:heroRole,updated_at:new Date().toISOString()
+    },{onConflict:'user_id'});
+  }catch(e){ console.warn('Cloud progress sync:',e); }
+}
+function cloudProgressCard(){
+  return `<div class="cloud-sync-card"><strong>☁️ Cloud progress</strong><div class="cloud-sync-ok">Your lessons, profile, XP and badge progress are connected to your account.</div><div class="cloud-sync-note">Your progress can follow you when you sign in on another device.</div></div>`;
+}
+
+function rewardState(){
+  const lessons=completedTopicIds.size;
+  const saved=savedTopicIds.size+savedResourceIds.size;
+  const quizzes=quizHistory.length;
+  const badges=badgeDefinitions.filter(b=>b.ok()).length;
+  const xp=lessons*10+saved*15+quizzes*25+badges*10;
+  return {lessons,saved,quizzes,badges,xp,level:Math.floor(xp/100)+1,within:xp%100};
+}
+function showRewardToast(message){
+  let t=document.getElementById('rewardToast');
+  if(!t){t=document.createElement('div');t.id='rewardToast';t.className='reward-toast';document.body.appendChild(t);}
+  t.textContent=message;t.classList.add('show');
+  clearTimeout(window.__rewardTimer);
+  window.__rewardTimer=setTimeout(()=>t.classList.remove('show'),4000);
+}
+function renderRewards(){
+  const previousXp=Number(localStorage.getItem('ssh_last_seen_xp')||'0');
+  const state=rewardState(), name=getHeroName();
+  checkForLevelUp(previousXp,state.xp);
+  localStorage.setItem('ssh_last_seen_xp',String(state.xp));
+  const level=document.getElementById('rewardLevel'); if(!level)return;
+  document.getElementById('rewardHeroName').textContent=name;
+  level.textContent=String(state.level);
+  document.getElementById('rewardXp').textContent=state.xp+' XP';
+  document.getElementById('rewardXpBar').style.width=state.within+'%';
+  document.getElementById('rewardXpText').textContent=state.within+' / 100 XP to Level '+(state.level+1);
+
+  const mg=document.getElementById('rewardMissionGrid');
+  mg.innerHTML=rewardMissions.map((m,i)=>{
+    const value=Math.min(m.get(),m.target), done=value>=m.target, pct=Math.round(value/m.target*100);
+    return `<div class="reward-card ${done?'complete':'locked'}">
+      <div class="reward-icon">${m.icon}</div><span class="pill">${done?'Completed':'Mission'}</span>
+      <h3>${esc(m.title)}</h3><p>${esc(m.text)}</p>
+      <div class="reward-progress"><div style="width:${pct}%"></div></div>
+      <small>${value} / ${m.target}</small>
+      ${done?'':'<div class="reward-actions"><button class="cta secondary" onclick="show(\''+m.go+'\')">Work on it</button></div>'}
+    </div>`;
+  }).join('');
+
+  const bg=document.getElementById('rewardBadgeGrid');
+  bg.innerHTML=badgeDefinitions.map(b=>{
+    const ok=b.ok();
+    return `<div class="reward-card ${ok?'complete':'locked'}"><div class="reward-icon">${b.icon}</div>
+      <span class="pill">${ok?'Unlocked':'Locked'}</span><h3>${esc(b.title)}</h3><p>${esc(b.text)}</p>
+      <strong>${ok?'⭐ Reward earned':'🔒 Keep going'}</strong></div>`;
+  }).join('');
+
+  const next=rewardMissions.find(m=>m.get()<m.target);
+  document.getElementById('rewardNextTitle').textContent=next?next.icon+' '+next.title:'🎉 Starter missions complete!';
+  document.getElementById('rewardNextText').textContent=next?next.text+' You are at '+Math.min(next.get(),next.target)+' of '+next.target+'.':'You unlocked the starter reward path. Keep learning to build your next level.';
+}
+
+function show(id){const jp=document.getElementById('levelJourneyPanel');if(jp)jp.style.display=(id==='journey'?'block':'none');document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));const target=document.getElementById(id);if(!target)return;target.classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.id===id));closeModal();if(id==='resources')filterResources();if(id==='quiz')renderQuiz();if(id==='dashboard')renderDashboard();if(id==='journey')renderJourney();if(id==='rewards')renderRewards();if(id==='badges')renderBadgeCabinet();if(id==='profile')renderHeroProfile();window.scrollTo({top:0,behavior:document.body.classList.contains('reduced-motion')?'auto':'smooth'});}
+const navItems=[['home','Home'],['dashboard','My Dashboard'],['journey','My Journey'],['rewards','Rewards'],['badges','Badges'],['learn','Learn'],['acceptance','Acceptance'],['communication','Communication'],['sensory','Sensory'],['families','Families'],['educators','Educators'],['resources','Resources'],['myths','Myths & Facts'],['quiz','Quiz']];
+document.getElementById('nav').innerHTML=navItems.map(x=>`<button data-id="${x[0]}" onclick="show('${x[0]}')">${x[1]}</button>`).join('');
+document.querySelector('[data-id="home"]').classList.add('active');
+const needs=[['learn','I want to learn'],['communication','Communication help'],['sensory','Sensory information'],['families','I’m a caregiver'],['educators','I’m an educator'],['resources','I need resources'],['acceptance','I want to be an ally'],['quiz','Test my knowledge']];
+const needDescriptions={learn:'Short, person-centered lessons and practical information.',communication:'Ways to support communication without requiring one style.',sensory:'Learn about sensory differences and accessible environments.',families:'Practical support for families and caregivers.',educators:'Inclusive classroom and school strategies.',resources:'Find verified organizations and community resources.',acceptance:'Build respectful, accessible, inclusive spaces.',quiz:'Take the 8-question Autism Basics quiz.'};document.getElementById('needs').innerHTML=needs.map(x=>`<button class="card" style="text-align:left" onclick="show('${x[0]}')"><h3>${x[1]}</h3><p>${needDescriptions[x[0]]}</p><span class="pill">Open</span></button>`).join('');
+function authHeaders(){return session?.access_token?{apikey:KEY,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'}:H;}
+function authedApi(path,opt={}){return fetch(URL+path,{...opt,headers:{...authHeaders(),...(opt.headers||{})}}).then(async r=>{let d=null;try{d=await r.json()}catch{}if(!r.ok)throw new Error(d?.message||d?.error_description||('Request failed '+r.status));return d});}
+let savedTopicIds=new Set(),savedResourceIds=new Set();
+async function loadSaved(){savedTopicIds=new Set();savedResourceIds=new Set();if(!session?.user?.id)return;try{let [st,sr]=await Promise.all([authedApi('/rest/v1/saved_topics?select=topic_id'),authedApi('/rest/v1/saved_resources?select=resource_id')]);savedTopicIds=new Set((st||[]).map(x=>x.topic_id));savedResourceIds=new Set((sr||[]).map(x=>x.resource_id));}catch(e){console.warn('Saved content could not be loaded',e.message);document.getElementById('savedCount').textContent='Error';document.getElementById('authMessage').textContent='Signed in as '+session.user.email+' • Saved items could not be read: '+e.message;}}
+async function toggleTopicSave(id){if(!session?.user?.id){alert('Please sign in to save a topic.');show('profile');return}try{if(savedTopicIds.has(id)){await authedApi(`/rest/v1/saved_topics?user_id=eq.${encodeURIComponent(session.user.id)}&topic_id=eq.${encodeURIComponent(id)}`,{method:'DELETE'});savedTopicIds.delete(id);}else{await authedApi('/rest/v1/saved_topics',{method:'POST',headers:{Prefer:'return=minimal,resolution=ignore-duplicates'},body:JSON.stringify({user_id:session.user.id,topic_id:id})});savedTopicIds.add(id);}renderTopics();updateAccount();syncBadgeState();if(document.getElementById('modal').classList.contains('open'))openTopic(id);}catch(e){alert('Could not save topic: '+e.message);}}
+async function toggleResourceSave(id){if(!session?.user?.id){alert('Please sign in to save a resource.');show('profile');return}try{if(savedResourceIds.has(id)){await authedApi(`/rest/v1/saved_resources?user_id=eq.${encodeURIComponent(session.user.id)}&resource_id=eq.${encodeURIComponent(id)}`,{method:'DELETE'});savedResourceIds.delete(id);}else{await authedApi('/rest/v1/saved_resources',{method:'POST',headers:{Prefer:'return=minimal,resolution=ignore-duplicates'},body:JSON.stringify({user_id:session.user.id,resource_id:id})});savedResourceIds.add(id);}filterResources();updateAccount();syncBadgeState();}catch(e){alert('Could not save resource: '+e.message);}}
+const lessonLibrary={
+ 'what-is-autism':{
+  intro:'Autism is a neurodevelopmental difference. It can influence communication, social interaction, sensory experiences, routines, interests, and the way a person experiences the world. Every autistic person is an individual.',
+  sections:[
+   ['A person-centered view',['Autism is part of how a person experiences and responds to the world.','Support should focus on access, communication, wellbeing, autonomy, and the person’s own goals.','There is no single “autistic personality,” and no one support works for everyone.']],
+   ['What can be different?',['Communication may include speech, writing, signs, gestures, pictures, typing, or AAC.','Sensory input such as sound, light, touch, movement, or smells may be experienced differently.','Some people prefer predictable routines or need extra time to process information.','Interests, attention, learning styles, and ways of interacting can vary widely.']],
+   ['What helps?',['Ask rather than assume.','Give clear information and enough processing time.','Offer reasonable accommodations and different ways to participate.','Respect communication methods, boundaries, preferences, and choices.']],
+   ['Remember',['Autism is a spectrum of experiences, not a ranking from “mild” to “severe.”','A person can have strengths and support needs at the same time.','Listen to autistic people about their own experiences whenever possible.']]
+  ]
+ },
+ 'communication-differences':{
+  intro:'Communication is more than spoken language. Autistic people may communicate in many different ways, and one person may use different methods depending on the situation, energy level, or environment.',
+  sections:[
+   ['Different ways to communicate',['Speech, writing, typing, signs, gestures, facial expressions, pictures, and visual schedules can all carry meaning.','AAC (augmentative and alternative communication) can include communication apps, speech-generating devices, letter boards, or picture systems.','A person may understand more than they can easily express in the moment.']],
+   ['Helpful communication habits',['Use clear, direct language when that is helpful for the person.','Allow extra processing time and avoid rushing an answer.','Offer information visually when appropriate.','Ask the person how they prefer to communicate instead of guessing.']],
+   ['What to avoid',['Do not assume eye contact, facial expression, or spoken language measures understanding or honesty.','Do not speak over someone or automatically answer for them.','Do not remove a person’s communication method because it looks different from your own.']],
+   ['Remember',['Communication is a two-way process. The goal is connection and understanding, not making everyone communicate in the same style.']]
+  ]
+ },
+ 'sensory-experiences':{
+  intro:'Sensory experiences can be stronger, weaker, or simply different for autistic people. The same environment can feel comfortable to one person and overwhelming to another.',
+  sections:[
+   ['Common sensory areas',['Sound: alarms, crowds, background conversations, or sudden noises.','Light and visuals: bright lights, glare, clutter, or moving images.','Touch: clothing textures, unexpected touch, or crowded spaces.','Smell and taste: strong odors, food textures, or flavors.','Movement and body sensations: balance, motion, or the need for movement.']],
+   ['Signs someone may need a change',['A person may cover their ears, move away, become quieter, seek movement, ask for a break, or show other signs of stress.','Some people actively seek certain sensory input because it helps them regulate or focus.']],
+   ['Helpful supports',['Offer a quieter or lower-stimulation space when possible.','Give advance notice about loud sounds or changes.','Allow appropriate sensory tools or movement breaks.','Ask what helps rather than assuming.']],
+   ['Remember',['Sensory support is individualized. A strategy should be judged by whether it helps the person participate comfortably and safely.']]
+  ]
+ },
+ 'acceptance-and-inclusion':{
+  intro:'Autism acceptance means respecting autistic people as they are while working to remove barriers and create environments where they can participate, communicate, and belong.',
+  sections:[
+   ['Acceptance in practice',['Use respectful language and avoid stereotypes.','Make room for different communication styles and ways of participating.','Provide reasonable accommodations and accessible choices.','Include autistic people in decisions that affect them.']],
+   ['Acceptance is not',['Expecting a person to hide harmless autistic traits just to appear typical.','Assuming one “normal” way of learning, communicating, socializing, or behaving.','Treating autism as a reason to exclude someone from activities or opportunities.']],
+   ['How allies can help',['Listen to autistic people and value lived experience.','Challenge stereotypes and exclusion when you see them.','Ask what support would make participation easier.','Focus on access and belonging rather than changing someone’s identity.']],
+   ['Remember',['Inclusion means meaningful participation, not simply being physically present.']]
+  ]
+ },
+ 'neurodiversity':{
+  intro:'Neurodiversity describes the natural variation in human brains and ways of thinking. The neurodiversity perspective recognizes that differences can involve both strengths and support needs.',
+  sections:[
+   ['A simple way to understand it',['People differ in how they learn, communicate, focus, process information, and experience the world.','Autism, ADHD, dyslexia, and other neurological differences are part of human variation.','Neurodiversity does not mean every person has the same experience or needs.']],
+   ['Strengths and support needs',['A person may have strong interests, detailed knowledge, creativity, memory, pattern recognition, or other strengths.','The same person may need support with communication, transitions, sensory access, organization, or other areas.','Strengths do not cancel out support needs, and support needs do not erase strengths.']],
+   ['Inclusive thinking',['Look for barriers in the environment, not only differences in the person.','Offer multiple ways to learn, communicate, and participate.','Ask the person what works for them.']],
+   ['Remember',['Respecting neurodiversity means valuing people while still taking real support needs seriously.']]
+  ]
+ },
+ 'supporting-families':{
+  intro:'Families and caregivers can play an important role in creating supportive environments. The starting point is learning who the person is, what they enjoy, how they communicate, and what support helps them.',
+  sections:[
+   ['Start with the individual',['Learn the person’s communication methods, preferences, strengths, routines, and goals.','Include the autistic person in decisions as much as possible, using accessible communication when needed.','Avoid assuming family members or professionals always know what the person wants.']],
+   ['Build practical support',['Create predictable routines while allowing flexibility when possible.','Coordinate with schools, healthcare professionals, therapists, community organizations, or advocates as appropriate.','Keep useful information about communication and accommodations consistent across settings.']],
+   ['Support wellbeing',['Make time for interests, rest, connection, and enjoyable activities.','Watch for signs that an environment is too demanding and adjust supports.','Seek professional help when there are concerns about health, safety, communication, or daily functioning.']],
+   ['Remember',['Caregivers need support too. A sustainable support plan considers the needs and capacity of the whole family while respecting the autistic person’s autonomy.']]
+  ]
+ },
+ 'inclusive-educators':{
+  intro:'Inclusive education means designing learning environments where students can access instruction, communicate, participate, and demonstrate learning in ways that work for them.',
+  sections:[
+   ['Make expectations clear',['Use concise instructions and check for understanding.','Provide predictable routines and advance notice of major changes when possible.','Break complex tasks into manageable steps.','Use visual examples, written directions, schedules, or models when helpful.']],
+   ['Offer multiple ways to participate',['Allow different ways to respond when appropriate, such as speaking, typing, writing, visuals, or other approved methods.','Consider sensory access, seating, noise, lighting, transitions, and movement needs.','Give processing time before expecting a response.']],
+   ['Build an inclusive classroom',['Focus on strengths and interests while teaching needed skills.','Avoid public shaming or forcing eye contact or other harmless behaviors.','Work with the student and support team to understand accommodations and goals.','Create opportunities for genuine belonging with peers.']],
+   ['Remember',['The goal is access to learning and participation. Accommodations are tools for removing barriers, not unfair advantages.']]
+  ]
+ }
+};
+// The database title “Communication Differences” uses the same detailed lesson above.
+const lessonAliases={'communication-differences':'communication-differences'};
+function lessonMarkup(lesson){
+ let html=`<p class="lesson-intro">${esc(lesson.intro)}</p>`;
+ for(const [heading,items] of lesson.sections){html+=`<section style="margin-top:20px"><h3>${esc(heading)}</h3><ul style="line-height:1.65;padding-left:22px">${items.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>`;}
+ return html;
+}
+function openTopic(id){let t=topics.find(x=>x.id===id);if(!t)return;const lesson=lessonLibrary[t.id];const body=lesson?lessonMarkup(lesson):`<p style="white-space:pre-line;line-height:1.6">${esc(t.content||'')}</p>`;document.getElementById('modalContent').innerHTML=`<span class="pill">${esc(t.category||'LEARN')}</span><h2>${esc(t.title)}</h2><p>${esc(t.summary||'')}</p>${body}<div class="modal-actions"><button class="cta" onclick="toggleTopicSave('${esc(t.id)}')">${savedTopicIds.has(t.id)?'Remove from saved':'Save topic'}</button><button class="cta ${completedTopicIds.has(t.id)?'secondary':''}" onclick="toggleTopicComplete('${esc(t.id)}')">${completedTopicIds.has(t.id)?'Completed ✓':'Mark lesson complete'}</button><button class="cta secondary" onclick="closeModal()">Close</button></div>`;document.getElementById('modal').classList.add('open');}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+function renderTopics(){document.getElementById('topics').innerHTML=topics.length?topics.map(t=>`<div class="card"><span class="pill">${esc(t.category||'LEARN')}</span><h3>${esc(t.title)}</h3><p>${esc(t.summary||t.content||'')}</p><div class="modal-actions"><button class="cta" onclick="openTopic('${esc(t.id)}')">Read more</button><button class="cta secondary" onclick="toggleTopicSave('${esc(t.id)}')">${savedTopicIds.has(t.id)?'Saved ✓':'Save'}</button></div></div>`).join(''):'<div class="card"><h3>No learning topics found</h3></div>';}
+function renderResources(){if(typeof filterResources==='function')filterResources();}
+function clearResourceFilters(){const q=document.getElementById('resourceSearch'),a=document.getElementById('area');if(q)q.value='';if(a)a.value='';renderResources();}
+document.getElementById('resourceSearch').addEventListener('input',renderResources);document.getElementById('area').addEventListener('change',renderResources);
+
+const quizQuestions=[
+ {q:'Which statement best describes autism?',a:['A temporary illness that can be cured','A neurodevelopmental difference that can affect communication, interaction, sensory experiences, and behavior','A condition that affects every person in exactly the same way','A problem caused by poor parenting'],c:1,e:'Autism is a neurodevelopmental difference, and autistic people can have very different strengths, preferences, communication styles, and support needs.'},
+ {q:'Which can be a form of communication for an autistic person?',a:['Only spoken words','Speech, writing, signs, gestures, visuals, AAC, or combinations of these','Only eye contact','Only facial expressions'],c:1,e:'Communication can take many forms. A person may use speech, writing, signs, gestures, visuals, AAC, or several methods.'},
+ {q:'What is a helpful approach when someone has different sensory needs?',a:['Assume everyone needs the same environment','Tell the person to ignore sensory discomfort','Ask about preferences and, when possible, offer appropriate supports or a quieter space','Avoid making any accommodations'],c:2,e:'Sensory experiences vary. Individualized supports and asking about preferences can make environments more accessible.'},
+ {q:'What does autism acceptance emphasize?',a:['Making every autistic person behave the same way','Respecting autistic people, supporting access and autonomy, and valuing differences','Hiding autistic traits at all times','Avoiding autistic people'],c:1,e:'Acceptance centers dignity, respect, access, autonomy, and inclusion rather than trying to make everyone the same.'},
+ {q:'Which is an inclusive classroom practice?',a:['Only allowing one way to complete every assignment','Using clear instructions, predictable routines, visual supports, and multiple ways to demonstrate learning','Removing all choices from students','Assuming one support works for everyone'],c:1,e:'Clear expectations, predictable routines, visual supports, and multiple ways to participate can improve access to learning.'},
+ {q:'What is a good starting point for a caregiver supporting an autistic person?',a:['Assume what the person wants','Learn the person’s communication, preferences, strengths, goals, and support needs','Speak for the person whenever possible','Treat autism as something that must be fixed'],c:1,e:'Person-centered support starts with the individual and respects their communication, preferences, strengths, goals, and support needs.'},
+ {q:'True or false: All autistic people communicate, learn, and experience the world in the same way.',a:['True','False'],c:1,e:'False. Autism is a spectrum, and people can have very different experiences, strengths, preferences, and support needs.'},
+ {q:'What is one way to be an effective ally?',a:['Speak over autistic people','Listen to autistic people, respect accommodations and preferences, and support inclusion','Assume you know what every autistic person needs','Use stereotypes to explain autism'],c:1,e:'Good allies listen, respect individual preferences and accommodations, and support meaningful inclusion.'}
+];
+let quizIndex=0,quizAnswers=[];
+function renderQuiz(){
+ const el=document.getElementById('quizArea');
+ if(!el)return;
+ if(quizIndex==='result'){renderQuizResult();return;}
+ const q=quizQuestions[quizIndex], selected=quizAnswers[quizIndex];
+ el.innerHTML=`<div class="card"><div class="profile-row"><span>Question ${quizIndex+1} of ${quizQuestions.length}</span><strong>${Math.round((quizIndex/quizQuestions.length)*100)}%</strong></div><h2>${esc(q.q)}</h2><div style="display:grid;gap:10px;margin-top:16px">${q.a.map((x,i)=>`<label class="card" style="cursor:pointer;padding:12px;box-shadow:none"><input type="radio" name="quizAnswer" value="${i}" ${selected===i?'checked':''}> ${esc(x)}</label>`).join('')}</div><div class="modal-actions"><button class="cta" onclick="quizNext()">${quizIndex===quizQuestions.length-1?'Finish quiz':'Next'}</button>${quizIndex>0?'<button class="cta secondary" onclick="quizBack()">Back</button>':''}</div></div>`;
+}
+function quizNext(){const pick=document.querySelector('input[name="quizAnswer"]:checked');if(!pick){alert('Please choose an answer before continuing.');return}quizAnswers[quizIndex]=Number(pick.value);if(quizIndex<quizQuestions.length-1){quizIndex++;renderQuiz()}else{quizIndex='result';renderQuiz()}}
+function quizBack(){if(typeof quizIndex==='number'&&quizIndex>0){quizIndex--;renderQuiz()}}
+async function saveQuizAttempt(score){if(!session?.user?.id)return false;try{await authedApi('/rest/v1/quiz_attempts',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({user_id:session.user.id,quiz_id:'autism-basics-v1',score,question_count:quizQuestions.length})});return true}catch(e){console.warn('Quiz attempt could not be saved',e.message);return e.message}}
+async function renderQuizResult(){const score=quizAnswers.reduce((n,v,i)=>n+(v===quizQuestions[i].c?1:0),0);const percent=Math.round(score/quizQuestions.length*100);const saved=await saveQuizAttempt(score);let saveText=!session?.user?.id?'Sign in to save this attempt.':saved===true?'Your result was saved to your account.':`Your result could not be saved: ${esc(saved)}`;document.getElementById('quizArea').innerHTML=`<div class="card"><span class="pill">Quiz complete</span><h2>You scored ${score} out of ${quizQuestions.length} (${percent}%)</h2><p>${percent>=80?'Great job!':'Nice work—review the explanations below and try again whenever you want.'}</p><p><strong>${saveText}</strong></p></div><div style="display:grid;gap:12px;margin-top:14px">${quizQuestions.map((q,i)=>`<div class="card"><h3>${i+1}. ${esc(q.q)}</h3><p><strong>${quizAnswers[i]===q.c?'Correct':'Review'}</strong> — ${esc(q.e)}</p></div>`).join('')}</div><div class="modal-actions"><button class="cta" onclick="quizIndex=0;quizAnswers=[];renderQuiz()">Retake quiz</button><button class="cta secondary" onclick="show('profile')">View profile</button></div>`;await loadQuizProgress();syncBadgeState()}
+let quizHistory=[];
+async function loadQuizProgress(){
+  const history=document.getElementById('quizHistory');
+  if(!session?.user?.id){
+    document.getElementById('quizCount').textContent='0';
+    document.getElementById('bestScore').textContent='—';
+    document.getElementById('quizProgressText').textContent='0%';
+    document.getElementById('quizProgressBar').style.width='0%';
+    if(history)history.innerHTML='<div class="empty">Sign in to see your quiz history.</div>';
+    return;
+  }
+  try{
+    const rows=await authedApi('/rest/v1/quiz_attempts?select=id,quiz_id,score,question_count,completed_at&order=completed_at.desc');
+    quizHistory=rows||[];
+    const count=quizHistory.length;
+    const best=count?Math.max(...quizHistory.map(x=>x.question_count?Math.round((Number(x.score)/Number(x.question_count))*100):0)):0;
+    document.getElementById('quizCount').textContent=String(count);
+    document.getElementById('bestScore').textContent=count?best+'%':'—';
+    document.getElementById('quizProgressText').textContent=count?'100%':'0%';
+    document.getElementById('quizProgressBar').style.width=count?'100%':'0%';
+    if(history){
+      history.innerHTML=count?quizHistory.slice(0,5).map((x,i)=>{const pct=x.question_count?Math.round((Number(x.score)/Number(x.question_count))*100):0;const date=x.completed_at?new Date(x.completed_at).toLocaleString():'';return `<div class="history-item"><strong>${esc(x.quiz_id==='autism-basics-v1'?'Autism Basics':'Quiz')}</strong><br><span>${Number(x.score)}/${Number(x.question_count)} correct • ${pct}%</span><br><small>${esc(date)}</small></div>`}).join(''):'<div class="empty">No quiz attempts yet. Complete the quiz to start your progress history.</div>';
+    }
+    renderDashboard();renderJourney();renderRewards();renderBadgeCabinet();
+  }catch(e){
+    document.getElementById('quizCount').textContent='Error';
+    document.getElementById('bestScore').textContent='—';
+    if(history)history.innerHTML='<div class="empty">Quiz history could not be loaded: '+esc(e.message)+'</div>';
+  }
+  renderDashboard();
+}
+function renderSavedContent(){
+  const el=document.getElementById('savedContent');
+  if(!el)return;
+  document.getElementById('savedTopicsCount').textContent=String(savedTopicIds.size);
+  document.getElementById('savedResourcesCount').textContent=String(savedResourceIds.size);
+  if(!session?.user?.id){el.innerHTML='<div class="empty">Sign in to see your saved topics and resources.</div>';return}
+  const topicNames=topics.filter(t=>savedTopicIds.has(t.id)).map(t=>`<span class="pill">${esc(t.title)}</span>`).join(' ');
+  const resourceNames=resources.filter(r=>savedResourceIds.has(r.id)).map(r=>`<span class="pill">${esc(r.name)}</span>`).join(' ');
+  if(!topicNames&&!resourceNames){el.innerHTML='<div class="empty">You have not saved any topics or resources yet.</div>';return}
+  el.innerHTML=`<div style="margin-bottom:12px"><strong>Learning topics</strong><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">${topicNames||'<span class="empty">None saved</span>'}</div></div><div><strong>Resources</strong><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">${resourceNames||'<span class="empty">None saved</span>'}</div></div>`;
+}
+
+const badgeDefinitions = [
+  {id:'first-lesson',icon:'📚',title:'First Lesson',text:'Complete your first learning topic.',ok:()=>completedTopicIds.size>=1},
+  {id:'three-lessons',icon:'🌟',title:'Lesson Explorer',text:'Complete three learning topics.',ok:()=>completedTopicIds.size>=3},
+  {id:'first-save',icon:'🔖',title:'Helpful Finder',text:'Save your first topic or resource.',ok:()=>savedTopicIds.size+savedResourceIds.size>=1},
+  {id:'quiz',icon:'🧠',title:'Knowledge Hero',text:'Complete the Autism Basics quiz.',ok:()=>quizHistory.length>=1},
+  {id:'perfect',icon:'🏆',title:'Perfect Score',text:'Earn 100% on a quiz.',ok:()=>quizHistory.some(x=>Number(x.question_count)>0 && Number(x.score)===Number(x.question_count))},
+  {id:'three-saves',icon:'💜',title:'Resource Builder',text:'Save three topics or resources.',ok:()=>savedTopicIds.size+savedResourceIds.size>=3}
+];
+
+function renderDashboard(){
+ refreshProfileChrome();
+  const lessons=document.getElementById('dashLessons'); if(!lessons)return;
+  const lessonCount=completedTopicIds.size, saved=savedTopicIds.size+savedResourceIds.size, quizzes=quizHistory.length;
+  const earnedBadges=badgeDefinitions.filter(b=>b.ok()), earned=earnedBadges.length;
+  lessons.textContent=String(lessonCount); document.getElementById('dashSaved').textContent=String(saved); document.getElementById('dashQuizzes').textContent=String(quizzes); document.getElementById('dashBadges').textContent=String(earned);
+  const steps=[
+    {done:lessonCount>=1,title:'Complete your first lesson',text:'Explore one learning topic.'},
+    {done:saved>=1,title:'Save something helpful',text:'Save a topic or verified resource.'},
+    {done:quizzes>=1,title:'Test your knowledge',text:'Finish the Autism Basics quiz.'},
+    {done:earned>=3,title:'Earn three badges',text:'Keep learning, saving, and testing yourself.'}
+  ];
+  const pct=Math.round(steps.filter(x=>x.done).length/steps.length*100);
+  document.getElementById('dashProgressBar').style.width=pct+'%'; document.getElementById('dashProgressText').textContent=pct+'% of your starter mission complete';
+  const title=document.getElementById('dashMissionTitle'), text=document.getElementById('dashMissionText');
+  if(earned>=6){title.textContent='Super Hero status: complete';text.textContent='You earned every starter badge. Keep exploring and building inclusive communities.';}
+  else if(lessonCount>=3&&quizzes>=1){title.textContent='You are building strong momentum';text.textContent='You have completed lessons and the quiz. Explore resources or use a support tool next.';}
+  else if(lessonCount>=1){title.textContent='Keep your mission going';text.textContent='You started learning. Add another lesson, save something useful, or try the quiz.';}
+  else{title.textContent='Choose your first learning mission';text.textContent='Complete a lesson, save a helpful resource, or take the quiz to start building your progress.';}
+  const grid=document.getElementById('badgeGrid');
+  grid.innerHTML=badgeDefinitions.map(b=>{const isEarned=b.ok();return `<div class="card badge-card ${isEarned?'earned':'locked'}"><div class="feature-head"><div><span class="pill">${isEarned?'Earned':'Locked'}</span><h3>${b.icon} ${esc(b.title)}</h3></div><div class="feature-icon">${isEarned?'✓':'?'}</div></div><p>${esc(b.text)}</p></div>`;}).join('');
+  const list=document.getElementById('missionChecklist'); if(list)list.innerHTML=steps.map(x=>`<div class="mission-step ${x.done?'done':''}"><div class="mission-check">${x.done?'✓':'•'}</div><div><strong>${esc(x.title)}</strong><small>${esc(x.text)}</small></div></div>`).join('');
+  const xp=lessonCount*10+saved*15+quizzes*25+earned*10; const xpEl=document.getElementById('dashXp'); if(xpEl)xpEl.textContent=String(xp);
+  const next=badgeDefinitions.find(b=>!b.ok()), nextEl=document.getElementById('dashNextBadge'), nextText=document.getElementById('dashNextBadgeText');
+  if(next){if(nextEl)nextEl.textContent=next.icon;if(nextText)nextText.textContent=next.title;}else{if(nextEl)nextEl.textContent='✓';if(nextText)nextText.textContent='All starter badges earned';}
+  const at=document.getElementById('dashAchievementTitle'), ax=document.getElementById('dashAchievementText');
+  if(earnedBadges.length){const latest=earnedBadges[earnedBadges.length-1];at.textContent=latest.icon+' '+latest.title+' earned!';ax.textContent=latest.text+' Keep going to unlock the next badge.';}
+  else{at.textContent='Your journey starts here';ax.textContent='Complete your first lesson to earn your first badge.';}
+}
+
+
+const heroAvatars=['🦸🏽','🦸🏾‍♀️','🦸🏻‍♂️','🦸🏿‍♀️','🦸🏼‍♂️','🦸🏽‍♀️','🦸🏿‍♂️','🦸🏻‍♀️'];
+const heroRoles=[['autistic','I’m an autistic person'],['family','I’m a family member'],['educator','I’m an educator'],['ally','I’m an ally']];
+function getHeroAvatar(){return localStorage.getItem('ssh_hero_avatar')||heroAvatars[0];}
+function getHeroRole(){return localStorage.getItem('ssh_hero_role')||localStorage.getItem('ssh_role')||'autistic';}
+function profileRoleLabel(){return (heroRoles.find(x=>x[0]===getHeroRole())||heroRoles[0])[1];}
+function refreshProfileChrome(){
+ const name=getHeroName(),avatar=getHeroAvatar(),role=profileRoleLabel();
+ const topName=document.getElementById('topProfileName'),topAvatar=document.getElementById('topProfileAvatar'),chip=document.getElementById('topProfileChip'),topBtn=document.getElementById('profileTopButton');
+ if(topName)topName.textContent=name; if(topAvatar)topAvatar.textContent=avatar; if(chip)chip.style.display='flex'; if(topBtn)topBtn.textContent=name==='My Super Hero'?'Profile':'👤 '+name;
+ const da=document.getElementById('dashboardHeroAvatar'),dn=document.getElementById('dashboardHeroName'),dr=document.getElementById('dashboardHeroRole');
+ if(da)da.textContent=avatar; if(dn)dn.textContent=name; if(dr)dr.textContent=role;
+ const ja=document.getElementById('journeyAvatar'); if(ja)ja.textContent=avatar;
+}
+function saveHeroAvatar(a){localStorage.setItem('ssh_hero_avatar',a);saveCloudProgress({hero_avatar:a});refreshProfileChrome();renderHeroProfile();renderJourney();renderDashboard();}
+function saveHeroRole(r){localStorage.setItem('ssh_hero_role',r);localStorage.setItem('ssh_role',r);saveCloudProgress({hero_role:r});refreshProfileChrome();renderHeroProfile();renderJourney();renderDashboard();}
+function saveProfileHero(){
+ const input=document.getElementById('profileHeroNameInput');
+ const value=(input?.value||'').trim().slice(0,40);
+ if(value)localStorage.setItem('ssh_hero_name',value); else localStorage.removeItem('ssh_hero_name');
+ refreshProfileChrome(); renderHeroProfile(); renderJourney(); renderDashboard();
+ const note=document.getElementById('profileSavedMessage'); if(note){note.style.display='block';note.textContent='✓ Profile saved on this device. Your Hero name, avatar, and role now appear throughout the app.';setTimeout(()=>{note.style.display='none'},3200);}
+}
+function renderHeroProfile(){
+ const root=document.getElementById('profileHeroAvatar'); if(!root)return;
+ const lessonCount=completedTopicIds.size, saved=savedTopicIds.size+savedResourceIds.size, quizzes=quizHistory.length;
+ const earnedBadges=badgeDefinitions.filter(b=>b.ok()), earned=earnedBadges.length;
+ const xp=lessonCount*10+saved*15+quizzes*25+earned*10, level=Math.floor(xp/100)+1, within=xp%100;
+ const name=getHeroName(), avatar=getHeroAvatar(), role=getHeroRole();
+ root.textContent=avatar;
+ document.getElementById('profileHeroName').textContent=name;
+ document.getElementById('profileHeroRole').textContent=(heroRoles.find(x=>x[0]===role)||heroRoles[0])[1];
+ document.getElementById('profileHeroLevel').textContent=String(level);
+ document.getElementById('profileHeroXp').textContent=xp+' XP';
+ document.getElementById('profileHeroXpBar').style.width=within+'%';
+ document.getElementById('profileHeroXpText').textContent=within+' / 100 XP to Level '+(level+1);
+ document.getElementById('profileHeroLessons').textContent=String(lessonCount);
+ document.getElementById('profileHeroSaved').textContent=String(saved);
+ document.getElementById('profileHeroBadges').textContent=String(earned);
+ const input=document.getElementById('profileHeroNameInput'); if(input&&document.activeElement!==input)input.value=name==='My Super Hero'?'':name;
+ document.getElementById('heroAvatarGrid').innerHTML=heroAvatars.map(a=>`<button class="avatar-choice ${a===avatar?'selected':''}" onclick="saveHeroAvatar('${a}')" aria-label="Choose avatar ${a}">${a}</button>`).join('');
+ document.getElementById('heroRoleGrid').innerHTML=heroRoles.map(([id,label])=>`<button class="role-choice ${id===role?'selected':''}" onclick="saveHeroRole('${id}')">${esc(label)}</button>`).join('');
+ document.getElementById('profileBadgeRow').innerHTML=badgeDefinitions.map(b=>`<span class="profile-badge ${b.ok()?'':'locked'}">${b.icon} ${esc(b.title)}</span>`).join('');
+ refreshProfileChrome();
+}
+
+function getHeroName(){return localStorage.getItem('ssh_hero_name')||'My Super Hero';}
+function saveHeroName(){
+  const input=document.getElementById('heroNameInput');
+  const value=(input?.value||'').trim().slice(0,40);
+  if(value)localStorage.setItem('ssh_hero_name',value);
+  else localStorage.removeItem('ssh_hero_name');
+  renderJourney();
+}
+function renderJourney(){const jp=document.getElementById('levelJourneyPanel');if(jp)jp.style.display='block';updateJourneyMilestones();
+  const el=document.getElementById('journeyLevel'); if(!el)return;
+  const lessonCount=completedTopicIds.size;
+  const saved=savedTopicIds.size+savedResourceIds.size;
+  const quizzes=quizHistory.length;
+  const earnedBadges=badgeDefinitions.filter(b=>b.ok());
+  const earned=earnedBadges.length;
+  const xp=lessonCount*10+saved*15+quizzes*25+earned*10;
+  const level=Math.floor(xp/100)+1;
+  const within=xp%100;
+  const name=getHeroName();
+  el.textContent=String(level);
+  document.getElementById('journeyHeroName').textContent=name;
+  document.getElementById('journeyXp').textContent=xp+' XP';
+  document.getElementById('journeyXpBar').style.width=within+'%';
+  document.getElementById('journeyXpText').textContent=within+' / 100 XP to Level '+(level+1);
+  document.getElementById('journeyLessons').textContent=String(lessonCount);
+  document.getElementById('journeySaved').textContent=String(saved);
+  document.getElementById('journeyQuizzes').textContent=String(quizzes);
+  document.getElementById('journeyBadges').textContent=String(earned);
+  const input=document.getElementById('heroNameInput'); if(input&&document.activeElement!==input)input.value=name==='My Super Hero'?'':name;
+
+  const steps=[
+    {done:lessonCount>=1,title:'Complete your first lesson',text:'Explore one learning topic.'},
+    {done:saved>=1,title:'Save something helpful',text:'Save a topic or verified resource.'},
+    {done:quizzes>=1,title:'Test your knowledge',text:'Finish the Autism Basics quiz.'},
+    {done:earned>=3,title:'Earn three badges',text:'Keep learning, saving, and testing yourself.'},
+    {done:earned>=6,title:'Unlock every starter badge',text:'Complete the full starter achievement set.'}
+  ];
+  const list=document.getElementById('journeyMissionList');
+  if(list)list.innerHTML=steps.map(x=>`<div class="mission-step ${x.done?'done':''}"><div class="mission-check">${x.done?'✓':'•'}</div><div><strong>${esc(x.title)}</strong><small>${esc(x.text)}</small></div></div>`).join('');
+
+  const next=badgeDefinitions.find(b=>!b.ok());
+  const nextIcon=document.getElementById('journeyNextBadgeIcon'),nextTitle=document.getElementById('journeyNextBadge'),nextText=document.getElementById('journeyNextBadgeText');
+  if(next){nextIcon.textContent=next.icon;nextTitle.textContent=next.title;nextText.textContent=next.text;}
+  else{nextIcon.textContent='✓';nextTitle.textContent='All starter badges earned';nextText.textContent='Keep exploring the app and building inclusive communities.';}
+
+  const latest=earnedBadges[earnedBadges.length-1];
+  document.getElementById('journeyAchievementTitle').textContent=latest?latest.icon+' '+latest.title+' earned!':'Your journey starts here';
+  document.getElementById('journeyAchievementText').textContent=latest?latest.text+' Keep going to unlock the next badge.':'Complete your first lesson to earn your first badge.';
+  refreshProfileChrome();
+
+  const grid=document.getElementById('journeyBadgeGrid');
+  if(grid)grid.innerHTML=badgeDefinitions.map(b=>{const ok=b.ok();return `<div class="card badge-card ${ok?'earned':'locked'}"><span class="pill">${ok?'Earned':'Locked'}</span><h3>${b.icon} ${esc(b.title)}</h3><p>${esc(b.text)}</p></div>`}).join('');
+}
+
+function openTool(type){
+  const data={
+    communication:{
+      title:'Communication Helper',
+      intro:'Use these prompts to make communication more accessible.',
+      items:['What communication method does the person prefer?','Have I allowed enough processing time?','Would a visual, written, signed, or AAC option help?','Am I adapting too, instead of expecting the person to do all the adapting?']
+    },
+    sensory:{
+      title:'Environment Check',
+      intro:'Use these prompts before or during a potentially difficult environment.',
+      items:['Can the person access a quieter or lower-stimulation space?','Have I explained major changes ahead of time?','Are lighting, sound, crowding, or movement creating barriers?','Can the person take an appropriate break when needed?']
+    },
+    school:{
+      title:'Inclusive Classroom Check',
+      intro:'A quick review for learning environments.',
+      items:['Are instructions clear and manageable?','Are there multiple appropriate ways to participate or demonstrate learning?','Is processing time available?','Are sensory access and transitions considered?']
+    },
+    ally:{
+      title:'Inclusion Checklist',
+      intro:'Small actions can help create genuinely inclusive spaces.',
+      items:['Listen to autistic people and respect their preferences.','Remove barriers instead of blaming the person.','Respect communication and sensory differences.','Include autistic people in decisions that affect them.']
+    }
+  }[type];
+  if(!data)return;
+  document.getElementById('modalContent').innerHTML=`<span class="pill">Super Hero Tool</span><h2>${esc(data.title)}</h2><p class="lesson-intro">${esc(data.intro)}</p><ul class="checklist">${data.items.map(x=>`<li><input class="check" type="checkbox">${esc(x)}</li>`).join('')}</ul><div class="tip"><strong>Remember:</strong> Support should be individualized, respectful, and centered on the person's communication, preferences, autonomy, and access needs.</div><div class="modal-actions"><button class="cta" onclick="closeModal()">Done</button></div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+function setTextSize(v){document.documentElement.style.fontSize=v;localStorage.setItem('bd_text_size',v)}
+function restoreTextSize(){const v=localStorage.getItem('bd_text_size')||'16px';document.documentElement.style.fontSize=v;const s=document.getElementById('textSize');if(s)s.value=v}
+function setPref(key,value){localStorage.setItem('bd_'+key,value?'1':'0')}
+function setTextSize(v){document.documentElement.style.fontSize=v;localStorage.setItem('bd_text_size',v);const s=document.getElementById('textSize');if(s)s.value=v;const l=document.getElementById('largeTextToggle');if(l)l.checked=v!=='16px';}
+function restoreTextSize(){setTextSize(localStorage.getItem('bd_text_size')||'16px')}
+function toggleLargeText(on){setTextSize(on?'18px':'16px')}
+function toggleContrast(on){document.body.classList.toggle('high-contrast',on);setPref('contrast',on)}
+function toggleMotion(on){document.body.classList.toggle('reduced-motion',on);setPref('motion',on)}
+function toggleCompact(on){document.body.classList.toggle('compact',on);setPref('compact',on)}
+function restoreAccessibility(){const c=localStorage.getItem('bd_contrast')==='1',m=localStorage.getItem('bd_motion')==='1',co=localStorage.getItem('bd_compact')==='1';document.body.classList.toggle('high-contrast',c);document.body.classList.toggle('reduced-motion',m);document.body.classList.toggle('compact',co);restoreTextSize();for(const [id,v] of [['contrastToggle',c],['motionToggle',m],['compactToggle',co]]){const el=document.getElementById(id);if(el)el.checked=v;}}
+function resetAccessibility(){['bd_contrast','bd_motion','bd_compact','bd_text_size'].forEach(k=>localStorage.removeItem(k));restoreAccessibility()}
+function startWelcome(force=false){if(!force&&localStorage.getItem('bd_welcome_seen')==='1')return;document.getElementById('welcome').classList.add('open')}
+function closeWelcome(){document.getElementById('welcome').classList.remove('open');localStorage.setItem('bd_welcome_seen','1')}
+function welcomeGo(id){closeWelcome();show(id)}
+let completedTopicIds=new Set(JSON.parse(localStorage.getItem('ssh_completed_topics')||'[]'));
+function localProfileState(){return {hero_name:localStorage.getItem('ssh_hero_name')||'',hero_avatar:localStorage.getItem('ssh_hero_avatar')||'',hero_role:localStorage.getItem('ssh_hero_role')||localStorage.getItem('ssh_role')||''};}
+function applyCloudProfile(row){if(!row)return;if(row.hero_name){localStorage.setItem('ssh_hero_name',row.hero_name)}else{localStorage.removeItem('ssh_hero_name')}if(row.hero_avatar){localStorage.setItem('ssh_hero_avatar',row.hero_avatar)}if(row.hero_role){localStorage.setItem('ssh_hero_role',row.hero_role);localStorage.setItem('ssh_role',row.hero_role)}if(Array.isArray(row.completed_topics)){completedTopicIds=new Set(row.completed_topics);persistCompletedTopics()}}
+async function loadCloudProgress(){
+  cloudProgressLoaded=false;
+  if(!session?.user?.id){return}
+  try{
+    const rows=await authedApi(`/rest/v1/super_hero_progress?select=user_id,completed_topics,hero_name,hero_avatar,hero_role&user_id=eq.${encodeURIComponent(session.user.id)}`);
+    if(rows&&rows.length){applyCloudProfile(rows[0]);}
+    else{
+      const lp=localProfileState();
+      await authedApi('/rest/v1/super_hero_progress',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({user_id:session.user.id,completed_topics:[...completedTopicIds],...lp})});
+    }
+    cloudProgressLoaded=true;
+  }catch(e){
+    console.warn('Cloud progress unavailable:',e.message);
+    const msg=document.getElementById('authMessage');
+    if(msg && session?.user?.email) msg.textContent='Signed in as '+session.user.email+' • Cloud progress needs the v39 database migration.';
+  }
+  refreshProfileChrome();updateLearningProgress();renderDashboard();renderJourney();renderRewards();renderBadgeCabinet();renderHeroProfile();
+}
+async function saveCloudProgress(extra={}){
+  if(!session?.user?.id||!cloudProgressLoaded||cloudProgressSaving)return;
+  cloudProgressSaving=true;
+  try{
+    const body={user_id:session.user.id,completed_topics:[...completedTopicIds],...localProfileState(),...extra};
+    await authedApi(`/rest/v1/super_hero_progress?user_id=eq.${encodeURIComponent(session.user.id)}`,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify(body)});
+  }catch(e){console.warn('Cloud progress save failed:',e.message)}finally{cloudProgressSaving=false}
+}
+
+function persistCompletedTopics(){localStorage.setItem('ssh_completed_topics',JSON.stringify([...completedTopicIds]));}
+function toggleTopicComplete(id){if(completedTopicIds.has(id))completedTopicIds.delete(id);else completedTopicIds.add(id);persistCompletedTopics();saveCloudProgress();updateLearningProgress();syncBadgeState();if(document.getElementById('modal').classList.contains('open'))openTopic(id);}
+function updateLearningProgress(){const n=completedTopicIds.size;const a=document.getElementById('completedTopicCount');const b=document.getElementById('completedTopicCount2');if(a)a.textContent=String(n);if(b)b.textContent=String(n);const title=document.getElementById('nextStepTitle'),text=document.getElementById('nextStepText'),btn=document.getElementById('nextStepButton');if(!title)return;if(n>=topics.length&&topics.length){title.textContent='You completed the starter lessons';text.textContent='Great work. Keep exploring resources, communication supports, sensory access, and the quiz.';btn.textContent='Take the quiz';btn.onclick=()=>show('quiz');}else if(n){title.textContent=`Keep going — ${n} lesson${n===1?'':'s'} completed`;text.textContent='Choose another lesson or test your knowledge to keep building your progress.';btn.textContent='Continue learning';btn.onclick=()=>show('learn');}else{title.textContent='Start with a lesson';text.textContent='Choose a topic to begin building your Spectrum Super Hero learning path.';btn.textContent='Explore lessons';btn.onclick=()=>show('learn');}}
+function chooseRole(role){localStorage.setItem('ssh_role',role);localStorage.setItem('ssh_hero_role',role);refreshProfileChrome();closeWelcome();const map={autistic:'learn',family:'families',educator:'educators',ally:'acceptance'};show(map[role]||'learn');}
+function restoreRole(){const role=localStorage.getItem('ssh_role');if(!role)return;const labels={autistic:'Autistic person',family:'Family member',educator:'Educator or school staff',ally:'Ally or community member'};const card=document.getElementById('nextStepCard');if(card){const p=card.querySelector('.pill');if(p)p.textContent=`For: ${labels[role]||'You'}`;}}
+function setBanner(t,ok=false){let b=document.getElementById('banner');b.textContent=t;b.className='banner'+(ok?' ok':'');}
+async function loadData(){
+  const diagnostics=[];
+  try{
+    const t=await api('/rest/v1/learning_topics?select=id,title,summary,content,category&order=title');
+    topics=Array.isArray(t)?t:[];
+    diagnostics.push('learning_topics: '+topics.length+' rows');
+  }catch(e){diagnostics.push('learning_topics ERROR: '+e.message);topics=[];}
+  let resourceError='';
+  try{
+    const r=await api('/rest/v1/resources?select=id,name,description,category,website_url,phone,location_name,state_code,city,audience,accessibility_notes,eligibility_notes,cost_notes,verification_status,last_verified_at&verification_status=eq.verified&order=name');
+    resources=Array.isArray(r)?r:[];
+    diagnostics.push('resources verified query: '+resources.length+' rows');
+  }catch(e){
+    resourceError=e?.message||String(e);
+    diagnostics.push('resources verified query ERROR: '+resourceError);
+    resources=[];
+    try{
+      const r2=await api('/rest/v1/resources?select=id,name,verification_status&verification_status=eq.verified&order=name');
+      resources=Array.isArray(r2)?r2:[];
+      diagnostics.push('resources minimal verified query: '+resources.length+' rows');
+      resourceError='';
+    }catch(e2){
+      resourceError=e2?.message||String(e2);
+      diagnostics.push('resources minimal verified query ERROR: '+resourceError);
+    }
+  }
+  const rs=document.getElementById('resourceCloudStatus');
+  // v49: publish the resource query result before other UI work can interrupt rendering.
+  if(resources.length){
+    if(rs)rs.innerHTML='☁️ Supabase returned <strong>'+resources.length+'</strong> verified resource rows.';
+  }else if(resourceError){
+    if(rs)rs.innerHTML='⚠️ Supabase resource query error.<br><small>'+esc(resourceError)+'</small>';
+  }else{
+    if(rs)rs.innerHTML='☁️ Supabase returned <strong>0</strong> verified resource rows.';
+  }
+  try{await loadSaved();}catch(e){diagnostics.push('saved content ERROR: '+(e?.message||String(e)));}
+  try{updateAccount();}catch(e){diagnostics.push('account UI ERROR: '+(e?.message||String(e)));}
+  try{renderTopics();}catch(e){diagnostics.push('topics UI ERROR: '+(e?.message||String(e)));}
+  try{renderResources();}catch(e){diagnostics.push('resource UI ERROR: '+(e?.message||String(e)));}
+  try{syncBadgeState();}catch(e){diagnostics.push('badge UI ERROR: '+(e?.message||String(e)));}
+  try{populateResourceFilters();}catch(e){diagnostics.push('resource filters ERROR: '+(e?.message||String(e)));}
+  try{filterResources({preserveStatus:true});}catch(e){diagnostics.push('resource filter UI ERROR: '+(e?.message||String(e)));}
+  if(resources.length){
+    setBanner(`Connected to Spectrum Super Hero cloud data • ${topics.length} learning topics • ${resources.length} verified resources`,true);
+    if(rs)rs.innerHTML='☁️ Connected to the verified Spectrum Super Hero resource directory • '+resources.length+' verified resources.';
+  }else if(resourceError){
+    setBanner('Supabase resource access needs attention.',false);
+    if(rs)rs.innerHTML='⚠️ Resource query failed.<br><small>'+esc(diagnostics.join(' • '))+'</small><br><button class="guided-btn" style="margin-top:8px" onclick="loadData()">Retry cloud resources</button>';
+  }else{
+    setBanner('Cloud connected, but no verified resource rows were returned.',true);
+    if(rs)rs.innerHTML='☁️ Supabase returned 0 verified resource rows.<br><small>'+esc(diagnostics.join(' • '))+'</small><br><button class="guided-btn" style="margin-top:8px" onclick="loadData()">Retry cloud resources</button>';
+  }
+  window.__resourceDiagnostics=diagnostics;
+  const diag=document.getElementById('resourceDiagnostics'); if(diag){diag.textContent=diagnostics.join(' • ');diag.style.display='block';}
+}
+async function saveSession(s){session=s;if(s)localStorage.setItem('bd_session',JSON.stringify(s));else localStorage.removeItem('bd_session');cloudProgressLoaded=false;await loadSaved();if(s)await loadCloudProgress();renderTopics();renderResources();updateAccount();}
+function updateAccount(){updateLearningProgress();restoreRole();renderDashboard();renderJourney();renderRewards();renderBadgeCabinet();document.getElementById('accountState').textContent=session?.user?.email||'Signed out';document.getElementById('authMessage').textContent=session?.user?.email?`Signed in as ${session.user.email}`:'Not signed in';document.getElementById('savedCount').textContent=String(savedTopicIds.size+savedResourceIds.size);renderSavedContent();loadQuizProgress();}
+async function signUp(){let email=document.getElementById('email').value.trim(),password=document.getElementById('password').value;if(!email||!password){document.getElementById('authMessage').textContent='Enter an email and password.';return}try{let d=await api('/auth/v1/signup',{method:'POST',body:JSON.stringify({email,password})});saveSession(d.session);document.getElementById('authMessage').textContent=d.session?'Account created and signed in.':'Account created. Check your email if confirmation is enabled.';}catch(e){document.getElementById('authMessage').textContent=e.message;}}
+async function signIn(){let email=document.getElementById('email').value.trim(),password=document.getElementById('password').value;try{let d=await api('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email,password})});saveSession(d);document.getElementById('authMessage').textContent='Signed in.';}catch(e){document.getElementById('authMessage').textContent=e.message;}}
+function signOutUser(){saveSession(null);document.getElementById('authMessage').textContent='Signed out.';}
+try{session=JSON.parse(localStorage.getItem('bd_session')||'null')}catch{}restoreAccessibility();refreshProfileChrome();updateAccount();loadData();if(session?.user?.id)loadCloudProgress();setTimeout(()=>startWelcome(false),450);
+</script>
+<div id="levelupOverlay" class="levelup-overlay" role="dialog" aria-modal="true" aria-label="Super Hero level up">
+  <div class="levelup-card">
+    <div class="levelup-stars">⭐ ✨ ⭐</div>
+    <div>SUPER HERO ACHIEVEMENT</div>
+    <h2>LEVEL UP!</h2>
+    <div class="levelup-number" id="levelupNumber">2</div>
+    <p id="levelupMessage">You are growing your knowledge and making a difference!</p>
+    <div class="levelup-reward">
+      <span>🏆 New Level</span>
+      <span>⚡ More XP</span>
+      <span>🦸 Keep Going</span>
+    </div>
+    <button class="levelup-close" onclick="closeLevelUp()">Continue My Journey</button>
+  </div>
+</div>
+
+<script>
+const guidedLessons={
+"what-is-autism":["Autism Basics","Autism is a lifelong neurodevelopmental difference that can affect communication, sensory experiences, learning, and how someone experiences the world.","Which statement is most accurate?","Autistic people can have different strengths, preferences, and support needs.","Every autistic person has the same needs."],
+"acceptance-and-inclusion":["Acceptance","Inclusion means people can participate and belong without being expected to hide harmless differences.","What is a good first step?","Ask what support helps the person participate.","Assume everyone needs the same accommodation."],
+"communication-differences":["Communication","Communication can include speech, writing, signs, visuals, gestures, or devices.","Which approach supports communication access?","Give processing time and allow appropriate communication methods.","Only accept spoken answers."],
+"sensory-experiences":["Sensory","People can experience sound, light, touch, movement, and other sensations differently.","What is helpful?","Ask what changes would make the environment more accessible.","Assume the same sensory needs affect everyone."],
+"supporting-families":["Families","Support should center the autistic person's preferences, goals, and autonomy.","What should family support center?","The person's needs, preferences, goals, and well-being.","Making the person appear less autistic."],
+"inclusive-educators":["Educators","Inclusive education offers multiple ways to access instruction and participate.","Which classroom practice increases access?","Offer multiple appropriate ways to participate and respond.","Require one way for every student to answer."]
+};
+let guidedCurrent=null;
+function startGuidedLesson(id){
+ const x=guidedLessons[id]; if(!x)return; guidedCurrent={id,x};
+ document.getElementById("guidedLessonPanel").innerHTML=
+ '<div class="guided-panel"><span class="guided-chip">'+x[0]+'</span><h2>'+x[0]+'</h2>'+
+ '<div class="guided-bar"><span id="guidedBar"></span></div><p>'+x[1]+'</p>'+
+ '<h3>Quick check</h3><p>'+x[2]+'</p>'+
+ '<button class="guided-choice" onclick="answerGuided(this,true)">'+x[3]+'</button>'+
+ '<button class="guided-choice" onclick="answerGuided(this,false)">'+x[4]+'</button>'+
+ '<div id="guidedFeedback" class="guided-hide"></div></div>';
+ document.getElementById("guidedBar").style.width="50%";
+ document.getElementById("guidedLessonPanel").scrollIntoView({behavior:"smooth",block:"start"});
+}
+async function answerGuided(btn,good){
+ const f=document.getElementById("guidedFeedback");
+ if(good){
+  btn.classList.add("good"); f.className=""; f.innerHTML='<p><strong>Correct!</strong> Great job.</p><button class="guided-btn" onclick="finishGuidedLesson()">Complete lesson</button>';
+ }else{
+  btn.classList.add("bad"); f.className=""; f.innerHTML='<p>Try again. Choose the answer that focuses on individual support and access.</p>';
+ }
+}
+async function finishGuidedLesson(){
+ const id=guidedCurrent.id;
+ try{
+  if(typeof completedTopicIds!=="undefined") completedTopicIds.add(id);
+  const arr=JSON.parse(localStorage.getItem("ssh_completed_topics")||"[]");
+  if(!arr.includes(id))arr.push(id);
+  localStorage.setItem("ssh_completed_topics",JSON.stringify(arr));
+  if(typeof syncSuperHeroCloudProgress==="function")await syncSuperHeroCloudProgress();
+  if(typeof renderDashboard==="function")renderDashboard();
+  if(typeof renderJourney==="function")renderJourney();
+  if(typeof renderRewards==="function")renderRewards();
+  if(typeof renderBadgeCabinet==="function")renderBadgeCabinet();
+ }catch(e){console.warn(e)}
+ document.getElementById("guidedLessonPanel").innerHTML='<div class="guided-panel"><h2>🎉 Lesson complete!</h2><p>Your lesson progress has been saved. Check My Dashboard, Rewards, or Badges.</p></div>';
+}
+</script>
+
+<script>
+/* v44: Supabase-backed Resource Finder with full resource metadata. */
+const resourceStarterFallback=[];
+function titleCaseResourceCategory(value){
+  return String(value||'').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+}
+function resourceAudienceList(r){
+  if(Array.isArray(r.audience)) return r.audience;
+  if(typeof r.audience==='string' && r.audience.trim()) return r.audience.split(',').map(x=>x.trim()).filter(Boolean);
+  return [];
+}
+function resourceArea(r){
+  const state=String(r.state_code||'').toUpperCase();
+  const city=String(r.city||'').trim();
+  if(city.toLowerCase()==='pittsburgh') return 'Pittsburgh';
+  if(state==='PA') return 'Pennsylvania';
+  return 'National';
+}
+function resourceSearchText(r){
+  return [r.name,r.description,r.category,r.state_code,r.city,r.location_name,r.accessibility_notes,r.eligibility_notes,r.cost_notes,...resourceAudienceList(r)].filter(Boolean).join(' ').toLowerCase();
+}
+function populateResourceFilters(){
+  const cats=[...new Set((resources||[]).map(r=>r.category).filter(Boolean))].sort();
+  const audiences=[...new Set((resources||[]).flatMap(resourceAudienceList).filter(Boolean))].sort();
+  const cat=document.getElementById('resourceCategory'), aud=document.getElementById('resourceAudience');
+  if(cat){const current=cat.value;cat.innerHTML='<option value="">All categories</option>'+cats.map(x=>`<option value="${esc(x)}">${esc(titleCaseResourceCategory(x))}</option>`).join('');cat.value=current;}
+  if(aud){const current=aud.value;aud.innerHTML='<option value="">All audiences</option>'+audiences.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('');aud.value=current;}
+}
+function resourceDetails(r){
+  const details=[];
+  if(r.location_name) details.push(r.location_name);
+  if(r.city || r.state_code) details.push([r.city,r.state_code].filter(Boolean).join(', '));
+  if(r.cost_notes) details.push('Cost: '+r.cost_notes);
+  if(r.eligibility_notes) details.push('Eligibility: '+r.eligibility_notes);
+  if(r.accessibility_notes) details.push('Access: '+r.accessibility_notes);
+  return details;
+}
+function resourceVerifiedDate(r){
+  if(!r.last_verified_at) return 'Verified resource';
+  const d=new Date(r.last_verified_at);
+  return Number.isNaN(d.getTime())?'Verified resource':'Verified '+d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
+}
+function filterResources(opts={}){
+  const q=(document.getElementById('resourceSearch')?.value||'').toLowerCase().trim();
+  const c=document.getElementById('resourceCategory')?.value||'';
+  const a=document.getElementById('resourceAudience')?.value||'';
+  const area=document.getElementById('resourceArea')?.value||'';
+  const list=Array.isArray(resources)?resources:[];
+  const rows=list.filter(r=>String(r.verification_status||'').toLowerCase()==='verified')
+    .filter(r=>!q||resourceSearchText(r).includes(q))
+    .filter(r=>!c||r.category===c)
+    .filter(r=>!a||resourceAudienceList(r).includes(a))
+    .filter(r=>!area||resourceArea(r)===area);
+  const count=document.getElementById('resourceCount'),out=document.getElementById('resourceResults'),status=document.getElementById('resourceCloudStatus');
+  if(status && !opts.preserveStatus && !window.__resourceDiagnostics?.length) status.textContent=list.length?`☁️ Connected to the verified Spectrum Super Hero resource directory • ${list.length} verified resource${list.length===1?'':'s'}`:'☁️ Connected, but no verified resources are currently published.';
+  if(count)count.textContent=`Showing ${rows.length} of ${list.length} verified resources`;
+  if(!out)return;
+  if(!rows.length){out.innerHTML='<div class="resource-empty"><strong>No resources match those filters.</strong><br>Try a broader search or another area.</div>';return;}
+  out.innerHTML=rows.map(r=>{
+    const audiences=resourceAudienceList(r), areaLabel=resourceArea(r), details=resourceDetails(r);
+    const safeUrl=String(r.website_url||'#').replace(/'/g,'%27');
+    return `<article class="resource-card">
+      <span class="resource-tag">✓ Verified source</span>
+      <h3>${esc(r.name)}</h3>
+      <div class="resource-meta"><span class="resource-tag">${esc(titleCaseResourceCategory(r.category))}</span><span class="resource-tag">${esc(areaLabel)}</span>${audiences.slice(0,2).map(x=>`<span class="resource-tag">${esc(x)}</span>`).join('')}</div>
+      <p>${esc(r.description||'')}</p>
+      ${details.length?`<div style="display:grid;gap:5px;margin:10px 0;color:#64728d;font-size:14px">${details.map(x=>`<div>• ${esc(x)}</div>`).join('')}</div>`:''}
+      <small>${esc(resourceVerifiedDate(r))}</small>
+      <div class="resource-actions" style="margin-top:12px">
+        <button class="guided-btn" onclick="window.open('${safeUrl}','_blank','noopener,noreferrer')">Official website</button>
+        <button class="guided-btn" style="background:#eef0f7;color:#26324b" onclick="toggleResourceSave('${esc(r.id)}')">${savedResourceIds.has(r.id)?'🔖 Saved ✓':'🔖 Save'}</button>
+        <button class="guided-btn" style="background:#fff2f4;color:#8d304d" onclick="reportResource('${esc(r.id)}')">Report outdated info</button>
+      </div>
+    </article>`;
+  }).join('');
+}
+function clearResourceFilters(){
+  ['resourceSearch','resourceCategory','resourceAudience','resourceArea'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  filterResources();
+}
+async function reportResource(id){
+  if(!session?.user?.id){alert('Please sign in before reporting a resource.');show('profile');return;}
+  const reason=prompt('What should we review? For example: outdated link, wrong location, eligibility changed, or other incorrect information.');
+  if(!reason||!reason.trim())return;
+  try{
+    await authedApi('/rest/v1/resource_reports',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({resource_id:id,user_id:session.user.id,reason:reason.trim()})});
+    alert('Thank you. Your report was submitted for review.');
+  }catch(e){alert('Could not submit the report: '+e.message);}
+}
+window.addEventListener('load',()=>setTimeout(()=>{populateResourceFilters();filterResources();},250));
+</script>
+</body></html>
