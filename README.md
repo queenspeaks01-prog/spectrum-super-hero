@@ -1,4 +1,4 @@
-Spectrum Super Hero v48
+My My Spectrum Super Hero v50
 
 Resource Finder cloud fix.
 
