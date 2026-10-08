@@ -926,7 +926,7 @@ async function loadCloudProgress(){
   }catch(e){
     console.warn('Cloud progress unavailable:',e.message);
     const msg=document.getElementById('authMessage');
-   if(msg && session?.user?.email) msg.textContent='Signed in as '+session.user.email+' • Cloud progress error: '+e.message;  refreshProfileChrome();updateLearningProgress();renderDashboard();renderJourney();renderRewards();renderBadgeCabinet();renderHeroProfile();
+   if(msg && session?.user?.email) msg.textContent='Signed in as '+session.user.email+' • Cloud progress needs the v39 database migration.: '+e.message;  refreshProfileChrome();updateLearningProgress();renderDashboard();renderJourney();renderRewards();renderBadgeCabinet();renderHeroProfile();
 }
 async function saveCloudProgress(extra={}){
   if(!session?.user?.id||!cloudProgressLoaded||cloudProgressSaving)return;
