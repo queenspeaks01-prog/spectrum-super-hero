@@ -660,8 +660,8 @@ function openTopic(id){let t=topics.find(x=>x.id===id);if(!t)return;const lesson
 function closeModal(){document.getElementById('modal').classList.remove('open');}
 function renderTopics(){document.getElementById('topics').innerHTML=topics.length?topics.map(t=>`<div class="card"><span class="pill">${esc(t.category||'LEARN')}</span><h3>${esc(t.title)}</h3><p>${esc(t.summary||t.content||'')}</p><div class="modal-actions"><button class="cta" onclick="openTopic('${esc(t.id)}')">Read more</button><button class="cta secondary" onclick="toggleTopicSave('${esc(t.id)}')">${savedTopicIds.has(t.id)?'Saved ✓':'Save'}</button></div></div>`).join(''):'<div class="card"><h3>No learning topics found</h3></div>';}
 function renderResources(){if(typeof filterResources==='function')filterResources();}
-function clearResourceFilters(){const q=document.getElementById('resourceSearch'),a=document.getElementById('area');if(q)q.value='';if(a)a.value='';renderResources();}
-document.getElementById('resourceSearch').addEventListener('input',renderResources);document.getElementById('area').addEventListener('change',renderResources);
+function clearResourceFilters(){const q=document.getElementById('resourceSearch'),a=document.getElementById('resourceArea');if(q)q.value='';if(a)a.value='';renderResources();}
+// Resource Finder controls are already wired through their HTML oninput/onchange handlers.
 
 const quizQuestions=[
  {q:'Which statement best describes autism?',a:['A temporary illness that can be cured','A neurodevelopmental difference that can affect communication, interaction, sensory experiences, and behavior','A condition that affects every person in exactly the same way','A problem caused by poor parenting'],c:1,e:'Autism is a neurodevelopmental difference, and autistic people can have very different strengths, preferences, communication styles, and support needs.'},
