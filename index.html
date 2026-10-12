@@ -136,6 +136,75 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
 .resource-finder{margin-top:22px}.resource-filters{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}.resource-filters input,.resource-filters select{padding:12px;border:1px solid #d9dce7;border-radius:12px;background:#fff}.resource-results{display:grid;gap:14px}.resource-card{background:#fff;border:1px solid #ddd6ff;border-radius:18px;padding:18px}.resource-card h3{margin:5px 0}.resource-meta{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.resource-tag{background:#eee9ff;color:#5b45ff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800}.resource-card p{color:#64728d;line-height:1.5}.resource-actions{display:flex;gap:8px;flex-wrap:wrap}.resource-empty{padding:24px;text-align:center;border:1px dashed #cdd2df;border-radius:16px;color:#64728d}
 @media(max-width:800px){.resource-filters{grid-template-columns:1fr 1fr}}@media(max-width:500px){.resource-filters{grid-template-columns:1fr}}
 </style>
+
+/* Spectrum Super Hero responsive refresh */
+@media (max-width: 700px) {
+  .top {
+    position: relative;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+  .top .brand {
+    width: 100%;
+  }
+  .top-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+  }
+  .top-actions button {
+    min-height: 44px;
+    padding: 10px 8px;
+    white-space: normal;
+  }
+  .nav {
+    position: relative;
+    top: auto;
+    gap: 4px;
+  }
+  .nav button {
+    min-height: 44px;
+    padding: 10px 12px;
+  }
+  .wrap {
+    padding: 16px 12px 72px;
+  }
+  .hero {
+    padding: 20px 16px;
+    border-radius: 24px;
+  }
+  .hero-logo {
+    max-width: 220px;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 9vw, 42px);
+  }
+  .hero .modal-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .hero .modal-actions button {
+    min-height: 46px;
+  }
+  .card {
+    padding: 16px;
+  }
+  .resource-filters {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 701px) and (max-width: 1024px) {
+  .wrap {
+    padding: 22px 18px 80px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 </style></head>
 <body>
 <header class="top"><div class="brand"><img class="brand-logo" src="icon-192.png" alt="Spectrum Super Hero logo"><span>Spectrum Super Hero</span></div><div class="top-actions"><div class="top-profile-chip" id="topProfileChip"><span class="avatar" id="topProfileAvatar">🦸</span><span id="topProfileName">My Super Hero</span></div><button class="cta dashboard-top" onclick="show('dashboard')">⭐ My Dashboard</button><button class="cta secondary" onclick="show('journey')">🦸 My Journey</button><button class="cta secondary reward-top" onclick="show('rewards')">🏆 Rewards</button><button class="cta secondary" onclick="show('badges')">🏅 Badges</button><button class="cta secondary" id="profileTopButton" onclick="show('profile')">Profile</button></div></header>
