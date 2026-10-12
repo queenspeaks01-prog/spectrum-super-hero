@@ -135,6 +135,35 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
 <style>
 .resource-finder{margin-top:22px}.resource-filters{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}.resource-filters input,.resource-filters select{padding:12px;border:1px solid #d9dce7;border-radius:12px;background:#fff}.resource-results{display:grid;gap:14px}.resource-card{background:#fff;border:1px solid #ddd6ff;border-radius:18px;padding:18px}.resource-card h3{margin:5px 0}.resource-meta{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.resource-tag{background:#eee9ff;color:#5b45ff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800}.resource-card p{color:#64728d;line-height:1.5}.resource-actions{display:flex;gap:8px;flex-wrap:wrap}.resource-empty{padding:24px;text-align:center;border:1px dashed #cdd2df;border-radius:16px;color:#64728d}
 @media(max-width:800px){.resource-filters{grid-template-columns:1fr 1fr}}@media(max-width:500px){.resource-filters{grid-template-columns:1fr}}
+
+/* Colorful Spectrum Super Hero home cards */
+#needs .card {
+  text-align: left;
+  color: #fff;
+  border: 0;
+  min-height: 184px;
+  box-shadow: 0 10px 24px #18213a18;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+#needs .card h3,
+#needs .card p {
+  color: inherit;
+}
+#needs .card .pill {
+  background: #ffffff2b;
+  color: inherit;
+}
+#needs .card:nth-child(8n+1) { background: linear-gradient(135deg, #5b3df5, #8566ff); }
+#needs .card:nth-child(8n+2) { background: linear-gradient(135deg, #1769e0, #36a4ff); }
+#needs .card:nth-child(8n+3) { background: linear-gradient(135deg, #df367d, #ff78a7); }
+#needs .card:nth-child(8n+4) { background: linear-gradient(135deg, #008f83, #31c7b2); }
+#needs .card:nth-child(8n+5) { background: linear-gradient(135deg, #ffdb57, #ffbf35); color: #29213c; }
+#needs .card:nth-child(8n+6) { background: linear-gradient(135deg, #5b3df5, #8566ff); }
+#needs .card:nth-child(8n+7) { background: linear-gradient(135deg, #1769e0, #36a4ff); }
+#needs .card:nth-child(8n+8) { background: linear-gradient(135deg, #df367d, #ff78a7); }
+#needs .card:nth-child(8n+5) .pill { background: #29213c18; color: #29213c; }
+#needs .card:hover { transform: translateY(-3px); box-shadow: 0 15px 30px #18213a24; }
+#needs .card:focus-visible { outline: 3px solid #172033; outline-offset: 3px; }
 </style>
 
 
