@@ -210,10 +210,33 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
     font-size: 12px !important;
   }
 }
+/* Keep header and menu fixed on mobile */
  
+@media (max-width: 600px) {
+  .top {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+  }
+
+  .nav {
+    position: fixed !important;
+    top: 68px !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 999 !important;
+  }
+
+  body {
+    padding-top: 120px !important;
+  }
+}
 </style>
 
 
+  
 </style></head>
 <body>
 <header class="top"><div class="brand"><img class="brand-logo" src="icon-192.png" alt="Spectrum Super Hero logo"><span>Spectrum Super Hero</span></div><div class="top-actions"><div class="top-profile-chip" id="topProfileChip"><span class="avatar" id="topProfileAvatar">🦸</span><span id="topProfileName">My Super Hero</span></div><button class="cta dashboard-top" onclick="show('dashboard')">⭐ My Dashboard</button><button class="cta secondary" onclick="show('journey')">🦸 My Journey</button><button class="cta secondary reward-top" onclick="show('rewards')">🏆 Rewards</button><button class="cta secondary" onclick="show('badges')">🏅 Badges</button><button class="cta secondary" id="profileTopButton" onclick="show('profile')">Profile</button></div></header>
