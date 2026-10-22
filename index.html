@@ -196,7 +196,20 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
   }
 }
 
+/* Mobile navigation and scrolling fix */
+@media (max-width: 600px) {
+  .nav {
+    position: relative !important;
+    top: auto !important;
+    padding: 5px 8px !important;
+    gap: 4px !important;
+  }
 
+  .nav button {
+    padding: 7px 8px !important;
+    font-size: 12px !important;
+  }
+}
 </style>
 
 
