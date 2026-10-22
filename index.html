@@ -233,10 +233,69 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
     padding-top: 120px !important;
   }
 }
+  /* Make the mobile dashboard more compact */
+@media (max-width: 600px) {
+  .top {
+    padding: 6px 10px !important;
+    gap: 4px !important;
+  }
+
+  .brand-logo {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .top .brand span {
+    font-size: 14px !important;
+  }
+
+  .top-actions {
+    gap: 4px !important;
+  }
+
+  .top-actions button {
+    padding: 6px 8px !important;
+    font-size: 12px !important;
+  }
+
+  .nav {
+    padding: 4px 6px !important;
+    gap: 4px !important;
+  }
+
+  .nav button {
+    padding: 6px 8px !important;
+    font-size: 11px !important;
+  }
+}
+/* Make the mobile dashboard more compact */
+@media (max-width: 600px) {
+  .hero {
+    padding: 16px !important;
+    gap: 12px !important;
+  }
+
+  .hero-logo img {
+    max-width: 220px !important;
+    height: auto !important;
+  }
+
+  .hero h1 {
+    font-size: 30px !important;
+    line-height: 1.15 !important;
+  }
+
+  .hero p {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+}
 </style>
 
 
   
+
+
 </style></head>
 <body>
 <header class="top"><div class="brand"><img class="brand-logo" src="icon-192.png" alt="Spectrum Super Hero logo"><span>Spectrum Super Hero</span></div><div class="top-actions"><div class="top-profile-chip" id="topProfileChip"><span class="avatar" id="topProfileAvatar">🦸</span><span id="topProfileName">My Super Hero</span></div><button class="cta dashboard-top" onclick="show('dashboard')">⭐ My Dashboard</button><button class="cta secondary" onclick="show('journey')">🦸 My Journey</button><button class="cta secondary reward-top" onclick="show('rewards')">🏆 Rewards</button><button class="cta secondary" onclick="show('badges')">🏅 Badges</button><button class="cta secondary" id="profileTopButton" onclick="show('profile')">Profile</button></div></header>
