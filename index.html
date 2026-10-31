@@ -166,16 +166,6 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
 #needs .card:hover { transform: translateY(-3px); box-shadow: 0 15px 30px #18213a24; }
 #needs .card:focus-visible { outline: 3px solid #172033; outline-offset: 3px; }
 /* Home card color styling */
-/* Keep navigation items visible */
-#nav {
-  flex-wrap: wrap;
-  overflow-x: visible;
-  white-space: normal;
-}
-
-
-
-
 @media (max-width: 600px) {
   .top {
     flex-wrap: wrap;
@@ -197,11 +187,49 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
   }
 }
 
+/* Keep the menu below the full, potentially wrapped header. */
+:root { --top-height: 68px; }
+.nav {
+  position: sticky;
+  top: var(--top-height);
+  z-index: 40;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+#nav { flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; white-space: nowrap; }
+
+/* Compact the dashboard itself on phones, not the home welcome panel. */
+@media (max-width: 600px) {
+  #dashboard > h1 { font-size: clamp(26px, 7vw, 38px); }
+  #dashboard > p { font-size: 15px; margin: 6px 0 10px; }
+  #dashboard .dashboard-hero-card {
+    padding: 12px;
+    gap: 10px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  #dashboard .dashboard-hero-card > div:last-child { margin-left: 0 !important; }
+  #dashboard .dashboard-hero-card .avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 26px;
+  }
+  #dashboard .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  #dashboard .stat { padding: 10px; }
+  #dashboard .stat strong { font-size: 22px; }
+}
 
 </style>
 
-
-</style></head>
+</head>
 <body>
 <header class="top"><div class="brand"><img class="brand-logo" src="icon-192.png" alt="Spectrum Super Hero logo"><span>Spectrum Super Hero</span></div><div class="top-actions"><div class="top-profile-chip" id="topProfileChip"><span class="avatar" id="topProfileAvatar">🦸</span><span id="topProfileName">My Super Hero</span></div><button class="cta dashboard-top" onclick="show('dashboard')">⭐ My Dashboard</button><button class="cta secondary" onclick="show('journey')">🦸 My Journey</button><button class="cta secondary reward-top" onclick="show('rewards')">🏆 Rewards</button><button class="cta secondary" onclick="show('badges')">🏅 Badges</button><button class="cta secondary" id="profileTopButton" onclick="show('profile')">Profile</button></div></header>
 <nav class="nav" id="nav"></nav>
@@ -656,6 +684,11 @@ function renderRewards(){
 }
 
 function show(id){const jp=document.getElementById('levelJourneyPanel');if(jp)jp.style.display=(id==='journey'?'block':'none');document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));const target=document.getElementById(id);if(!target)return;target.classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.id===id));closeModal();if(id==='resources')filterResources();if(id==='quiz')renderQuiz();if(id==='dashboard')renderDashboard();if(id==='journey')renderJourney();if(id==='rewards')renderRewards();if(id==='badges')renderBadgeCabinet();if(id==='profile')renderHeroProfile();window.scrollTo({top:0,behavior:document.body.classList.contains('reduced-motion')?'auto':'smooth'});}
+const stickyHeader=document.querySelector('.top');
+const syncStickyNavOffset=()=>document.documentElement.style.setProperty('--top-height',`${stickyHeader.getBoundingClientRect().height}px`);
+syncStickyNavOffset();
+if('ResizeObserver' in window)new ResizeObserver(syncStickyNavOffset).observe(stickyHeader);
+else window.addEventListener('resize',syncStickyNavOffset);
 const navItems=[['home','Home'],['dashboard','My Dashboard'],['journey','My Journey'],['rewards','Rewards'],['badges','Badges'],['learn','Learn'],['acceptance','Acceptance'],['communication','Communication'],['sensory','Sensory'],['families','Families'],['educators','Educators'],['heroes','Meet the Heroes'],['resources','Resources'],['myths','Myths & Facts'],['quiz','Quiz']];
 document.getElementById('nav').innerHTML=navItems.map(x=>`<button data-id="${x[0]}" onclick="show('${x[0]}')">${x[1]}</button>`).join('');
 document.querySelector('[data-id="home"]').classList.add('active');
