@@ -1,5 +1,4 @@
-Warning: fs was declared with const; use let for reassignable variables.
-const CACHE_NAME = 'spectrum-super-hero-shell-v5';
+const CACHE_NAME = 'spectrum-super-hero-shell-v6';
 const APP_SHELL = [
   './',
   './index.html',
@@ -7,7 +6,14 @@ const APP_SHELL = [
   './icon-192.png',
   './icon-512.png',
   './spectrum-super-hero-kids-logo.png',
-  './spectrum-super-hero-badges-updated.png'
+  './spectrum-super-hero-badges-updated.png',
+  './hero-challenge-portraits/raife.jpg',
+  './hero-challenge-portraits/kevin.jpg',
+  './hero-challenge-portraits/sarah.jpg',
+  './hero-challenge-portraits/charlie.jpg',
+  './hero-challenge-portraits/emily.jpg',
+  './hero-challenge-portraits/mya.jpg',
+  './hero-challenge-portraits/john.jpg'
 ];
 
 self.addEventListener('install', (event) => {
