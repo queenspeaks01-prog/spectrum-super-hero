@@ -84,6 +84,20 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
 @keyframes rewardPop{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
 @media(max-width:700px){.reward-grid{grid-template-columns:1fr}.reward-head{align-items:flex-start}.reward-xp{min-width:0}}
 .heroes-intro{background:linear-gradient(135deg,#171b4b,#5436c5 55%,#ff6b9d);color:#fff;border-radius:22px;padding:22px;margin-bottom:18px}.heroes-intro p{color:#f0edff;line-height:1.6}.heroes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}.hero-character{border:1px solid #ddd6ff;border-radius:20px;padding:18px;background:linear-gradient(145deg,#fff,#f7f4ff);box-shadow:0 8px 24px #18213a0c}.hero-character .hero-color{height:7px;border-radius:99px;margin:-2px 0 14px}.hero-character h3{margin:6px 0}.hero-character p{line-height:1.55;color:#66718a}.heroes-tagline{font-weight:900;color:#6248ff}.meet-heroes-link{margin-top:16px;background:linear-gradient(135deg,#f7f4ff,#fff0f5)}
+.hero-flight-panel{margin:16px 0 20px;padding:16px;border:1px solid #ddd6ff;border-radius:20px;background:linear-gradient(135deg,#f7f4ff,#fff0f5);overflow:hidden}
+.hero-flight-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.hero-flight-heading h2{font-size:20px;margin:0}
+.hero-flight-heading p{margin:4px 0 0;color:#66718a}
+.hero-flight-toggle{border:1px solid #6248ff;border-radius:999px;padding:8px 12px;background:#fff;color:#4936c5;font:inherit;font-weight:800;cursor:pointer}
+.hero-flight-row{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;align-items:end}
+.hero-flight-character{min-width:0;text-align:center;animation:heroFlightBob 2.8s ease-in-out infinite;animation-delay:var(--flight-delay,0s);will-change:transform}
+.hero-flight-character img{display:block;width:min(100%,88px);aspect-ratio:1;margin:0 auto 6px;object-fit:cover;border-radius:22px;border:3px solid #fff;box-shadow:0 7px 16px #392a7226}
+.hero-flight-character span{display:block;font-size:13px;font-weight:900;color:#302768;overflow-wrap:anywhere}
+.hero-flight-panel.is-paused .hero-flight-character{animation-play-state:paused}
+@keyframes heroFlightBob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-9px) rotate(1deg)}}
+@media(max-width:700px){.hero-flight-row{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.hero-flight-character img{width:min(100%,72px)}}
+@media(prefers-reduced-motion:reduce){.hero-flight-character{animation:none!important;will-change:auto}}
+body.reduced-motion .hero-flight-character{animation:none!important;will-change:auto}
 .heroes-banner{display:block;width:100%;max-width:640px;max-height:50vh;height:auto;object-fit:contain;margin:0 auto 22px;border-radius:20px;box-shadow:0 12px 30px #18213a20}
 @media(max-width:600px){.heroes-banner{max-height:42vh;margin-bottom:16px;border-radius:16px}}
 </style>
@@ -308,6 +322,10 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
 
 <section id="heroes" class="section">
   <div class="heroes-intro"><span class="pill" style="background:#ffffff22;color:#fff">OUR TEAM</span><h1 style="color:#fff;background:none;-webkit-text-fill-color:#fff;margin-top:10px">Meet the Spectrum Super Heroes!</h1><p>Seven heroes. Seven strengths. One team. Each hero brings something special, and together they remind us that different abilities make us stronger.</p><p class="heroes-tagline" style="color:#ffe37a">Different Abilities. Stronger Together.</p></div>
+  <div class="hero-flight-panel" id="heroFlightPanel">
+    <div class="hero-flight-heading"><div><h2>Meet the heroes in motion</h2><p>Our team is ready to fly into every mission.</p></div><button id="heroFlightToggle" class="hero-flight-toggle" type="button" aria-label="Hero animation" aria-pressed="true" onclick="toggleHeroFlight()">Animation on</button></div>
+    <div class="hero-flight-row" aria-label="Spectrum Super Heroes gently moving together"><div class="hero-flight-character" style="--flight-delay:0s"><img src="hero-challenge-portraits/raife.jpg" alt="Raife’, a Spectrum Super Hero" width="88" height="88" loading="lazy"><span>Raife’</span></div><div class="hero-flight-character" style="--flight-delay:0.14s"><img src="hero-challenge-portraits/kevin.jpg" alt="Kevin, a Spectrum Super Hero" width="88" height="88" loading="lazy"><span>Kevin</span></div><div class="hero-flight-character" style="--flight-delay:0.28s"><img src="hero-challenge-portraits/sarah.jpg" alt="Sarah, a Spectrum Super Hero" width="88" height="88" loading="lazy"><span>Sarah</span></div><div class="hero-flight-character" style="--flight-delay:0.42000000000000004s"><img src="hero-challenge-portraits/charlie.jpg" alt="Charlie, a Spectrum Super Hero" width="88" height="88" loading="lazy"><span>Charlie</span></div><div class="hero-flight-character" style="--flight-delay:0.56s"><img src="hero-challenge-portraits/emily.jpg" alt="Emily, a Spectrum Super Hero" width="88" height="88" loading="lazy"><span>Emily</span></div><div class="hero-flight-character" style="--flight-delay:0.7000000000000001s"><img src="hero-challenge-portraits/mya.jpg" alt="Mya, a Spectrum Super Hero" width="88" height="88" loading="lazy"><span>Mya</span></div><div class="hero-flight-character" style="--flight-delay:0.8400000000000001s"><img src="hero-challenge-portraits/john.jpg" alt="John, a Spectrum Super Hero" width="88" height="88" loading="lazy"><span>John</span></div></div>
+  </div>
   <img class="heroes-banner" src="spectrum-super-hero-badges-updated.png" alt="Seven Spectrum Super Hero character badges">
   <div class="heroes-grid">
     <article class="hero-character"><div class="hero-color" style="background:#246bff"></div><span class="pill">TEAM LEADER</span><h3>Raife’</h3><p><strong>The Team Leader</strong></p><p>Raife’ helps the team organize, solve number puzzles, and turn big challenges into manageable steps. He reminds everyone that their ideas and strengths matter.</p></article>
@@ -739,6 +757,9 @@ function renderRewards(){
   document.getElementById('rewardNextText').textContent=next?next.text+' You are at '+Math.min(next.get(),next.target)+' of '+next.target+'.':'You unlocked the starter reward path. Keep learning to build your next level.';
 }
 
+function setHeroFlightEnabled(enabled){const panel=document.getElementById('heroFlightPanel'),button=document.getElementById('heroFlightToggle');if(!panel||!button)return;panel.classList.toggle('is-paused',!enabled);button.setAttribute('aria-pressed',String(enabled));button.textContent=enabled?'Animation on':'Animation off';}
+function toggleHeroFlight(){const button=document.getElementById('heroFlightToggle');if(button)setHeroFlightEnabled(button.getAttribute('aria-pressed')!=='true');}
+window.addEventListener('DOMContentLoaded',()=>{const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches||document.body.classList.contains('reduced-motion');setHeroFlightEnabled(!reduce);});
 function show(id){const jp=document.getElementById('levelJourneyPanel');if(jp)jp.style.display=(id==='journey'?'block':'none');document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));const target=document.getElementById(id);if(!target)return;target.classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.id===id));const mobileNav=document.getElementById('mobileNavSelect');if(mobileNav&&Array.from(mobileNav.options).some(option=>option.value===id))mobileNav.value=id;closeModal();if(id==='resources')filterResources();if(id==='quiz')renderQuiz();if(id==='dashboard')renderDashboard();if(id==='journey')renderJourney();if(id==='rewards')renderRewards();if(id==='badges')renderBadgeCabinet();if(id==='profile')renderHeroProfile();window.scrollTo({top:0,behavior:document.body.classList.contains('reduced-motion')?'auto':'smooth'});}
 const stickyHeader=document.querySelector('.top');
 const syncStickyNavOffset=()=>document.documentElement.style.setProperty('--top-height',`${stickyHeader.getBoundingClientRect().height}px`);
