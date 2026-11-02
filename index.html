@@ -123,6 +123,22 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
 .badge-progress>div{height:100%;background:linear-gradient(90deg,#ffd34e,#ff7fa2)}
 .badge-pop{position:fixed;left:50%;bottom:25px;transform:translateX(-50%) translateY(20px);z-index:10001;background:#171b4b;color:#fff;border:2px solid #ffd34e;border-radius:18px;padding:15px 20px;opacity:0;pointer-events:none;transition:.25s;text-align:center;font-weight:800}
 .badge-pop.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.badge-print-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}
+.badge-print-actions p{margin:0;color:var(--muted);font-size:14px}
+#badgePrintSheet{display:none}
+.badge-print-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+.badge-print-card{border:2px solid #8a72ff;border-radius:18px;padding:18px;break-inside:avoid;background:linear-gradient(145deg,#fff,#f5f1ff);min-height:190px}
+.badge-print-icon{font-size:42px;margin-bottom:8px}
+.badge-print-name{font-size:12px;color:#5a42e8;font-weight:800;margin-top:16px}
+@media print{
+  @page{margin:14mm}
+  body.printing-badges> :not(#badges){display:none!important}
+  body.printing-badges #badges{display:block!important;position:static!important;margin:0!important;padding:0!important;background:#fff!important}
+  body.printing-badges #badges> :not(#badgePrintSheet){display:none!important}
+  body.printing-badges #badgePrintSheet{display:block!important;color:#171b4b;font-family:Arial,sans-serif}
+  .badge-print-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .badge-print-card{box-shadow:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 @media(max-width:700px){.badge-cabinet{grid-template-columns:1fr}}
 </style>
 <style>
@@ -527,8 +543,9 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
 <section id="badges" class="section">
 <div class="card"><span class="pill">SUPER HERO COLLECTION</span><h2>🏆 Badge Cabinet</h2>
 <p>Every badge celebrates something you accomplished. Locked badges show what you can work toward next.</p>
-<div class="badge-count"><div><strong id="badgeEarnedCount">0</strong><div>badges earned</div></div><div class="badge-progress"><div id="badgeCabinetProgress" style="width:0%"></div></div><div id="badgeTotalCount">0 total</div></div></div>
-<div id="badgeCabinetGrid" class="badge-cabinet"></div></section>
+<div class="badge-count"><div><strong id="badgeEarnedCount">0</strong><div>badges earned</div></div><div class="badge-progress"><div id="badgeCabinetProgress" style="width:0%"></div></div><div id="badgeTotalCount">0 total</div></div>
+<div class="badge-print-actions"><button id="badgePrintButton" class="cta secondary" type="button" onclick="printEarnedBadges()" disabled>🖨️ Print earned badge cards</button><p id="badgePrintHint" aria-live="polite">Earn a badge to make your first card.</p></div></div>
+<div id="badgePrintSheet" aria-hidden="true"></div><div id="badgeCabinetGrid" class="badge-cabinet"></div></section>
 <section id="profile" class="section"><h1>My Hero Profile</h1>
 <div class="card hero-profile">
   <div class="hero-profile-top">
@@ -633,7 +650,21 @@ function badgeDates(){return JSON.parse(localStorage.getItem('ssh_badge_dates')|
 function showBadgePop(m){let e=document.getElementById('badgePop');if(!e){e=document.createElement('div');e.id='badgePop';e.className='badge-pop';document.body.appendChild(e)}e.textContent=m;e.classList.add('show');clearTimeout(window.__bp);window.__bp=setTimeout(()=>e.classList.remove('show'),4000);}
 function markNewBadges(){const d=badgeDates(),now=new Date().toISOString();let fresh=null;badgeCatalog.forEach(b=>{if(b.ok()&&!d[b.id]){d[b.id]=now;if(!fresh)fresh=b}});localStorage.setItem('ssh_badge_dates',JSON.stringify(d));if(fresh)showBadgePop('🏆 Badge unlocked: '+fresh.icon+' '+fresh.title);}
 function syncBadgeState(){try{markNewBadges();renderBadgeCabinet();; syncSuperHeroCloudProgress();renderDashboard();; syncSuperHeroCloudProgress();renderJourney();; syncSuperHeroCloudProgress();renderRewards();; syncSuperHeroCloudProgress();renderHeroProfile();}catch(e){console.warn('Badge sync failed',e.message);}}
-function renderBadgeCabinet(){const g=document.getElementById('badgeCabinetGrid');if(!g)return;markNewBadges();const d=badgeDates(),n=badgeCatalog.filter(b=>b.ok()).length;document.getElementById('badgeEarnedCount').textContent=n;document.getElementById('badgeTotalCount').textContent=badgeCatalog.length+' total';document.getElementById('badgeCabinetProgress').style.width=Math.round(n/badgeCatalog.length*100)+'%';g.innerHTML=badgeCatalog.map(b=>{const ok=b.ok();const date=d[b.id]?new Date(d[b.id]).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'';return `<div class="badge-item ${ok?'earned':'locked'}"><div class="badge-status">${ok?'UNLOCKED':'LOCKED'}</div><div class="badge-medal">${b.icon}</div><h3>${esc(b.title)}</h3><p>${esc(b.requirement)}</p><div class="badge-date">${ok?'Earned '+esc(date):'Keep going to unlock'}</div></div>`}).join('');}
+function renderBadgeCabinet(){const g=document.getElementById('badgeCabinetGrid');if(!g)return;markNewBadges();const d=badgeDates(),n=badgeCatalog.filter(b=>b.ok()).length;document.getElementById('badgeEarnedCount').textContent=n;document.getElementById('badgeTotalCount').textContent=badgeCatalog.length+' total';document.getElementById('badgeCabinetProgress').style.width=Math.round(n/badgeCatalog.length*100)+'%';const printButton=document.getElementById('badgePrintButton'),printHint=document.getElementById('badgePrintHint');if(printButton)printButton.disabled=n===0;if(printHint)printHint.textContent=n?`Print ${n} earned ${n===1?'badge card':'badge cards'} to keep or share with a grown-up.`:'Earn a badge to make your first card.';g.innerHTML=badgeCatalog.map(b=>{const ok=b.ok();const date=d[b.id]?new Date(d[b.id]).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'';return `<div class="badge-item ${ok?'earned':'locked'}"><div class="badge-status">${ok?'UNLOCKED':'LOCKED'}</div><div class="badge-medal">${b.icon}</div><h3>${esc(b.title)}</h3><p>${esc(b.requirement)}</p><div class="badge-date">${ok?'Earned '+esc(date):'Keep going to unlock'}</div></div>`}).join('');}
+function printEarnedBadges(){
+  markNewBadges();
+  const earned=badgeCatalog.filter(b=>b.ok());
+  if(!earned.length)return;
+  const dates=badgeDates(),name=localStorage.getItem('ssh_hero_name')||'My Super Hero';
+  const sheet=document.getElementById('badgePrintSheet');
+  if(!sheet)return;
+  sheet.innerHTML=`<header><span>🌈 SPECTRUM SUPER HERO</span><h1>My Hero Badges</h1><p>Every badge celebrates something you did in your own way.</p></header><div class="badge-print-grid">${earned.map(b=>{const date=dates[b.id]?new Date(dates[b.id]).toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'}):'';return `<article class="badge-print-card"><div class="badge-print-icon" aria-hidden="true">${b.icon}</div><h2>${esc(b.title)}</h2><p>${esc(b.requirement)}</p><div class="badge-print-name">${esc(name)}${date?' · Earned '+esc(date):''}</div></article>`}).join('')}</div><p style="margin-top:20px">Different Abilities. Stronger Together.</p>`;
+  const cleanup=()=>document.body.classList.remove('printing-badges');
+  window.addEventListener('afterprint',cleanup,{once:true});
+  document.body.classList.add('printing-badges');
+  window.print();
+  setTimeout(cleanup,1000);
+}
 
 
 async function syncSuperHeroCloudProgress(){
