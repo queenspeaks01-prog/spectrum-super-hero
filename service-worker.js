@@ -1,4 +1,5 @@
-const CACHE_NAME = 'spectrum-super-hero-shell-v4';
+Warning: fs was declared with const; use let for reassignable variables.
+const CACHE_NAME = 'spectrum-super-hero-shell-v5';
 const APP_SHELL = [
   './',
   './index.html',
