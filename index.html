@@ -505,6 +505,14 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
   </div>
 </section>
 
+<section id="challenges" class="section">
+  <div class="reward-hero"><span class="pill" style="background:#ffffff22;color:#fff">SPECTRUM SUPER HERO MISSIONS</span><h1>Hero Challenges</h1><p>Pick any activity and do it in your own way. Each completed challenge earns 15 XP and that hero’s badge.</p></div>
+  <div class="card"><span class="pill">Your challenge progress</span><div class="stats-grid" style="margin-top:12px"><div class="stat"><span class="pill">Challenges</span><strong id="challengeCount">0</strong><span>completed</span></div><div class="stat"><span class="pill">Challenge XP</span><strong id="challengeXp">0</strong><span>earned</span></div></div><div class="progress-track" style="margin-top:14px"><div id="challengeProgressBar" class="progress-bar" style="width:0%"></div></div><p id="challengeProgressText" style="margin:8px 0 0">0 of 7 challenges complete</p><h3 id="challengeNextTitle" style="margin-top:16px">Choose a challenge</h3><p id="challengeNextText">There is no timer. You can skip anything or ask a trusted adult for help.</p></div>
+  <div class="card" style="margin-top:14px"><span class="pill">Your way counts</span><p>Challenges are optional. You can pause, skip, draw, think, or ask a trusted adult to join. No photos, personal details, or proof are needed. Progress is saved on this device.</p></div>
+  <div id="challengeGrid" class="reward-grid" style="margin-top:18px"></div>
+  <div class="modal-actions"><button class="cta secondary" onclick="show('badges')">🏅 See your Badge Cabinet</button><button class="cta secondary" onclick="show('rewards')">🎁 See Rewards</button></div>
+</section>
+
 <div id="levelJourneyPanel" class="card" style="margin-top:18px">
   <span class="pill">SUPER HERO JOURNEY</span>
   <h2>Your growing journey</h2>
@@ -567,7 +575,7 @@ function levelProgressState(){
   const saved=savedTopicIds.size+savedResourceIds.size;
   const quizzes=quizHistory.length;
   const badges=badgeDefinitions.filter(b=>b.ok()).length;
-  const xp=lessons*10+saved*15+quizzes*25+badges*10;
+  const xp=lessons*10+saved*15+quizzes*25+badges*10+completedHeroChallenges().size*15;
   return {xp,level:Math.floor(xp/100)+1,within:xp%100};
 }
 function closeLevelUp(){
@@ -648,7 +656,7 @@ function rewardState(){
   const saved=savedTopicIds.size+savedResourceIds.size;
   const quizzes=quizHistory.length;
   const badges=badgeDefinitions.filter(b=>b.ok()).length;
-  const xp=lessons*10+saved*15+quizzes*25+badges*10;
+  const xp=lessons*10+saved*15+quizzes*25+badges*10+completedHeroChallenges().size*15;
   return {lessons,saved,quizzes,badges,xp,level:Math.floor(xp/100)+1,within:xp%100};
 }
 function showRewardToast(message){
@@ -701,7 +709,7 @@ const syncStickyNavOffset=()=>document.documentElement.style.setProperty('--top-
 syncStickyNavOffset();
 if('ResizeObserver' in window)new ResizeObserver(syncStickyNavOffset).observe(stickyHeader);
 else window.addEventListener('resize',syncStickyNavOffset);
-const navItems=[['home','Home'],['dashboard','My Dashboard'],['journey','My Journey'],['rewards','Rewards'],['badges','Badges'],['learn','Learn'],['acceptance','Acceptance'],['communication','Communication'],['sensory','Sensory'],['families','Families'],['educators','Educators'],['heroes','Meet the Heroes'],['resources','Resources'],['myths','Myths & Facts'],['quiz','Quiz']];
+const navItems=[['home','Home'],['dashboard','My Dashboard'],['journey','My Journey'],['rewards','Rewards'],['badges','Badges'],['challenges','Challenges'],['learn','Learn'],['acceptance','Acceptance'],['communication','Communication'],['sensory','Sensory'],['families','Families'],['educators','Educators'],['heroes','Meet the Heroes'],['resources','Resources'],['myths','Myths & Facts'],['quiz','Quiz']];
 const mobileNavItems=[...navItems,['profile','Profile']];document.getElementById('mobileNavSelect').innerHTML=mobileNavItems.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join('');document.getElementById('mobileNavSelect').addEventListener('change',event=>show(event.target.value));document.getElementById('nav').insertAdjacentHTML('beforeend',navItems.map(x=>`<button data-id="${x[0]}" onclick="show('${x[0]}')">${x[1]}</button>`).join(''));
 document.querySelector('[data-id="home"]').classList.add('active');
 const needs=[['learn','I want to learn'],['communication','Communication help'],['sensory','Sensory information'],['families','I’m a caregiver'],['educators','I’m an educator'],['resources','I need resources'],['acceptance','I want to be an ally'],['quiz','Test my knowledge']];
@@ -875,19 +883,20 @@ function renderDashboard(){
     {done:lessonCount>=1,title:'Complete your first lesson',text:'Explore one learning topic.'},
     {done:saved>=1,title:'Save something helpful',text:'Save a topic or verified resource.'},
     {done:quizzes>=1,title:'Test your knowledge',text:'Finish the Autism Basics quiz.'},
+    {done:completedHeroChallenges().size>=1,title:'Complete a Hero Challenge',text:'Choose any challenge that feels right for you.'},
     {done:earned>=3,title:'Earn three badges',text:'Keep learning, saving, and testing yourself.'}
   ];
   const pct=Math.round(steps.filter(x=>x.done).length/steps.length*100);
   document.getElementById('dashProgressBar').style.width=pct+'%'; document.getElementById('dashProgressText').textContent=pct+'% of your starter mission complete';
   const title=document.getElementById('dashMissionTitle'), text=document.getElementById('dashMissionText');
-  if(earned>=6){title.textContent='Super Hero status: complete';text.textContent='You earned every starter badge. Keep exploring and building inclusive communities.';}
+  if(earned>=badgeDefinitions.length){title.textContent='Super Hero status: complete';text.textContent='You earned every badge. Keep exploring and building inclusive communities.';}
   else if(lessonCount>=3&&quizzes>=1){title.textContent='You are building strong momentum';text.textContent='You have completed lessons and the quiz. Explore resources or use a support tool next.';}
   else if(lessonCount>=1){title.textContent='Keep your mission going';text.textContent='You started learning. Add another lesson, save something useful, or try the quiz.';}
   else{title.textContent='Choose your first learning mission';text.textContent='Complete a lesson, save a helpful resource, or take the quiz to start building your progress.';}
   const grid=document.getElementById('badgeGrid');
   grid.innerHTML=badgeDefinitions.map(b=>{const isEarned=b.ok();return `<div class="card badge-card ${isEarned?'earned':'locked'}"><div class="feature-head"><div><span class="pill">${isEarned?'Earned':'Locked'}</span><h3>${b.icon} ${esc(b.title)}</h3></div><div class="feature-icon">${isEarned?'✓':'?'}</div></div><p>${esc(b.text)}</p></div>`;}).join('');
   const list=document.getElementById('missionChecklist'); if(list)list.innerHTML=steps.map(x=>`<div class="mission-step ${x.done?'done':''}"><div class="mission-check">${x.done?'✓':'•'}</div><div><strong>${esc(x.title)}</strong><small>${esc(x.text)}</small></div></div>`).join('');
-  const xp=lessonCount*10+saved*15+quizzes*25+earned*10; const xpEl=document.getElementById('dashXp'); if(xpEl)xpEl.textContent=String(xp);
+  const xp=lessonCount*10+saved*15+quizzes*25+earned*10+completedHeroChallenges().size*15; const xpEl=document.getElementById('dashXp'); if(xpEl)xpEl.textContent=String(xp);
   const next=badgeDefinitions.find(b=>!b.ok()), nextEl=document.getElementById('dashNextBadge'), nextText=document.getElementById('dashNextBadgeText');
   if(next){if(nextEl)nextEl.textContent=next.icon;if(nextText)nextText.textContent=next.title;}else{if(nextEl)nextEl.textContent='✓';if(nextText)nextText.textContent='All starter badges earned';}
   const at=document.getElementById('dashAchievementTitle'), ax=document.getElementById('dashAchievementText');
@@ -922,7 +931,7 @@ function renderHeroProfile(){
  const root=document.getElementById('profileHeroAvatar'); if(!root)return;
  const lessonCount=completedTopicIds.size, saved=savedTopicIds.size+savedResourceIds.size, quizzes=quizHistory.length;
  const earnedBadges=badgeDefinitions.filter(b=>b.ok()), earned=earnedBadges.length;
- const xp=lessonCount*10+saved*15+quizzes*25+earned*10, level=Math.floor(xp/100)+1, within=xp%100;
+ const xp=lessonCount*10+saved*15+quizzes*25+earned*10+completedHeroChallenges().size*15, level=Math.floor(xp/100)+1, within=xp%100;
  const name=getHeroName(), avatar=getHeroAvatar(), role=getHeroRole();
  root.textContent=avatar;
  document.getElementById('profileHeroName').textContent=name;
@@ -956,7 +965,7 @@ function renderJourney(){const jp=document.getElementById('levelJourneyPanel');i
   const quizzes=quizHistory.length;
   const earnedBadges=badgeDefinitions.filter(b=>b.ok());
   const earned=earnedBadges.length;
-  const xp=lessonCount*10+saved*15+quizzes*25+earned*10;
+  const xp=lessonCount*10+saved*15+quizzes*25+earned*10+completedHeroChallenges().size*15;
   const level=Math.floor(xp/100)+1;
   const within=xp%100;
   const name=getHeroName();
@@ -975,8 +984,9 @@ function renderJourney(){const jp=document.getElementById('levelJourneyPanel');i
     {done:lessonCount>=1,title:'Complete your first lesson',text:'Explore one learning topic.'},
     {done:saved>=1,title:'Save something helpful',text:'Save a topic or verified resource.'},
     {done:quizzes>=1,title:'Test your knowledge',text:'Finish the Autism Basics quiz.'},
+    {done:completedHeroChallenges().size>=1,title:'Complete a Hero Challenge',text:'Choose any challenge that feels right for you.'},
     {done:earned>=3,title:'Earn three badges',text:'Keep learning, saving, and testing yourself.'},
-    {done:earned>=6,title:'Unlock every starter badge',text:'Complete the full starter achievement set.'}
+    {done:earned>=badgeDefinitions.length,title:'Unlock every badge',text:'Complete learning, rewards, and Hero Challenges.'}
   ];
   const list=document.getElementById('journeyMissionList');
   if(list)list.innerHTML=steps.map(x=>`<div class="mission-step ${x.done?'done':''}"><div class="mission-check">${x.done?'✓':'•'}</div><div><strong>${esc(x.title)}</strong><small>${esc(x.text)}</small></div></div>`).join('');
@@ -1288,5 +1298,26 @@ async function reportResource(id){
   }catch(e){alert('Could not submit the report: '+e.message);}
 }
 window.addEventListener('load',()=>setTimeout(()=>{populateResourceFilters();filterResources();},250));
+</script>
+<script>
+const heroChallenges=[
+{id:'raife-teamwork',hero:'Raife’',badge:'Raife’s Teamwork Badge',icon:'🧭',title:'Raife’s Teamwork Plan',text:'Choose a small task or activity. Make a simple one-step plan with a teammate or trusted adult.'},
+{id:'kevin-detail',hero:'Kevin',badge:'Kevin’s Detail Detective Badge',icon:'🔎',title:'Kevin’s Detail Detective',text:'Notice one helpful detail in a book, game, or room, such as a clear sign or a quiet place. You can keep your answer to yourself.'},
+{id:'sarah-voice',hero:'Sarah',badge:'Sarah’s Brave Voice Badge',icon:'🗣️',title:'Sarah’s Brave Voice',text:'Practice sharing an idea, preference, or need in a way that works for you: speech, writing, signs, pictures, AAC, or with trusted adult support. A pretend example is fine.'},
+{id:'charlie-creative',hero:'Charlie',badge:'Charlie’s Creative Builder Badge',icon:'🎨',title:'Charlie’s Creative Builder',text:'Draw or imagine one small change that could help more people join a game, activity, or space.'},
+{id:'emily-strengths',hero:'Emily',badge:'Emily’s Strengths Spotlight Badge',icon:'⭐',title:'Emily’s Strengths Spotlight',text:'Think of, draw, or tell someone about something you enjoy or feel proud of.'},
+{id:'mya-team-spirit',hero:'Mya',badge:'Mya’s Team Spirit Badge',icon:'🤝',title:'Mya’s Team Spirit',text:'Offer encouragement, a kind greeting, or an invitation to join—only if it feels comfortable.'},
+{id:'john-one-step',hero:'John',badge:'John’s One-Step Mission Badge',icon:'🚀',title:'John’s One-Step Mission',text:'Pick one thing you care about and take one small step. Asking for help or taking a break counts.'}
+];
+function completedHeroChallenges(){try{const ids=JSON.parse(localStorage.getItem('ssh_completed_hero_challenges')||'[]');return new Set(Array.isArray(ids)?ids:[]);}catch{return new Set();}}
+const heroChallengeBadges=heroChallenges.map(c=>({id:'badge-'+c.id,icon:c.icon,title:c.badge,text:'Complete '+c.title+'.',ok:()=>completedHeroChallenges().has(c.id)}));
+const challengeMilestoneBadges=[{id:'challenge-crew',icon:'🌈',title:'Challenge Crew',text:'Complete any three Hero Challenges.',ok:()=>completedHeroChallenges().size>=3},{id:'all-heroes',icon:'🏅',title:'All-Hero Champion',text:'Complete all seven Hero Challenges.',ok:()=>completedHeroChallenges().size>=7}];
+badgeDefinitions.push(...heroChallengeBadges,...challengeMilestoneBadges);
+badgeCatalog.push(...[...heroChallengeBadges,...challengeMilestoneBadges].map(b=>({id:b.id,icon:b.icon,title:b.title,requirement:b.text,ok:b.ok})));
+rewardMissions.push({icon:'🦸',title:'Hero Challenge Starter',text:'Complete any Hero Challenge.',target:1,get:()=>completedHeroChallenges().size,go:'challenges'},{icon:'🌈',title:'Challenge Crew',text:'Complete any three Hero Challenges.',target:3,get:()=>completedHeroChallenges().size,go:'challenges'},{icon:'🏅',title:'All-Hero Champion',text:'Complete all seven Hero Challenges.',target:7,get:()=>completedHeroChallenges().size,go:'challenges'});
+function renderChallenges(){const grid=document.getElementById('challengeGrid');if(!grid)return;const completed=completedHeroChallenges(),count=heroChallenges.filter(c=>completed.has(c.id)).length;document.getElementById('challengeCount').textContent=String(count);document.getElementById('challengeXp').textContent=String(count*15);document.getElementById('challengeProgressBar').style.width=Math.round(count/heroChallenges.length*100)+'%';document.getElementById('challengeProgressText').textContent=count+' of '+heroChallenges.length+' challenges complete';const next=heroChallenges.find(c=>!completed.has(c.id));document.getElementById('challengeNextTitle').textContent=next?next.icon+' '+next.title:'🎉 You completed every Hero Challenge!';document.getElementById('challengeNextText').textContent=next?next.text+' Complete it for 15 XP and a Hero badge.':'All seven Hero badges are yours. Come back whenever you want to revisit the activities.';grid.innerHTML=heroChallenges.map(c=>{const done=completed.has(c.id);return `<article class="reward-card ${done?'complete':'locked'}"><div class="reward-icon">${c.icon}</div><span class="pill">${done?'Completed':'Hero Challenge'}</span><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><p><strong>Hero badge:</strong> ${esc(c.badge)}</p>${done?'<button class="cta secondary" disabled>Completed ✓</button>':'<button class="cta" onclick="completeHeroChallenge(\''+c.id+'\')">Complete challenge · +15 XP</button>'}</article>`;}).join('');}
+function completeHeroChallenge(id){const challenge=heroChallenges.find(c=>c.id===id),completed=completedHeroChallenges();if(!challenge||completed.has(id))return;completed.add(id);localStorage.setItem('ssh_completed_hero_challenges',JSON.stringify([...completed]));markNewBadges();renderChallenges();renderDashboard();renderJourney();renderRewards();renderBadgeCabinet();renderHeroProfile();showRewardToast('🏅 '+challenge.badge+' earned! +15 XP earned.');}
+const originalShowForChallenges=window.show;window.show=function(id){const result=originalShowForChallenges(id);if(id==='challenges')renderChallenges();return result;};
+renderChallenges();renderDashboard();renderJourney();renderRewards();renderBadgeCabinet();renderHeroProfile();
 </script>
 </body></html>
