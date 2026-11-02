@@ -1,11 +1,12 @@
-const CACHE_NAME = 'spectrum-super-hero-shell-v3';
+const CACHE_NAME = 'spectrum-super-hero-shell-v4';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png',
-  './spectrum-super-hero-kids-logo.png'
+  './spectrum-super-hero-kids-logo.png',
+  './spectrum-super-hero-badges-updated.png'
 ];
 
 self.addEventListener('install', (event) => {
