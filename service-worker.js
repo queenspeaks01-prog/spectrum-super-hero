@@ -1,4 +1,4 @@
-const CACHE_NAME = 'spectrum-super-hero-shell-v9';
+const CACHE_NAME = 'spectrum-super-hero-shell-v10';
 const APP_SHELL = [
   './',
   './index.html',
