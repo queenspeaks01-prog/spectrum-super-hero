@@ -203,6 +203,18 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
 }
 #nav { flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; white-space: nowrap; }
 
+/* Use a compact, fully visible section picker on narrow screens. */
+.nav-mobile-select { display: none; }
+@media (max-width: 650px) {
+  #nav { display: block; width: 100%; max-width: 100%; padding: 8px 12px; overflow: hidden; }
+  #nav .nav-mobile-select {
+    display: block; width: 100%; max-width: 100%; min-height: 42px;
+    padding: 9px 12px; border: 1px solid #ffffff36; border-radius: 12px;
+    background: #202846; color: #fff; font: inherit; font-weight: 700;
+  }
+  #nav button { display: none; }
+}
+
 /* Compact the dashboard itself on phones, not the home welcome panel. */
 @media (max-width: 600px) {
   #dashboard > h1 { font-size: clamp(26px, 7vw, 38px); }
@@ -232,7 +244,7 @@ body{background:radial-gradient(circle at 10% 0%,#dff8ff 0,transparent 25%),radi
 </head>
 <body>
 <header class="top"><div class="brand"><img class="brand-logo" src="icon-192.png" alt="Spectrum Super Hero logo"><span>Spectrum Super Hero</span></div><div class="top-actions"><div class="top-profile-chip" id="topProfileChip"><span class="avatar" id="topProfileAvatar">🦸</span><span id="topProfileName">My Super Hero</span></div><button class="cta dashboard-top" onclick="show('dashboard')">⭐ My Dashboard</button><button class="cta secondary" onclick="show('journey')">🦸 My Journey</button><button class="cta secondary reward-top" onclick="show('rewards')">🏆 Rewards</button><button class="cta secondary" onclick="show('badges')">🏅 Badges</button><button class="cta secondary" id="profileTopButton" onclick="show('profile')">Profile</button></div></header>
-<nav class="nav" id="nav"></nav>
+<nav class="nav" id="nav"><select class="nav-mobile-select" id="mobileNavSelect" aria-label="Choose a section"></select></nav>
 <div class="banner" id="banner">Connecting to Spectrum Super Hero cloud data…</div>
 <main class="wrap">
 <section id="home" class="section active"><div class="hero"><div class="hero-logo"><img src="spectrum-super-hero-kids-logo.png" alt="Spectrum Super Hero logo featuring diverse superhero kids"></div><h1>Spectrum Super Hero</h1><p>Different Abilities. Stronger Together.</p><p>A welcoming place to learn, find practical support, celebrate differences, and build inclusive communities.</p><div class="modal-actions"><button class="cta" onclick="startWelcome(true)">Start here</button><button class="cta secondary" onclick="show('quiz')">Test your knowledge</button></div></div><div class="card" style="margin:-4px 0 22px;background:linear-gradient(135deg,#10162d,#25245a);color:white;border:0"><div class="feature-head"><div><span class="pill" style="background:#ffffff18;color:#fff">SUPER HERO MISSION</span><h3 style="font-size:24px;margin-top:9px;color:#fff">Learn. Connect. Advocate.</h3><p style="color:#dce3ff;margin-bottom:0">Choose a path below and build your own support and learning journey.</p></div><div class="feature-icon" style="background:#ffffff18;color:#fff">★</div></div></div><h2>What do you need today?</h2><div class="grid" id="needs"></div><div class="card" id="nextStepCard" style="margin-top:18px"><div class="feature-head"><div><span class="pill">Your next step</span><h3 id="nextStepTitle">Start with a lesson</h3></div><div class="feature-icon">★</div></div><p id="nextStepText">Choose a topic to begin building your Spectrum Super Hero learning path.</p><div class="modal-actions"><button class="cta" id="nextStepButton" onclick="show('learn')">Explore lessons</button><button class="cta secondary" onclick="show('dashboard')">View progress</button></div></div><div class="tip" style="margin-top:18px"><strong>Accessibility first:</strong> Change text size, contrast, motion, and layout preferences from Profile.</div></section>
@@ -683,14 +695,14 @@ function renderRewards(){
   document.getElementById('rewardNextText').textContent=next?next.text+' You are at '+Math.min(next.get(),next.target)+' of '+next.target+'.':'You unlocked the starter reward path. Keep learning to build your next level.';
 }
 
-function show(id){const jp=document.getElementById('levelJourneyPanel');if(jp)jp.style.display=(id==='journey'?'block':'none');document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));const target=document.getElementById(id);if(!target)return;target.classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.id===id));closeModal();if(id==='resources')filterResources();if(id==='quiz')renderQuiz();if(id==='dashboard')renderDashboard();if(id==='journey')renderJourney();if(id==='rewards')renderRewards();if(id==='badges')renderBadgeCabinet();if(id==='profile')renderHeroProfile();window.scrollTo({top:0,behavior:document.body.classList.contains('reduced-motion')?'auto':'smooth'});}
+function show(id){const jp=document.getElementById('levelJourneyPanel');if(jp)jp.style.display=(id==='journey'?'block':'none');document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));const target=document.getElementById(id);if(!target)return;target.classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.id===id));const mobileNav=document.getElementById('mobileNavSelect');if(mobileNav&&Array.from(mobileNav.options).some(option=>option.value===id))mobileNav.value=id;closeModal();if(id==='resources')filterResources();if(id==='quiz')renderQuiz();if(id==='dashboard')renderDashboard();if(id==='journey')renderJourney();if(id==='rewards')renderRewards();if(id==='badges')renderBadgeCabinet();if(id==='profile')renderHeroProfile();window.scrollTo({top:0,behavior:document.body.classList.contains('reduced-motion')?'auto':'smooth'});}
 const stickyHeader=document.querySelector('.top');
 const syncStickyNavOffset=()=>document.documentElement.style.setProperty('--top-height',`${stickyHeader.getBoundingClientRect().height}px`);
 syncStickyNavOffset();
 if('ResizeObserver' in window)new ResizeObserver(syncStickyNavOffset).observe(stickyHeader);
 else window.addEventListener('resize',syncStickyNavOffset);
 const navItems=[['home','Home'],['dashboard','My Dashboard'],['journey','My Journey'],['rewards','Rewards'],['badges','Badges'],['learn','Learn'],['acceptance','Acceptance'],['communication','Communication'],['sensory','Sensory'],['families','Families'],['educators','Educators'],['heroes','Meet the Heroes'],['resources','Resources'],['myths','Myths & Facts'],['quiz','Quiz']];
-document.getElementById('nav').innerHTML=navItems.map(x=>`<button data-id="${x[0]}" onclick="show('${x[0]}')">${x[1]}</button>`).join('');
+const mobileNavItems=[...navItems,['profile','Profile']];document.getElementById('mobileNavSelect').innerHTML=mobileNavItems.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join('');document.getElementById('mobileNavSelect').addEventListener('change',event=>show(event.target.value));document.getElementById('nav').insertAdjacentHTML('beforeend',navItems.map(x=>`<button data-id="${x[0]}" onclick="show('${x[0]}')">${x[1]}</button>`).join(''));
 document.querySelector('[data-id="home"]').classList.add('active');
 const needs=[['learn','I want to learn'],['communication','Communication help'],['sensory','Sensory information'],['families','I’m a caregiver'],['educators','I’m an educator'],['resources','I need resources'],['acceptance','I want to be an ally'],['quiz','Test my knowledge']];
 const needDescriptions={learn:'Short, person-centered lessons and practical information.',communication:'Ways to support communication without requiring one style.',sensory:'Learn about sensory differences and accessible environments.',families:'Practical support for families and caregivers.',educators:'Inclusive classroom and school strategies.',resources:'Find verified organizations and community resources.',acceptance:'Build respectful, accessible, inclusive spaces.',quiz:'Take the 8-question Autism Basics quiz.'};document.getElementById('needs').innerHTML=needs.map(x=>`<button class="card" style="text-align:left" onclick="show('${x[0]}')"><h3>${x[1]}</h3><p>${needDescriptions[x[0]]}</p><span class="pill">Open</span></button>`).join('');
