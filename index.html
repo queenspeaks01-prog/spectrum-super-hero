@@ -237,16 +237,12 @@ body.reduced-motion .hero-flight-character{animation:none!important;will-change:
 }
 #nav { flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; white-space: nowrap; }
 
-/* Use a compact, fully visible section picker on narrow screens. */
+/* Keep the phone menu as swipeable buttons; native iPhone selects can open a large picker sheet. */
 .nav-mobile-select { display: none; }
 @media (max-width: 650px) {
-  #nav { display: block; width: 100%; max-width: 100%; padding: 8px 12px; overflow: hidden; }
-  #nav .nav-mobile-select {
-    display: block; width: 100%; max-width: 100%; min-height: 42px;
-    padding: 9px 12px; border: 1px solid #ffffff36; border-radius: 12px;
-    background: #202846; color: #fff; font: inherit; font-weight: 700;
-  }
-  #nav button { display: none; }
+  #nav { display: flex; width: 100%; max-width: 100%; padding: 5px 8px; gap: 2px; overflow-x: auto; overflow-y: hidden; }
+  #nav .nav-mobile-select { display: none !important; }
+  #nav button { display: block !important; flex: 0 0 auto; padding: 8px 9px; font-size: 13px; }
 }
 
 /* Compact the dashboard itself on phones, not the home welcome panel. */
