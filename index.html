@@ -237,12 +237,16 @@ body.reduced-motion .hero-flight-character{animation:none!important;will-change:
 }
 #nav { flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; white-space: nowrap; }
 
-/* Keep the phone menu as swipeable buttons; native iPhone selects can open a large picker sheet. */
+/* Use the requested dropdown on narrow screens. */
 .nav-mobile-select { display: none; }
 @media (max-width: 650px) {
-  #nav { display: flex; width: 100%; max-width: 100%; padding: 5px 8px; gap: 2px; overflow-x: auto; overflow-y: hidden; }
-  #nav .nav-mobile-select { display: none !important; }
-  #nav button { display: block !important; flex: 0 0 auto; padding: 8px 9px; font-size: 13px; }
+  #nav { display: block; width: 100%; max-width: 100%; padding: 8px 12px; overflow: hidden; }
+  #nav .nav-mobile-select {
+    display: block; width: 100%; max-width: 100%; min-height: 42px;
+    padding: 9px 12px; border: 1px solid #ffffff36; border-radius: 12px;
+    background: #202846; color: #fff; font: inherit; font-weight: 700;
+  }
+  #nav button { display: none; }
 }
 
 /* Compact the dashboard itself on phones, not the home welcome panel. */
@@ -1250,7 +1254,7 @@ async function signUp(){let email=document.getElementById('email').value.trim(),
 async function signIn(){let email=document.getElementById('email').value.trim(),password=document.getElementById('password').value;try{let d=await api('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email,password})});saveSession(d);document.getElementById('authMessage').textContent='Signed in.';}catch(e){document.getElementById('authMessage').textContent=e.message;}}
 function signOutUser(){saveSession(null);document.getElementById('authMessage').textContent='Signed out.';}
 function playHomeHeroIntroWithSound(){const video=document.getElementById('homeHeroIntro'),button=document.getElementById('homeHeroSoundButton');if(!video)return;video.pause();video.currentTime=0;video.muted=false;video.volume=1;video.play().then(()=>{if(button)button.textContent='🔊 Replay welcome with sound';}).catch(()=>{if(button)button.textContent='▶ Tap to play welcome with sound';});}
-const homeHeroIntro=document.getElementById('homeHeroIntro');if(homeHeroIntro&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){homeHeroIntro.play().catch(()=>{});}if(homeHeroIntro)homeHeroIntro.addEventListener('ended',()=>{const button=document.getElementById('homeHeroSoundButton');if(button)button.textContent='▶ Play intro again with sound';});
+const homeHeroIntro=document.getElementById('homeHeroIntro');if(homeHeroIntro&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&!window.matchMedia('(max-width: 760px)').matches){homeHeroIntro.play().catch(()=>{});}if(homeHeroIntro)homeHeroIntro.addEventListener('ended',()=>{const button=document.getElementById('homeHeroSoundButton');if(button)button.textContent='▶ Play intro again with sound';});
 try{session=JSON.parse(localStorage.getItem('bd_session')||'null')}catch{}restoreAccessibility();refreshProfileChrome();updateAccount();loadData();if(session?.user?.id)loadCloudProgress();
 </script>
 <div id="levelupOverlay" class="levelup-overlay" role="dialog" aria-modal="true" aria-label="Super Hero level up">
