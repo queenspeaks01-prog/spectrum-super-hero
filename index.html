@@ -275,6 +275,26 @@ body.reduced-motion .hero-flight-character{animation:none!important;will-change:
 
 </style>
 
+
+<style>
+/* Keep phone navigation pinned while the page content scrolls. */
+@media(max-width:760px){
+  body{padding-top:calc(env(safe-area-inset-top) + 104px)}
+  .top{position:fixed;top:env(safe-area-inset-top);left:0;right:0;width:100%;height:56px;min-height:56px;padding:6px 10px;gap:8px;flex-wrap:nowrap;z-index:1000}
+  .top .brand{flex:0 1 auto;min-width:0;gap:6px}
+  .top .brand-logo{width:36px;height:36px;flex:0 0 36px}
+  .top .brand span{display:block;max-width:92px;font-size:14px;line-height:1.05;white-space:normal}
+  .top-actions{flex:0 0 auto;min-width:0;gap:5px}
+  .top-profile-chip,.top-actions>button:not(.dashboard-top):not(#profileTopButton){display:none}
+  .dashboard-top{max-width:115px;padding:8px 9px;font-size:12px;white-space:nowrap}
+  #profileTopButton{max-width:78px;padding:8px 9px;font-size:12px;overflow:hidden;text-overflow:ellipsis}
+  .nav{position:fixed;top:calc(env(safe-area-inset-top) + 56px);left:0;right:0;width:100%;height:48px;z-index:999;overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap;white-space:nowrap;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .wrap{width:100%;max-width:100%;padding-top:18px}
+  .welcome{padding:12px;align-items:flex-start;overflow:auto}
+  .welcome-box{width:100%;max-height:calc(100vh - 24px - env(safe-area-inset-top));max-height:calc(100dvh - 24px - env(safe-area-inset-top));overflow-y:auto;padding:18px;border-radius:18px}
+}
+</style>
 </head>
 <body>
 <header class="top"><div class="brand"><img class="brand-logo" src="icon-192.png" alt="Spectrum Super Hero logo"><span>Spectrum Super Hero</span></div><div class="top-actions"><div class="top-profile-chip" id="topProfileChip"><span class="avatar" id="topProfileAvatar">🦸</span><span id="topProfileName">My Super Hero</span></div><button class="cta dashboard-top" onclick="show('dashboard')">⭐ My Dashboard</button><button class="cta secondary" onclick="show('journey')">🦸 My Journey</button><button class="cta secondary reward-top" onclick="show('rewards')">🏆 Rewards</button><button class="cta secondary" onclick="show('badges')">🏅 Badges</button><button class="cta secondary" id="profileTopButton" onclick="show('profile')">Profile</button></div></header>
@@ -1235,7 +1255,7 @@ async function signIn(){let email=document.getElementById('email').value.trim(),
 function signOutUser(){saveSession(null);document.getElementById('authMessage').textContent='Signed out.';}
 function playHomeHeroIntroWithSound(){const video=document.getElementById('homeHeroIntro'),button=document.getElementById('homeHeroSoundButton');if(!video)return;video.pause();video.currentTime=0;video.muted=false;video.volume=1;video.play().then(()=>{if(button)button.textContent='🔊 Replay welcome with sound';}).catch(()=>{if(button)button.textContent='▶ Tap to play welcome with sound';});}
 const homeHeroIntro=document.getElementById('homeHeroIntro');if(homeHeroIntro&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){homeHeroIntro.play().catch(()=>{});}if(homeHeroIntro)homeHeroIntro.addEventListener('ended',()=>{const button=document.getElementById('homeHeroSoundButton');if(button)button.textContent='▶ Play intro again with sound';});
-try{session=JSON.parse(localStorage.getItem('bd_session')||'null')}catch{}restoreAccessibility();refreshProfileChrome();updateAccount();loadData();if(session?.user?.id)loadCloudProgress();setTimeout(()=>startWelcome(false),6500);
+try{session=JSON.parse(localStorage.getItem('bd_session')||'null')}catch{}restoreAccessibility();refreshProfileChrome();updateAccount();loadData();if(session?.user?.id)loadCloudProgress();
 </script>
 <div id="levelupOverlay" class="levelup-overlay" role="dialog" aria-modal="true" aria-label="Super Hero level up">
   <div class="levelup-card">
