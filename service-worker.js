@@ -1,4 +1,4 @@
-const CACHE_NAME = 'spectrum-super-hero-shell-v11';
+const CACHE_NAME = 'spectrum-super-hero-shell-v12';
 const APP_SHELL = [
   './',
   './index.html',
@@ -41,6 +41,8 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   // Do not cache Supabase/API calls or other cross-origin requests: account and cloud data need the network.
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
+  // Let media range requests stream directly; partial video responses cannot be cached reliably.
+  if (request.headers.has('range')) return;
   event.respondWith(
     fetch(request).then((response) => {
       if (response && response.ok) {
