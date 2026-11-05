@@ -1,7 +1,9 @@
-const CACHE_NAME = 'spectrum-super-hero-shell-v12';
+const CACHE_NAME = 'spectrum-super-hero-shell-v13';
 const APP_SHELL = [
   './',
   './index.html',
+  './theater.css',
+  './theater.js',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png',
