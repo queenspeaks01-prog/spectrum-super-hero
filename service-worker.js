@@ -1,7 +1,16 @@
-const CACHE_NAME = 'spectrum-super-hero-shell-v15';
+const CACHE_NAME = 'spectrum-super-hero-shell-v16';
 const APP_SHELL = [
   './',
   './index.html',
+  './quiet-room/charlie-calming-bubbles.html',
+  './quiet-room/emily-peaceful-sounds.html',
+  './quiet-room/index.html',
+  './quiet-room/john-quiet-break.html',
+  './quiet-room/kevin-find-five.html',
+  './quiet-room/mya-feelings.html',
+  './quiet-room/raife-count-with-me.html',
+  './quiet-room/sarah-breathe-with-me.html',
+
   './theater.css',
   './theater.js',
   './manifest.webmanifest',
