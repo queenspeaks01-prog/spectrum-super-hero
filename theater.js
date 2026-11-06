@@ -11,6 +11,7 @@
     {id:'6iHHPwYN7Zg', title:'Sing Along with Lyrics'},
     {id:'tHgUhYfgUIw', title:'Instrumental with Lyrics'}
   ];
+  const adventureVideo = {id:'tyyp36SRsts', title:'The Rise of Shadow Doubt — Part One', description:'A narrated adventure with on-screen words. Different abilities. Stronger together.'};
   let musicVideoId = musicVideos[0].id;
   const read = (key) => {try {const value=JSON.parse(localStorage.getItem(key)||'[]');return new Set(Array.isArray(value)?value.filter(id=>rooms.some(r=>r.id===id)):[]);}catch{return new Set();}};
   const favorites=read('ssh_theater_favorites'), completed=read('ssh_theater_missions');
@@ -27,9 +28,16 @@
     // Unload embedded media so sound stops even when YouTube's API is unavailable.
     root.querySelectorAll('iframe[data-theater-youtube]').forEach(frame=>frame.remove());
   }
+  function youtubePlayerMarkup(selectedVideo){
+    return `<h3>${selectedVideo.title}</h3><div class="theater-youtube-player"><iframe data-theater-youtube src="https://www.youtube-nocookie.com/embed/${selectedVideo.id}?autoplay=0&amp;playsinline=1&amp;rel=0" title="Spectrum Super Hero — ${selectedVideo.title}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p><a href="https://www.youtube.com/watch?v=${selectedVideo.id}" target="_blank" rel="noopener noreferrer">Watch ${selectedVideo.title} on YouTube</a></p><p>Press play when you are ready. YouTube playback needs an internet connection. If the player is unavailable, use the YouTube link above.</p>`;
+  }
+  function renderRoomPlayer(){
+    if(selected==='music')renderMusicPlayer();
+    else if(selected==='adventures')root.querySelector('#theaterScreen').innerHTML=youtubePlayerMarkup(adventureVideo)+`<p>${adventureVideo.description}</p>`;
+  }
   function renderMusicPlayer(){
     const selectedVideo=musicVideos.find(video=>video.id===musicVideoId);
-    root.querySelector('#theaterScreen').innerHTML=`<div class="theater-video-choices" role="group" aria-label="Choose a music video">${musicVideos.map(video=>`<button type="button" class="cta secondary" data-music-video="${video.id}" aria-pressed="${video.id===musicVideoId}">${video.title}</button>`).join('')}</div><h3>${selectedVideo.title}</h3><div class="theater-youtube-player"><iframe data-theater-youtube src="https://www.youtube-nocookie.com/embed/${selectedVideo.id}?autoplay=0&amp;playsinline=1&amp;rel=0" title="Spectrum Super Hero — ${selectedVideo.title}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p><a href="https://www.youtube.com/watch?v=${selectedVideo.id}" target="_blank" rel="noopener noreferrer">Watch ${selectedVideo.title} on YouTube</a></p><p>Press play when you are ready. YouTube playback needs an internet connection. If the player is unavailable, use the YouTube link above.</p>`;
+    root.querySelector('#theaterScreen').innerHTML=`<div class="theater-video-choices" role="group" aria-label="Choose a music video">${musicVideos.map(video=>`<button type="button" class="cta secondary" data-music-video="${video.id}" aria-pressed="${video.id===musicVideoId}">${video.title}</button>`).join('')}</div>${youtubePlayerMarkup(selectedVideo)}`;
   }
   function render(){
     stopVideo();
@@ -38,7 +46,7 @@
     const room=rooms.find(r=>r.id===selected);
     root.querySelector('#theaterRoomTitle').textContent=welcome?'Welcome to Spectrum Super Hero':room.name;
     root.querySelector('#theaterScreen').innerHTML=welcome?'<video controls playsinline preload="metadata" poster="media/spectrum-super-hero-intro-poster.png" aria-label="Spectrum Super Hero welcome video"><source src="media/spectrum-super-hero-intro.mp4" type="video/mp4"></video><p>The existing app welcome video. Captions are not yet available for this video.</p>':`<div class="theater-placeholder"><span aria-hidden="true" style="font-size:44px">${room.icon}</span><h3>${room.name} videos are coming soon</h3><p>You can try the optional mission now. There is no video to play in this room yet.</p></div>`;
-    if(!welcome && selected==='music')renderMusicPlayer();
+    if(!welcome)renderRoomPlayer();
     const video=root.querySelector('video');if(video)video.addEventListener('error',()=>announce('The welcome video could not load. Try again when you are online.'));
     root.querySelector('#theaterMission').innerHTML=`<span class="pill">OPTIONAL MISSION</span><h3>${room.title}</h3><ol>${room.steps.map(step=>`<li>${step}</li>`).join('')}</ol><p>Think, draw, use AAC, or ask someone to join. No timer or proof needed.</p><p><strong>Reward:</strong> ${room.badge} in your Badge Cabinet.</p><button type="button" class="cta" id="theaterComplete" ${completed.has(room.id)?'disabled':''}>${completed.has(room.id)?'Mission completed ✓':'Complete mission'}</button>`;
     const favorite=root.querySelector('#theaterFavorite');favorite.textContent=favorites.has(room.id)?'♥ Saved to favorites':'♡ Save room to favorites';favorite.setAttribute('aria-pressed',String(favorites.has(room.id)));
@@ -58,6 +66,6 @@
   root.querySelector('#theaterAccessibility').addEventListener('click',()=>show('profile'));
   const originalShow=window.show;
   window.show=function(id){stopVideo();if(id==='theater'){document.getElementById('homeHeroIntro')?.pause();render();}return originalShow(id);};
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)stopVideo();else if(root.classList.contains('active')&&!welcome&&selected==='music'&&!root.querySelector('iframe[data-theater-youtube]'))renderMusicPlayer();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)stopVideo();else if(root.classList.contains('active')&&!welcome&&['music','adventures'].includes(selected)&&!root.querySelector('iframe[data-theater-youtube]'))renderRoomPlayer();});
   render();
 })();

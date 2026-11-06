@@ -31,3 +31,9 @@ New UI is scoped to theater.css/theater.js. The existing show() extension patter
 Three user-supplied YouTube videos are now configured: original (`Rb1lljqbJdA`), sing-along with lyrics (`6iHHPwYN7Zg`), and instrumental with lyrics (`tHgUhYfgUIw`). Each has a responsive privacy-enhanced embed and direct YouTube fallback. Playback never autostarts; leaving the theater, switching videos/rooms, or hiding the tab unloads the embed. The other three rooms still say coming soon. Captions on YouTube depend on each upload's settings; visible lyrics are part of the two lyric videos.
 
 Validation of the music update: all three YouTube embed titles loaded in the browser; video selection updates the player and direct link; switching to Calm Corner removes the iframe. Phone viewport 390px: page width 375px, player width 323px. No autoplay URL parameter is enabled. JavaScript syntax and whitespace checks pass.
+
+## Hero Adventures update
+
+The owner-supplied narrated cartoon, The Rise of Shadow Doubt — Part One (`tyyp36SRsts`), is now configured in Hero Adventures using the same responsive, no-autoplay YouTube player and direct watch fallback as the music room. Changing rooms, leaving the theater or hiding the tab unloads playback; returning restores a paused player. The optional mission and badge remain independent of video playback.
+
+Validation: syntax/whitespace checks pass; Music & Dance retains all three choices and correct original-video URL. Switching to Calm Corner removes the embedded player. The supplied cartoon URL currently returns “This video is private” in the embedded YouTube player; make the upload Unlisted or Public and verify playback before merging this update.
