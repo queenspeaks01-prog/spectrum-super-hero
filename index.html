@@ -626,7 +626,7 @@ body.reduced-motion .hero-flight-character{animation:none!important;will-change:
     <div class="stat"><span class="pill">🔖 Saved</span><strong id="profileHeroSaved">0</strong></div>
     <div class="stat"><span class="pill">🏆 Badges</span><strong id="profileHeroBadges">0</strong></div>
   </div>
-  <div style="margin-top:18px"><strong>Who is this profile for?</strong><p class="hero-audience-note">Children can choose one of the Spectrum Super Heroes. Parents and grown-ups can choose a guide character.</p><div class="role-grid" id="heroAudienceGrid"></div></div><div style="margin-top:18px"><strong id="heroAvatarGroupLabel">Choose a child hero</strong><div class="avatar-grid" id="heroAvatarGrid"></div></div>
+  <div style="margin-top:18px"><strong>Who is this profile for?</strong><p class="hero-audience-note">Choose child or grown-up heroes, then pick any avatar you like. You can change it anytime.</p><div class="role-grid" id="heroAudienceGrid"></div></div><div style="margin-top:18px"><strong id="heroAvatarGroupLabel">Choose a child hero</strong><p class="hero-audience-note">Pick the hero that feels right to you. Your avatar is your choice, whatever your role.</p><div class="avatar-grid" id="heroAvatarGrid" aria-label="Choose your avatar"></div><p id="heroAvatarSaved" class="hero-audience-note" role="status" aria-live="polite"></p></div>
   <div style="margin-top:18px"><strong>Hero name</strong><div class="search"><input id="profileHeroNameInput" maxlength="40" placeholder="Enter your hero name"><button class="cta" onclick="saveProfileHero()">Save profile</button></div><div id="profileSavedMessage" class="profile-saved">✓ Profile saved on this device.</div></div>
   <div style="margin-top:12px"><strong>I'm here as</strong><div class="role-grid" id="heroRoleGrid"></div></div>
   <div style="margin-top:18px"><strong>Badges</strong><div class="profile-badge-row" id="profileBadgeRow"></div></div>
@@ -1011,7 +1011,7 @@ function renderDashboard(){
 
 
 const childHeroAvatars=[{"id":"child-raife","name":"Raife’","image":"hero-challenge-portraits/raife.jpg"},{"id":"child-kevin","name":"Kevin","image":"hero-challenge-portraits/kevin.jpg"},{"id":"child-sarah","name":"Sarah","image":"hero-challenge-portraits/sarah.jpg"},{"id":"child-charlie","name":"Charlie","image":"hero-challenge-portraits/charlie.jpg"},{"id":"child-emily","name":"Emily","image":"hero-challenge-portraits/emily.jpg"},{"id":"child-mya","name":"Mya","image":"hero-challenge-portraits/mya.jpg"},{"id":"child-john","name":"John","image":"hero-challenge-portraits/john.jpg"}];
-const grownUpHeroAvatars=[{"id":"grownup-caregiver","name":"Caregiver Coach","image":"grownup-hero-avatars/caregiver-coach.svg"},{"id":"grownup-family","name":"Family Guide","image":"grownup-hero-avatars/family-guide.svg"},{"id":"grownup-educator","name":"Educator Mentor","image":"grownup-hero-avatars/educator-mentor.svg"},{"id":"grownup-community","name":"Community Mentor","image":"grownup-hero-avatars/community-mentor.svg"}];
+const grownUpHeroAvatars=[{"id":"grownup-caregiver","name":"Purple Hero","image":"grownup-hero-avatars/caregiver-coach-v3.jpg"},{"id":"grownup-family","name":"Blue Hero","image":"grownup-hero-avatars/family-guide-v3.jpg"},{"id":"grownup-educator","name":"Green Hero","image":"grownup-hero-avatars/educator-mentor-v3.jpg"},{"id":"grownup-community","name":"Red Hero","image":"grownup-hero-avatars/community-mentor-v3.jpg"},{"id":"grownup-sunshine","name":"Yellow Hero","image":"grownup-hero-avatars/sunshine-v3.jpg"},{"id":"grownup-sky","name":"Cyan Hero","image":"grownup-hero-avatars/sky-v3.jpg"},{"id":"grownup-spark","name":"Orange Hero","image":"grownup-hero-avatars/spark-v3.jpg"},{"id":"grownup-wisdom","name":"Indigo Hero","image":"grownup-hero-avatars/wisdom-v3.jpg"}];
 const heroRoles=[['autistic','I’m an autistic person'],['family','I’m a family member'],['educator','I’m an educator'],['ally','I’m an ally']];
 function getHeroAudience(){return localStorage.getItem('ssh_hero_audience')==='grownup'?'grownup':'child';}
 function getCurrentHeroChoices(){return getHeroAudience()==='grownup'?grownUpHeroAvatars:childHeroAvatars;}
@@ -1028,7 +1028,7 @@ function saveHeroAudience(audience){
  saveCloudProgress({hero_avatar:localStorage.getItem(key)});
  refreshProfileChrome();renderHeroProfile();renderJourney();renderDashboard();
 }
-function saveHeroAvatar(id){const choices=getCurrentHeroChoices();if(!choices.some(a=>a.id===id))return;localStorage.setItem('ssh_'+getHeroAudience()+'_hero_avatar',id);localStorage.setItem('ssh_hero_avatar',id);saveCloudProgress({hero_avatar:id});refreshProfileChrome();renderHeroProfile();renderJourney();renderDashboard();}
+function saveHeroAvatar(id){const choices=getCurrentHeroChoices();if(!choices.some(a=>a.id===id))return;localStorage.setItem('ssh_'+getHeroAudience()+'_hero_avatar',id);localStorage.setItem('ssh_hero_avatar',id);saveCloudProgress({hero_avatar:id});refreshProfileChrome();renderHeroProfile();renderJourney();renderDashboard();const note=document.getElementById('heroAvatarSaved');if(note)note.textContent='✓ Avatar saved on this device. You can change it anytime.';}
 function refreshProfileChrome(){
  const name=getHeroName(),avatar=getHeroAvatar(),role=profileRoleLabel();
  const topName=document.getElementById('topProfileName'),topAvatar=document.getElementById('topProfileAvatar'),chip=document.getElementById('topProfileChip'),topBtn=document.getElementById('profileTopButton');
@@ -1037,7 +1037,7 @@ function refreshProfileChrome(){
  if(da)renderHeroAvatarNode(da,avatar); if(dn)dn.textContent=name; if(dr)dr.textContent=role;
  const ja=document.getElementById('journeyAvatar'); if(ja)renderHeroAvatarNode(ja,avatar);
 }
-function saveHeroAvatar(a){localStorage.setItem('ssh_hero_avatar',a);saveCloudProgress({hero_avatar:a});refreshProfileChrome();renderHeroProfile();renderJourney();renderDashboard();}
+
 function saveHeroRole(r){localStorage.setItem('ssh_hero_role',r);localStorage.setItem('ssh_role',r);saveCloudProgress({hero_role:r});refreshProfileChrome();renderHeroProfile();renderJourney();renderDashboard();}
 function saveProfileHero(){
  const input=document.getElementById('profileHeroNameInput');
@@ -1066,7 +1066,7 @@ function renderHeroProfile(){
  const audience=getHeroAudience(),choices=getCurrentHeroChoices(),audienceGrid=document.getElementById('heroAudienceGrid'),avatarGrid=document.getElementById('heroAvatarGrid');
  audienceGrid.innerHTML=[['child','For a child'],['grownup','For a parent or grown-up']].map(([id,label])=>'<button type="button" class="role-choice '+(id===audience?'selected':'')+'" data-audience-id="'+id+'" aria-pressed="'+(id===audience)+'">'+label+'</button>').join('');
  audienceGrid.querySelectorAll('[data-audience-id]').forEach(button=>button.addEventListener('click',()=>saveHeroAudience(button.dataset.audienceId)));
- document.getElementById('heroAvatarGroupLabel').textContent=audience==='child'?'Choose a child hero':'Choose a parent or grown-up character';
+ document.getElementById('heroAvatarGroupLabel').textContent=audience==='child'?'Choose your child avatar':'Choose your grown-up avatar';
  avatarGrid.innerHTML=choices.map(a=>'<button type="button" class="avatar-choice '+(a.id===avatar?'selected':'')+'" data-avatar-id="'+a.id+'" aria-pressed="'+(a.id===avatar)+'"><img src="'+a.image+'" alt="" loading="lazy"><span>'+esc(a.name)+'</span></button>').join('');
  avatarGrid.querySelectorAll('[data-avatar-id]').forEach(button=>button.addEventListener('click',()=>saveHeroAvatar(button.dataset.avatarId)));
  document.getElementById('heroRoleGrid').innerHTML=heroRoles.map(([id,label])=>`<button class="role-choice ${id===role?'selected':''}" onclick="saveHeroRole('${id}')">${esc(label)}</button>`).join('');

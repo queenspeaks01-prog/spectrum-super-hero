@@ -1,4 +1,4 @@
-const CACHE_NAME = 'spectrum-super-hero-shell-v16';
+const CACHE_NAME = 'spectrum-super-hero-shell-v19';
 const APP_SHELL = [
   './',
   './index.html',
@@ -25,10 +25,14 @@ const APP_SHELL = [
   './hero-challenge-portraits/emily.jpg',
   './hero-challenge-portraits/mya.jpg',
   './hero-challenge-portraits/john.jpg',
-  './grownup-hero-avatars/caregiver-coach.svg',
-  './grownup-hero-avatars/family-guide.svg',
-  './grownup-hero-avatars/educator-mentor.svg',
-  './grownup-hero-avatars/community-mentor.svg'
+  './grownup-hero-avatars/caregiver-coach-v3.jpg',
+  './grownup-hero-avatars/family-guide-v3.jpg',
+  './grownup-hero-avatars/educator-mentor-v3.jpg',
+  './grownup-hero-avatars/community-mentor-v3.jpg',
+  './grownup-hero-avatars/sunshine-v3.jpg',
+  './grownup-hero-avatars/sky-v3.jpg',
+  './grownup-hero-avatars/spark-v3.jpg',
+  './grownup-hero-avatars/wisdom-v3.jpg'
 ];
 
 self.addEventListener('install', (event) => {
