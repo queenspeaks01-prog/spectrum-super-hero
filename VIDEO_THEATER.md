@@ -25,3 +25,9 @@ The existing `media/spectrum-super-hero-intro.mp4` is available in the welcome p
 ## Maintainer notes
 
 New UI is scoped to theater.css/theater.js. The existing show() extension pattern is preserved. Badge definitions are added to both existing badge registries. Service-worker shell version is bumped and new static files are cached; large videos are not added to the precache.
+
+## Music & Dance update
+
+Three user-supplied YouTube videos are now configured: original (`Rb1lljqbJdA`), sing-along with lyrics (`6iHHPwYN7Zg`), and instrumental with lyrics (`tHgUhYfgUIw`). Each has a responsive privacy-enhanced embed and direct YouTube fallback. Playback never autostarts; leaving the theater, switching videos/rooms, or hiding the tab unloads the embed. The other three rooms still say coming soon. Captions on YouTube depend on each upload's settings; visible lyrics are part of the two lyric videos.
+
+Validation of the music update: all three YouTube embed titles loaded in the browser; video selection updates the player and direct link; switching to Calm Corner removes the iframe. Phone viewport 390px: page width 375px, player width 323px. No autoplay URL parameter is enabled. JavaScript syntax and whitespace checks pass.
