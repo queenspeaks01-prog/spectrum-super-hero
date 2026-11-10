@@ -4,7 +4,7 @@
     {id:'music',name:'Music & Dance',icon:'♫',color:'#dd668c',description:'Move, tap, or imagine a rhythm.',title:'Make your own rhythm',steps:['Choose a comfortable position. Sitting or standing both count.','Tap, move, draw, or imagine a rhythm you enjoy.','Pause whenever you want.'],badge:'Rhythm Hero'},
     {id:'adventures',name:'Hero Adventures',icon:'★',color:'#e4a735',description:'Imagine a mission with the team.',title:'Plan a team adventure',steps:['Imagine a place where the team could help.','Think of one small act of kindness.','Choose how the team can include everyone.'],badge:'Adventure Hero'},
     {id:'learning',name:'Learning Lab',icon:'✦',color:'#5b9bc3',description:'Notice, wonder, and explore.',title:'Notice something new',steps:['Choose a safe object or picture.','Notice a detail that interests you.','Think, draw, or ask a question about it.'],badge:'Curiosity Star'},
-    {id:'calm',name:'Calm Corner',icon:'☁',color:'#69a78a',description:'Take a pause in your own way.',title:'Choose your comfort',steps:['Notice what would feel comfortable right now.','Choose quiet, a stretch, a familiar object, or a break.','Take as much time as you want. You can skip any step.'],badge:'Comfort Hero'}
+    {id:'calm',name:'Calm Corner',icon:'☁',color:'#69a78a',description:'Seven heroes. Seven calming activities.',title:'Choose your comfort',steps:['Notice what would feel comfortable right now.','Choose quiet, a stretch, a familiar object, or a break.','Take as much time as you want. You can skip any step.'],badge:'Comfort Hero'}
   ];
   const musicVideos = [
     {id:'Rb1lljqbJdA', title:'Original Music Video'},
@@ -56,6 +56,7 @@
     const musicButton=event.target.closest('[data-music-video]');
     if(musicButton){musicVideoId=musicButton.dataset.musicVideo;stopVideo();renderMusicPlayer();root.querySelector(`[data-music-video="${musicVideoId}"]`)?.focus();announce(musicVideos.find(video=>video.id===musicVideoId).title+' selected. Press play when you are ready.');}
     const roomButton=event.target.closest('[data-room]');
+    if(roomButton&&roomButton.dataset.room==='calm'){stopVideo();window.location.assign('calm-corner/index.html');return;}
     if(roomButton){selected=roomButton.dataset.room;welcome=false;render();root.querySelector(`[data-room="${selected}"]`)?.focus();announce(rooms.find(r=>r.id===selected).name+' selected.');}
     if(event.target.id==='theaterFavorite'){if(favorites.has(selected))favorites.delete(selected);else favorites.add(selected);const persisted=save('ssh_theater_favorites',favorites);render();if(persisted)announce('Favorites updated.');}
     if(event.target.id==='theaterComplete'&&!completed.has(selected)){completed.add(selected);const persisted=save('ssh_theater_missions',completed);render();markNewBadges();renderDashboard();renderJourney();renderRewards();renderBadgeCabinet();renderHeroProfile();document.getElementById('levelJourneyPanel').style.display='none';root.querySelector('#theaterFavorite').focus();if(persisted)announce('Mission complete! Your badge is in the Badge Cabinet.');}
@@ -65,7 +66,7 @@
   // Reuse the app's accessibility preferences, including its profile controls.
   root.querySelector('#theaterAccessibility').addEventListener('click',()=>show('profile'));
   const originalShow=window.show;
-  window.show=function(id){stopVideo();if(id==='theater'){document.getElementById('homeHeroIntro')?.pause();render();}return originalShow(id);};
+  window.show=function(id){stopVideo();if(id==='calmcorner'||id==='quietroom'){window.location.assign('calm-corner/index.html');return;}if(id==='theater'){document.getElementById('homeHeroIntro')?.pause();render();}return originalShow(id);};
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stopVideo();else if(root.classList.contains('active')&&!welcome&&['music','adventures'].includes(selected)&&!root.querySelector('iframe[data-theater-youtube]'))renderRoomPlayer();});
   render();
 })();

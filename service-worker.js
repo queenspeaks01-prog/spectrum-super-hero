@@ -1,7 +1,8 @@
-const CACHE_NAME = 'spectrum-super-hero-shell-v19';
+const CACHE_NAME = 'spectrum-super-hero-shell-calm-corner-v1';
 const APP_SHELL = [
   './',
   './index.html',
+  './calm-corner/index.html',
   './quiet-room/charlie-calming-bubbles.html',
   './quiet-room/emily-peaceful-sounds.html',
   './quiet-room/index.html',
