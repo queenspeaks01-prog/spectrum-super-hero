@@ -5,6 +5,21 @@ const targets=Array.from(document.querySelectorAll('.tile,.checks li'));
 const setting=document.getElementById('celebrations-enabled');
 const message=document.getElementById('celebration-message');
 const close=document.getElementById('close-celebration');
+const celebrations=[
+{file:'raife',name:'Raife’',words:'SUPER JOB! YOU DID IT!',extra:'Together we are stronger!'},
+{file:'kevin',name:'Kevin',words:'AMAZING WORK!',extra:'You noticed every step of your mission!'},
+{file:'sarah',name:'Sarah',words:'YOU DID GREAT!',extra:'You made time for a calm bedtime routine!'},
+{file:'john',name:'John',words:'WAY TO KEEP GOING!',extra:'Every step counts, and asking for help counts too!'}
+];
+const bonusHeroes=[
+{file:'charlie',name:'Charlie',words:'Your creativity shines!'},
+{file:'emily',name:'Emily',words:'Your unique strengths are super!'},
+{file:'mya',name:'Mya',words:'You showed your super strength today!'}
+];
+let bonusIndex=0;
+const messageImg=message.querySelector('img');
+const messageTitle=message.querySelector('strong');
+const messageDetail=message.querySelector('small');
 let saved=[];
 try{const value=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(value))saved=value;}catch(e){}
 try{setting.checked=localStorage.getItem(prefKey)!=='off';}catch(e){}
@@ -15,6 +30,16 @@ const sheet=el.closest('.sheet');
 if(!sheet)return;
 const steps=Array.from(sheet.querySelectorAll('.tile,.checks li'));
 if(steps.length&&steps.every(item=>item.getAttribute('aria-pressed')==='true')){
+const routineSheets=Array.from(document.querySelectorAll('.sheet'));
+const sectionIndex=routineSheets.indexOf(sheet);
+const hero=celebrations[sectionIndex];
+if(!hero)return;
+const bonus=bonusHeroes[bonusIndex%bonusHeroes.length];
+bonusIndex++;
+messageImg.src='hero-challenge-portraits/'+hero.file+'.jpg';
+messageImg.alt=hero.name+' superhero portrait';
+messageTitle.textContent='⭐ '+hero.words;
+messageDetail.textContent=hero.name+': '+hero.extra+'  '+bonus.name+': '+bonus.words;
 sheet.appendChild(message);
 message.hidden=false;
 message.scrollIntoView({behavior:'smooth',block:'nearest'});
