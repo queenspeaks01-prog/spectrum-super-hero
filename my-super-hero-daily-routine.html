@@ -30,9 +30,12 @@ const sheet=el.closest('.sheet');
 if(!sheet)return;
 const steps=Array.from(sheet.querySelectorAll('.tile,.checks li'));
 if(steps.length&&steps.every(item=>item.getAttribute('aria-pressed')==='true')){
-const routineSheets=Array.from(document.querySelectorAll('.sheet'));
-const sectionIndex=routineSheets.indexOf(sheet);
-const hero=celebrations[sectionIndex];
+const heading=sheet.querySelector('h2');
+const headingText=(heading?.textContent||'').toLowerCase();
+const hero=headingText.includes('morning')?celebrations[0]:
+headingText.includes('after-school')?celebrations[1]:
+headingText.includes('bedtime')?celebrations[2]:
+headingText.includes('independent')?celebrations[3]:null;
 if(!hero)return;
 const bonus=bonusHeroes[bonusIndex%bonusHeroes.length];
 bonusIndex++;
